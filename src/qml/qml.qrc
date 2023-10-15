@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>AppSwitcher.qml</file>
+        <file>NotificationScreen.qml</file>
+        <file>ScreenSwipe.qml</file>
+    </qresource>
+</RCC>
