@@ -34,8 +34,4 @@ target_include_directories(cutie-home  PUBLIC
 target_link_libraries(cutie-home PUBLIC LayerShellQtInterface6 Qt::Core Qt::Gui Qt::GuiPrivate Qt::DBus Qt::Quick Qt::Network Qt::Qml)
 
 install(TARGETS cutie-home RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}")
-install(DIRECTORY atmospheres/atmospheres DESTINATION "${CMAKE_INSTALL_DATADIR}")
-install(DIRECTORY src/qml/layouts DESTINATION "${CMAKE_INSTALL_DATADIR}/cutie-keyboard")
-install(DIRECTORY src/qml/kbdstyle/QtQuick/VirtualKeyboard/Styles/cutie DESTINATION "${CMAKE_INSTALL_LIBDIR}/qt6/qml/QtQuick/VirtualKeyboard/Styles/")
 install(FILES logind.conf.d/10-cutie.conf DESTINATION "${CMAKE_INSTALL_SYSCONFDIR}/systemd/logind.conf.d")
-install(FILES android-service@hwcomposer.service.d/20-cutie.conf DESTINATION "${CMAKE_INSTALL_SYSCONFDIR}/systemd/system/android-service@hwcomposer.service.d")
