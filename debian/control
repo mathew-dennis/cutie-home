@@ -17,6 +17,8 @@ Standards-Version: 4.5.1
 Package: cutie-home
 Architecture: any
 Multi-Arch: foreign
+Provides: cutie-shell
+Conflicts: cutie-shell
 Pre-Depends: ${misc:Pre-Depends}
 Depends: ${misc:Depends}, ${shlibs:Depends}, 
           cutie-atmospheres-default,
