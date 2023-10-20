@@ -17,7 +17,13 @@ Multi-Arch: foreign
 Pre-Depends: ${misc:Pre-Depends}
 Depends: ${misc:Depends}, ${shlibs:Depends}, 
           cutie-atmospheres-default,
+          cutie-wlc,
+          cutie-launcher,
+          cutie-panel,
+          cutie-keyboard-layouts,
+          cutie-keyboard-style,
           qml6-module-cutie, 
+          qml6-module-cutiewlc, 
           qml6-module-qtquick, 
           qml6-module-qtquick-controls, 
           qml6-module-qtsensors, 
