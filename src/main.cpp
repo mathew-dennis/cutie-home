@@ -28,10 +28,11 @@ int main(int argc, char *argv[])
     QQuickView view;
 
     LayerShellQt::Window *layerShell = LayerShellQt::Window::get(&view);
-    layerShell->setLayer(LayerShellQt::Window::LayerBottom);
+    layerShell->setLayer(LayerShellQt::Window::LayerBackground);
     layerShell->setAnchors(LayerShellQt::Window::AnchorTop);
     layerShell->setKeyboardInteractivity(LayerShellQt::Window::KeyboardInteractivityNone);
     layerShell->setExclusiveZone(-1);
+    layerShell->setScope("cutie-home");
 
     view.setSource(QUrl("qrc:/main.qml"));
     view.show();
