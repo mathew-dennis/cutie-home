@@ -16,13 +16,11 @@ Item {
     states: [
         State{
             name: "appSwitcher"
-            PropertyChanges { target: wallpaperBlur; opacity: 0 }
             PropertyChanges { target: appSwitcher; opacity: 1 }
             PropertyChanges { target: notificationScreen; opacity: 0 }
         },
         State {
             name: "notificationScreen"
-            PropertyChanges { target: wallpaperBlur; opacity: 1 }
             PropertyChanges { target: appSwitcher; opacity: 0 }
             PropertyChanges { target: notificationScreen; opacity: 1 }
         }
@@ -47,65 +45,6 @@ Item {
             if (notifications.get(c_i).id === id)
                 notifications.remove(c_i);
         }
-    }
-
-    Item {
-        id: realWallpaper
-        anchors.fill: parent
-
-        Image {
-            id: wallpaper
-            anchors.fill: parent
-            source: "file:/" + Atmosphere.path + "/wallpaper.jpg"
-            fillMode: Image.PreserveAspectCrop
-        }
-
-        Image {
-            id: nextWallpaper
-            anchors.fill: parent
-            source: "file:/" + Atmosphere.path + "/wallpaper.jpg"
-            fillMode: Image.PreserveAspectCrop
-            opacity: 0
-            state: "normal"
-            states: [
-                State {
-                    name: "changing"
-                    PropertyChanges { target: nextWallpaper; opacity: 1 }
-                },
-                State {
-                    name: "normal"
-                    PropertyChanges { target: nextWallpaper; opacity: 0 }
-                }
-            ]
-
-            transitions: Transition {
-                to: "normal"
-
-                NumberAnimation {
-                    target: nextWallpaper
-                    properties: "opacity"
-                    easing.type: Easing.InOutQuad
-                    duration: 500
-                }
-            }
-        }
-    }
-
-    FastBlur {
-        id: wallpaperBlur
-        anchors.fill: parent
-        source: realWallpaper
-        radius: 70
-
-        Behavior on opacity {
-            PropertyAnimation { duration: 300 }
-        }
-    }
-
-    Rectangle {
-        color: Atmosphere.secondaryAlphaColor
-        anchors.fill: wallpaperBlur
-        opacity: wallpaperBlur.opacity / 3
     }
 
     AppSwitcher { id: appSwitcher }

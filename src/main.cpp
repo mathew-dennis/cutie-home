@@ -35,6 +35,7 @@ int main(int argc, char *argv[])
     layerShell->setScope("cutie-home");
 
     view.setSource(QUrl("qrc:/main.qml"));
+    view.setColor(QColor(Qt::transparent));
     view.show();
 
     Settings *settings = new Settings(view.engine());
