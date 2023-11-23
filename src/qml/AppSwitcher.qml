@@ -34,6 +34,7 @@ Item {
     GridView {
         id: tabListView
         anchors.fill: parent
+        anchors.topMargin: 40
         model: toplevelManager.toplevels
         cellWidth: appSwitcher.width / 2
         cellHeight: appSwitcher.height / 2 + 20
@@ -56,7 +57,7 @@ Item {
                 Item {
                     id: tileBlurMask
                     x: -appThumb.x-appBg.x-tabListView.x+tabListView.contentX
-                    y: -appThumb.y-appBg.y-tabListView.y+tabListView.contentY-30
+                    y: -appThumb.y-appBg.y-tabListView.y+tabListView.contentY
                     width: Screen.width
                     height: Screen.height
                     clip: true
@@ -65,7 +66,7 @@ Item {
                         width: appBg.width
                         height: appBg.height
                         x: appThumb.x+appBg.x+tabListView.x-tabListView.contentX
-                        y: appThumb.y+appBg.y+tabListView.y-tabListView.contentY+30
+                        y: appThumb.y+appBg.y+tabListView.y-tabListView.contentY
                         color: "black"
                         radius: 10
                     }
