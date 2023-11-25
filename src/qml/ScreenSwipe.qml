@@ -28,9 +28,6 @@ Item {
                 else { 
                     eval(root.state).opacity = 1; 
                     eval(nextState).opacity = 0;
-                    if (root.state === "appSwitcher")
-                        wallpaperBlur.opacity = 0;
-                    else wallpaperBlur.opacity = 1;
                 }
                 parent.x = 0;
             }
@@ -40,10 +37,6 @@ Item {
                     let nextState = getNextState();
                     eval(root.state).opacity = 1 - 2 * parent.x / root.width 
                     eval(nextState).opacity = 2 * parent.x / root.width
-                    if (root.state === "appSwitcher")
-                        wallpaperBlur.opacity = 2 * parent.x / root.width;
-                    else if (nextState === "appSwitcher")
-                        wallpaperBlur.opacity = 1 - 2 * parent.x / root.width;
                 }
             }
         }
@@ -76,9 +69,6 @@ Item {
                 else { 
                     eval(root.state).opacity = 1; 
                     eval(nextState).opacity = 0;
-                    if (root.state === "appSwitcher")
-                        wallpaperBlur.opacity = 0;
-                    else wallpaperBlur.opacity = 1;
                 }
                 parent.x = root.width - 20
             }
@@ -88,10 +78,6 @@ Item {
                     let nextState = getNextState();
                     eval(root.state).opacity = 2 * parent.x / root.width - 1
                     eval(nextState).opacity = 2 - 2 * parent.x / root.width
-                    if (root.state === "appSwitcher")
-                        wallpaperBlur.opacity = 2 - 2 * parent.x / root.width;
-                    else if (nextState === "appSwitcher")
-                        wallpaperBlur.opacity = 2 * parent.x / root.width - 1;
                 }
             }
         }

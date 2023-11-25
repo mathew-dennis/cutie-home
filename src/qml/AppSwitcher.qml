@@ -9,27 +9,6 @@ Item {
     anchors.fill: parent
     opacity: 0
     enabled: root.state == "appSwitcher"
-    
-    ForeignToplevelManagerV1 {
-        id: toplevelManager
-    }
-
-    Image {
-        id: wallpaper
-        width: Screen.width
-        height: Screen.height
-        source: "file:/" + Atmosphere.path + "/wallpaper.jpg"
-        fillMode: Image.PreserveAspectCrop
-        visible: false
-    }
-
-    FastBlur {
-        id: wallpaperBlur
-        anchors.fill: wallpaper
-        source: wallpaper
-        radius: 70
-        visible: false
-    }
 
     GridView {
         id: tabListView
@@ -38,10 +17,7 @@ Item {
         model: toplevelManager.toplevels
         cellWidth: appSwitcher.width / 2
         cellHeight: appSwitcher.height / 2 + 20
-
-        Behavior on opacity {
-            PropertyAnimation { duration: 300 }
-        }
+        opacity: 1.0 - cutieWlc.blur
 
         delegate: Item {
             id: appThumb

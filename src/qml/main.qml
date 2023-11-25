@@ -2,9 +2,8 @@ import QtQuick
 import Qt5Compat.GraphicalEffects
 import QtQuick.Controls
 import QtMultimedia
-import QtSensors
-
 import Cutie
+import Cutie.Wlc
 
 Item {
     id: root
@@ -45,6 +44,32 @@ Item {
             if (notifications.get(c_i).id === id)
                 notifications.remove(c_i);
         }
+    }
+    
+    ForeignToplevelManagerV1 {
+        id: toplevelManager
+    }
+
+    CutieWlc {
+        id: cutieWlc
+    }
+
+    Image {
+        id: wallpaper
+        width: Screen.width
+        height: Screen.height
+        source: "file:/" + Atmosphere.path + "/wallpaper.jpg"
+        fillMode: Image.PreserveAspectCrop
+        visible: true
+    }
+
+    FastBlur {
+        id: wallpaperBlur
+        anchors.fill: wallpaper
+        source: wallpaper
+        radius: 70
+        visible: true
+        opacity: Math.max(cutieWlc.blur, notificationScreen.opacity)
     }
 
     AppSwitcher { id: appSwitcher }
