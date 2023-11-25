@@ -13,6 +13,7 @@ Item {
         orientation: ListView.Vertical
         anchors.fill: parent
         anchors.topMargin: 30
+        opacity: 1.0 - cutieWlc.blur
 
         header: Item {
             height: notificationHeader.height + descriptionText.height * 3
