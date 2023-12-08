@@ -61,6 +61,14 @@ Item {
                     radius: 10
                 }
 
+                CutieAppThumbnail {
+                    id: thumbImage
+                    anchors.fill: appBg
+                    anchors.bottomMargin: 25
+                    wlc: cutieWlc
+                    toplevel: modelData
+                }
+
                 Item {
                     anchors.left: parent.left
                     anchors.right: parent.right
