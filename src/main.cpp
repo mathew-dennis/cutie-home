@@ -41,5 +41,10 @@ int main(int argc, char *argv[])
     Settings *settings = new Settings(view.engine());
     settings->autostart();
 
+    Notifications *notifications = new Notifications(&view);
+    new NotificationsAdaptor(notifications);
+    QDBusConnection::sessionBus().registerObject("/org/freedesktop/Notifications", notifications);
+    QDBusConnection::sessionBus().registerService("org.freedesktop.Notifications");
+
     return app.exec();
 }
