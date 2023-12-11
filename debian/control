@@ -20,25 +20,17 @@ Multi-Arch: foreign
 Provides: cutie-shell
 Conflicts: cutie-shell
 Pre-Depends: ${misc:Pre-Depends}
-Depends: ${misc:Depends}, ${shlibs:Depends}, 
-          cutie-atmospheres-default,
-          cutie-wlc,
-          cutie-launcher,
-          cutie-panel,
-          cutie-keyboard-layouts,
-          cutie-keyboard-style,
+Depends: ${misc:Depends}, ${shlibs:Depends},
           qml6-module-cutie, 
           qml6-module-cutiewlc, 
           qml6-module-qtquick, 
           qml6-module-qtquick-controls, 
-          qml6-module-qtsensors, 
-          qml6-module-qtquick-virtualkeyboard,
+          qml6-module-qtsensors,
           qml6-module-qtqml-workerscript,
           qml6-module-qtmultimedia,
           qml6-module-qtquick-window,
           qml6-module-qtquick-templates,
-          qml6-module-qtquick-layouts,
-          qt6-virtualkeyboard-plugin,          
+          qml6-module-qtquick-layouts,     
           upower,
           brightness-udev
 Description: This package contains Cutie home screen.
