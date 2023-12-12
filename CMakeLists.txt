@@ -34,4 +34,3 @@ target_include_directories(cutie-home  PUBLIC
 target_link_libraries(cutie-home PUBLIC LayerShellQtInterface6 Qt::Core Qt::Gui Qt::GuiPrivate Qt::DBus Qt::Quick Qt::Network Qt::Qml)
 
 install(TARGETS cutie-home RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}")
-install(FILES logind.conf.d/10-cutie.conf DESTINATION "${CMAKE_INSTALL_SYSCONFDIR}/systemd/logind.conf.d")

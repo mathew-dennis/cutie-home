@@ -11,6 +11,3 @@ export DEB_BUILD_MAINT_OPTIONS = hardening=+all
 
 %:
 	dh $@ --buildsystem=cmake --with pkgkde_symbolshelper
-
-override_dh_installsystemd:
-	dh_installsystemd --name cutie-ui-io --no-restart-on-upgrade
