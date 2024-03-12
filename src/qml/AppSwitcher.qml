@@ -103,8 +103,9 @@ Item {
 
                     onReleased: {
                         if (Math.abs(appBg.x - 10) > parent.width / 3) {
-                            appThumb.opacity = 0;
                             modelData.close();
+                            appThumb.opacity = 0;
+                            closedTm.start();
                         } else { 
                             appThumb.opacity = 1;
                         }
@@ -117,6 +118,12 @@ Item {
                         }
                     }
                 }
+            }
+
+            Timer {
+                id: closedTm
+                interval: 1000; running: false; repeat: false
+                onTriggered: appThumb.opacity = 1
             }
         }
     } 
