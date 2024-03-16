@@ -76,9 +76,10 @@ Item {
     NotificationScreen { id: notificationScreen }
     ScreenSwipe { id: screenSwipe }
     
-    SoundEffect {
+    MediaPlayer {
         id: notifSound
-        source: "qrc:/sounds/notif.wav"
+        source: Atmosphere.themeSound("message")
+        audioOutput: AudioOutput {}
     }
 
     ListModel { id: notifications }
