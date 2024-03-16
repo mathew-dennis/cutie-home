@@ -19,8 +19,7 @@ set(cutie-home_SOURCES
 )
 
 qt6_add_resources(APP_RESOURCES 
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/qml/qml.qrc 
-    ${CMAKE_CURRENT_SOURCE_DIR}/sounds/sounds.qrc)
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/qml/qml.qrc)
 
 qt_add_dbus_interface(cutie-home_SOURCES src/org.freedesktop.DBus.xml dbus_interface)
 qt_add_dbus_interface(cutie-home_SOURCES src/org.freedesktop.Notifications.xml notifications_interface)
