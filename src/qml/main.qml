@@ -36,7 +36,7 @@ Item {
 
     function addNotification(title, body, id) {
         notifications.append({title: title, body: body, id: id});
-        notifSound.play();
+        CutieFeedback.trigger(Application.name, "message-new-instant", {}, -1);
     }
 
     function delNotification(id) {
@@ -75,12 +75,6 @@ Item {
     AppSwitcher { id: appSwitcher }
     NotificationScreen { id: notificationScreen }
     ScreenSwipe { id: screenSwipe }
-    
-    MediaPlayer {
-        id: notifSound
-        source: Atmosphere.themeSound("message")
-        audioOutput: AudioOutput {}
-    }
 
     ListModel { id: notifications }
 }
