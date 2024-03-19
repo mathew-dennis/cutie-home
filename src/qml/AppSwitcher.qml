@@ -30,6 +30,22 @@ Item {
                 height: appThumb.height - 20
                 x: 10
 
+                NumberAnimation {
+                    id: opacityRestore
+                    target: appThumb
+                    property: "opacity"
+                    to: 1
+                    duration: 200
+                }
+
+                NumberAnimation {
+                    id: xRestore
+                    target: appBg
+                    property: "x"
+                    to: 10
+                    duration: 200
+                }
+
                 Item {
                     id: tileBlurMask
                     x: -appThumb.x-appBg.x-tabListView.x+tabListView.contentX
@@ -107,9 +123,9 @@ Item {
                             appThumb.opacity = 0;
                             closedTm.start();
                         } else { 
-                            appThumb.opacity = 1;
+                            opacityRestore.start();
                         }
-                        appBg.x = 10;
+                        xRestore.start();
                     }
 
                     onPositionChanged: {
