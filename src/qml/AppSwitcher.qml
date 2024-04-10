@@ -29,9 +29,7 @@ Item {
         opacity: 1.0 - cutieWlc.blur
         anchors {
             horizontalCenter: parent.horizontalCenter
-            top: parent.top
-            topMargin: appSwitcher.height / 2
-            leftMargin: appSwitcher.width / 2
+            verticalCenter: parent.verticalCenter
         }
     }
 
