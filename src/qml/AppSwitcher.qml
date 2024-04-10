@@ -19,8 +19,8 @@ Item {
         color: "black"
         opacity: 1.0 - cutieWlc.blur
         anchors {
-           leftargin: appSwitcher.width / 2
-           topMargin: appSwitcher.height / 2
+              horizontalCenter: parent.horizontalCenter
+              verticalCenter: parent.verticalCenter
         }
     }
     GridView {
