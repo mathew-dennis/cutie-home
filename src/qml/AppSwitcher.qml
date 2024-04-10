@@ -11,12 +11,12 @@ Item {
     enabled: root.state == "appSwitcher"
 
     // Heading " No Running Apps"
-    Text {
+    CutieLabel {
         anchors.fill: parent
         text: "No Running Apps"
         font.bold: true
         font.pixelSize: 16
-        color: "black"
+        color: Atmosphere.primaryColor
         opacity: 1.0 - cutieWlc.blur
         anchors {
            leftMargin: appSwitcher.width / 4
