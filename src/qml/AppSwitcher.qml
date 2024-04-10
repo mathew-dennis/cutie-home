@@ -156,29 +156,28 @@ Item {
                 interval: 1000; running: false; repeat: false
                 onTriggered: appThumb.opacity = 1
             }
-    // No Running Apps Indicator
-    Item {
-            id: noThumbnailsIndicator
-            visible: tabListView.model.length === 0
-            anchors {
-                horizontalCenter: parent.horizontalCenter
-                top: appThumb.bottom
-                topMargin: 10
-                opacity: 1.0 - cutieWlc.blur
-            }
+            // No Running Apps Indicator
+            Item {
+                id: noThumbnailsIndicator
+                visible: tabListView.model.length === 0
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
+                    top: appThumb.bottom
+                    topMargin: 10
+                }
 
-       Rectangle {
-            width: appSwitcher.width * 0.8
-            height: appSwitcher.height * 0.4
-            color: "gray"
-            radius: 10
+                Rectangle {
+                    width: appSwitcher.width * 0.8
+                    height: appSwitcher.height * 0.4
+                    color: "gray"
+                    radius: 10
 
-            Text {
-                anchors.centerIn: parent
-                text: "No Running Apps"
-                color: "white"
-                font.bold: true
-                 }
+                    Text {
+                        anchors.centerIn: parent
+                        text: "No Running Apps"
+                        color: "white"
+                        font.bold: true
+                    }
                 }
             }
         }
