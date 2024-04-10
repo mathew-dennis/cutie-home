@@ -19,9 +19,9 @@ Item {
         font.pixelSize: 16
         opacity: 1.0 - cutieWlc.blur
         anchors {
-           horizontalCenter: parent.horizontalCenter
            top: parent.top
            leftMargin: appSwitcher.width / 3
+           topMargin: appSwitcher.height / 2
         }
     }
     GridView {
