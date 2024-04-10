@@ -9,6 +9,16 @@ Item {
     anchors.fill: parent
     opacity: 0
     enabled: root.state == "appSwitcher"
+ // Heading "Running Apps"
+    Text {
+        text: "Running Apps"
+        font.bold: true
+        font.pixelSize: 16
+        color: "white"
+        anchors.horizontalCenter: parent.horizontalCenter
+        top: parent.top
+        topMargin: 20
+    }
 
     GridView {
         id: tabListView
