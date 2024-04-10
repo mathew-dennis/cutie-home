@@ -19,7 +19,7 @@ Item {
         color: Atmosphere.primaryColor
         opacity: 1.0 - cutieWlc.blur
         anchors {
-           leftMargin: appSwitcher.width / 4
+           leftMargin: appSwitcher.width / 2 + 10
            topMargin: appSwitcher.height / 2
         }
     }
