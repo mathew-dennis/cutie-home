@@ -19,7 +19,7 @@ Item {
         color: "black"
         opacity: 1.0 - cutieWlc.blur
         anchors {
-           leftMargin: appSwitcher.width / 2
+           leftMargin: appSwitcher.width / 4
            topMargin: appSwitcher.height / 2
         }
     }
