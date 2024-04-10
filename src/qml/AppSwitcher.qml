@@ -31,6 +31,8 @@ Item {
             horizontalCenter: parent.horizontalCenter
             top: parent.top
             topMargin: appSwitcher.height / 2
+            left: parent.left
+            leftMargin: appSwitcher.width / 2
         }
     }
 
