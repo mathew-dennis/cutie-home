@@ -28,8 +28,8 @@ Item {
         color: "black"
         opacity: 1.0 - cutieWlc.blur
         anchors {
-            horizontalCenter: parent.horizontalCenter
-            verticalCenter: parent.verticalCenter
+            horizontalCenter: appSwitcher.horizontalCenter
+            verticalCenter: appSwitcher.verticalCenter
         }
     }
 
