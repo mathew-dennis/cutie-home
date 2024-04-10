@@ -19,10 +19,10 @@ Item {
         cellHeight: appSwitcher.height / 2 + 20
         opacity: 1.0 - cutieWlc.blur
 
-    // Heading "Running Apps"
+    // Heading " No Running Apps"
     Text {
         anchors.fill: parent
-        text: "Running Apps"
+        text: "No Running Apps"
         font.bold: true
         font.pixelSize: 16
         color: "black"
@@ -30,7 +30,7 @@ Item {
         anchors {
             horizontalCenter: parent.horizontalCenter
             top: parent.top
-            topMargin: 20
+            topMargin: appSwitcher.height / 2
         }
     }
 
