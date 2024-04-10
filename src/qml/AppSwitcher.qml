@@ -156,9 +156,6 @@ Item {
                 interval: 1000; running: false; repeat: false
                 onTriggered: appThumb.opacity = 1
             }
-        }
-
-     }
     // No Running Apps Indicator
     Item {
             id: noThumbnailsIndicator
@@ -184,6 +181,6 @@ Item {
                  }
                 }
             }
-        
-     
+        }
+    } 
 }
