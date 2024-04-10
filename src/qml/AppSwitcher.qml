@@ -9,16 +9,7 @@ Item {
     anchors.fill: parent
     opacity: 0
     enabled: root.state == "appSwitcher"
-
-    GridView {
-        id: tabListView
-        anchors.fill: parent
-        anchors.topMargin: 40
-        model: toplevelManager.toplevels
-        cellWidth: appSwitcher.width / 2
-        cellHeight: appSwitcher.height / 2 + 20
-        opacity: 1.0 - cutieWlc.blur
-
+    
     // Heading " No Running Apps"
     Text {
         anchors.fill: parent
@@ -32,6 +23,14 @@ Item {
             verticalCenter: appSwitcher.verticalCenter
         }
     }
+    GridView {
+        id: tabListView
+        anchors.fill: parent
+        anchors.topMargin: 40
+        model: toplevelManager.toplevels
+        cellWidth: appSwitcher.width / 2
+        cellHeight: appSwitcher.height / 2 + 20
+        opacity: 1.0 - cutieWlc.blur
 
         delegate: Item {
             id: appThumb
