@@ -21,17 +21,19 @@ Item {
 
     // Heading "Running Apps"
     Text {
+        anchors.fill: parent
         text: "Running Apps"
         font.bold: true
         font.pixelSize: 16
         color: "black"
+        opacity: 1.0 - cutieWlc.blur
         anchors {
             horizontalCenter: parent.horizontalCenter
             top: parent.top
             topMargin: 20
         }
     }
-    
+
         delegate: Item {
             id: appThumb
             width: tabListView.cellWidth
