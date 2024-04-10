@@ -18,7 +18,7 @@ Item {
         font.pixelSize: 16
         opacity: 1.0 - cutieWlc.blur
         anchors {
-           leftMargin: appSwitcher.width / 4
+           leftMargin: appSwitcher.width / 3
            topMargin: appSwitcher.height / 2
         }
     }
