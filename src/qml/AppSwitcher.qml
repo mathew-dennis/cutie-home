@@ -16,7 +16,6 @@ Item {
         text: "No Running Apps"
         font.bold: true
         font.pixelSize: 16
-        color: Atmosphere.primaryColor
         opacity: 1.0 - cutieWlc.blur
         anchors {
            leftMargin: appSwitcher.width / 2 - 10
