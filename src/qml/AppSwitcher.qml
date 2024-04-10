@@ -9,7 +9,7 @@ Item {
     anchors.fill: parent
     opacity: 0
     enabled: root.state == "appSwitcher"
-    
+
     // Heading " No Running Apps"
     Text {
         anchors.fill: parent
@@ -19,8 +19,8 @@ Item {
         color: "black"
         opacity: 1.0 - cutieWlc.blur
         anchors {
-            horizontalCenter: appSwitcher.horizontalCenter
-            verticalCenter: appSwitcher.verticalCenter
+           leftargin: appSwitcher.width / 2
+           topMargin: appSwitcher.height / 2
         }
     }
     GridView {
