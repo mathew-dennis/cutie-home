@@ -23,6 +23,10 @@ Item {
            topMargin: appSwitcher.height / 2
         }
     }
+    
+    launcherApps.clear();
+    launcher.loadAppList();
+    console.log("refreshing launcherApps length");
 
     function addApp(data) {
         launcherApps.append(data)
