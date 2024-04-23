@@ -10,7 +10,7 @@
 #include <QQuickView>
 #include <LayerShellQt6/shell.h>
 #include <LayerShellQt6/window.h>
-#include "launcher.h" // Include the header file for Launcher
+#include "launcher.h" // Include the header file for launcher
 
 int main(int argc, char *argv[])
 {
@@ -44,16 +44,6 @@ int main(int argc, char *argv[])
 
 	Launcher *launcher = new Launcher(&engine);
 	engine.rootContext()->setContextProperty("launcher", launcher);
-
-	const QUrl url(QStringLiteral("qrc:/qml/main.qml"));
-	QObject::connect(
-		&engine, &QQmlApplicationEngine::objectCreated, &app,
-		[url](QObject *obj, const QUrl &objUrl) {
-			if (!obj && url == objUrl)
-				QCoreApplication::exit(-1);
-		},
-		Qt::QueuedConnection);
-	engine.load(url);
 
 	launcher->loadAppList();
 
