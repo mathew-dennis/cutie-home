@@ -23,13 +23,6 @@ Item {
            topMargin: appSwitcher.height / 2
         }
     }
-    
-    function refreshLauncherApps() {
-        console.log("refreshing launcherApps length");
-        launcherApps.clear();
-        launcher.loadAppList();
-        
-    }
 
     function addApp(data) {
         launcherApps.append(data);
@@ -53,7 +46,6 @@ Item {
 
         Component.onCompleted: {
             logLauncherAppsLength();
-            refreshLauncherApps();
         }
 
         delegate: Item {
