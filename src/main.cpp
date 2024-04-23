@@ -40,8 +40,10 @@ int main(int argc, char *argv[])
 	view.setSource(QUrl("qrc:/main.qml"));
 	view.setColor(QColor(Qt::transparent));
 	view.show();
-	QQmlApplicationEngine engine;
 
+	QQmlApplicationEngine engine;
+	Launcher *launcher = new Launcher(&engine);
+	engine.rootContext()->setContextProperty("launcher", launcher);
 
 	Settings *settings = new Settings(view.engine());
 	settings->autostart();
