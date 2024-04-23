@@ -9,45 +9,62 @@
 #include <QQuickView>
 #include <LayerShellQt6/shell.h>
 #include <LayerShellQt6/window.h>
+#include "launcher.h" // Include the header file for Launcher
 
 int main(int argc, char *argv[])
 {
-	LayerShellQt::Shell::useLayerShell();
+    LayerShellQt::Shell::useLayerShell();
 
-	QIcon::setThemeName("hicolor");
-	QIcon::setThemeSearchPaths(QStringList("/usr/share/icons"));
+    QIcon::setThemeName("hicolor");
+    QIcon::setThemeSearchPaths(QStringList("/usr/share/icons"));
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-	QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
 
-	QCoreApplication::setOrganizationName("Cutie Community Project");
-	QCoreApplication::setApplicationName("Cutie Shell");
+    QCoreApplication::setOrganizationName("Cutie Community Project");
+    QCoreApplication::setApplicationName("Cutie Shell");
 
-	QGuiApplication app(argc, argv);
-	QQuickView view;
+    QGuiApplication app(argc, argv);
+    QQuickView view;
 
-	LayerShellQt::Window *layerShell = LayerShellQt::Window::get(&view);
-	layerShell->setLayer(LayerShellQt::Window::LayerBackground);
-	layerShell->setAnchors(LayerShellQt::Window::AnchorTop);
-	layerShell->setKeyboardInteractivity(
-		LayerShellQt::Window::KeyboardInteractivityNone);
-	layerShell->setExclusiveZone(-1);
-	layerShell->setScope("cutie-home");
+    LayerShellQt::Window *layerShell = LayerShellQt::Window::get(&view);
+    layerShell->setLayer(LayerShellQt::Window::LayerBackground);
+    layerShell->setAnchors(LayerShellQt::Window::AnchorTop);
+    layerShell->setKeyboardInteractivity(
+        LayerShellQt::Window::KeyboardInteractivityNone);
+    layerShell->setExclusiveZone(-1);
+    layerShell->setScope("cutie-home");
 
-	view.setSource(QUrl("qrc:/main.qml"));
-	view.setColor(QColor(Qt::transparent));
-	view.show();
+    view.setSource(QUrl("qrc:/main.qml"));
+    view.setColor(QColor(Qt::transparent));
+    view.show();
+	QQmlApplicationEngine engine;
 
-	Settings *settings = new Settings(view.engine());
-	settings->autostart();
+	Launcher *launcher = new Launcher(&engine);
+	engine.rootContext()->setContextProperty("launcher", launcher);
 
-	Notifications *notifications = new Notifications(&view);
-	new NotificationsAdaptor(notifications);
-	QDBusConnection::sessionBus().registerObject(
-		"/org/freedesktop/Notifications", notifications);
-	QDBusConnection::sessionBus().registerService(
-		"org.freedesktop.Notifications");
+	const QUrl url(QStringLiteral("qrc:/qml/main.qml"));
+	QObject::connect(
+		&engine, &QQmlApplicationEngine::objectCreated, &app,
+		[url](QObject *obj, const QUrl &objUrl) {
+			if (!obj && url == objUrl)
+				QCoreApplication::exit(-1);
+		},
+		Qt::QueuedConnection);
+	engine.load(url);
 
-	return app.exec();
+	launcher->loadAppList();
+
+    Settings *settings = new Settings(view.engine());
+    settings->autostart();
+
+    Notifications *notifications = new Notifications(&view);
+    new NotificationsAdaptor(notifications);
+    QDBusConnection::sessionBus().registerObject(
+        "/org/freedesktop/Notifications", notifications);
+    QDBusConnection::sessionBus().registerService(
+        "org.freedesktop.Notifications");
+
+    return app.exec();
 }

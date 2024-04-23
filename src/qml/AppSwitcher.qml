@@ -23,6 +23,53 @@ Item {
            topMargin: appSwitcher.height / 2
         }
     }
+
+
+    GridView {
+        id: launchAppGrid
+        anchors.fill: parent
+        model: launcherApps
+        cellWidth: width / Math.floor(width / 85)
+        cellHeight: cellWidth
+        anchors {
+           top: parent.top
+           leftMargin: appSwitcher.width / 3
+           topMargin: appSwitcher.height / 2
+        }
+        property real tempContentY: 0
+        property bool refreshing: false
+
+
+        delegate: Item {
+            CutieButton {
+                id: appIconButton
+                width: launchAppGrid.cellWidth
+                height: width
+                icon.name: model["Desktop Entry/Icon"]
+                icon.source: "file://" + model["Desktop Entry/Icon"]
+                icon.height: width / 2
+                icon.width: height / 2
+                background: null
+                onClicked:
+                    compositor.execApp(model["Desktop Entry/Exec"]);
+            }
+
+            CutieLabel {
+                anchors.bottom: appIconButton.bottom
+                anchors.horizontalCenter: appIconButton.horizontalCenter
+                text: model["Desktop Entry/Name"]
+                font.pixelSize: 12
+                clip: true
+                width: 2 * appIconButton.width / 3
+                elide: Text.ElideRight
+                horizontalAlignment: Text.AlignHCenter
+            }
+        }
+    }
+
+    ListModel { id: launcherApps }
+
+    // old stuff 
     GridView {
         id: tabListView
         anchors.fill: parent
