@@ -45,8 +45,9 @@ int main(int argc, char *argv[])
 	Launcher *launcher = new Launcher(&engine);
 	engine.rootContext()->setContextProperty("launcher", launcher);
    	
+	engine.load(url);
 	launcher->loadAppList();
-
+    
 	Settings *settings = new Settings(view.engine());
 	settings->autostart();
 
