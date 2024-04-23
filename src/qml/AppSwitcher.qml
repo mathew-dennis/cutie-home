@@ -24,6 +24,10 @@ Item {
         }
     }
 
+    function addApp(data) {
+        launcherApps.append(data)
+    }
+    
     GridView {
         id: launchAppGrid
         visible: tabListView.model.length === 0
@@ -197,4 +201,5 @@ Item {
             }
         }
     } 
+    ListModel { id: launcherApps }
 }
