@@ -67,8 +67,6 @@ Item {
         }
     }
 
-    ListModel { id: launcherApps }
-
     // old stuff 
     GridView {
         id: tabListView
