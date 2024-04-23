@@ -45,6 +45,8 @@ int main(int argc, char *argv[])
 	Launcher *launcher = new Launcher(&engine);
 	engine.rootContext()->setContextProperty("launcher", launcher);
    	
+	const QUrl url(QStringLiteral("qrc:/qml/main.qml"));
+	
 	engine.load(url);
 	launcher->loadAppList();
     
