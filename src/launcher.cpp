@@ -72,16 +72,7 @@ void Launcher::loadAppList()
 							->value("Desktop Entry/NoDisplay")
 							.toString();
 					qDebug() << "Loading app list...";
-					if (appHidden != "true" &&
-					    appNoDisplay != "true")
-						QMetaObject::invokeMethod(
-							((QQmlApplicationEngine
-								  *)parent())
-								->rootObjects()
-									[0],
-							"addApp",
-							Q_ARG(QVariant,
-							      appData));
+
 				}
 				delete curEntryFile;
 			}
