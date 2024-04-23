@@ -13,7 +13,7 @@ Item {
     CutieLabel {
         visible: tabListView.model.length === 0
         anchors.fill: parent
-        text: "No Running Apps"
+        text: "No Running s"
         font.bold: true
         font.pixelSize: 16
         opacity: 1.0 - cutieWlc.blur
@@ -27,7 +27,7 @@ Item {
     function addApp(data) {
         launcherApps.append(data)
     }
-    
+
     GridView {
         id: launchAppGrid
         visible: tabListView.model.length === 0
