@@ -72,7 +72,17 @@ void Launcher::loadAppList()
 							->value("Desktop Entry/NoDisplay")
 							.toString();
 					qDebug() << "Loading app list...";
-
+					if (appHidden != "true" &&
+					    appNoDisplay != "true")
+						QQuickView view;
+						view.setSource(QUrl("qrc:/main.qml"));
+						QObject *rootObject = view.rootObject();
+						QQuickItem *rootItem = qobject_cast<QQuickItem *>(rootObject);
+						if (rootItem) {
+    						QMetaObject::invokeMethod(rootItem, "addApp", Q_ARG(QVariant, appData));
+						} else {
+    					  qDebug() << "Error: Root item is null or cannot be cast to QQuickItem";
+                        }
 				}
 				delete curEntryFile;
 			}
