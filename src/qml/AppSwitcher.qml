@@ -27,13 +27,13 @@ Item {
 
     GridView {
         id: launchAppGrid
+        visible: tabListView.model.length === 0
         anchors.fill: parent
         model: launcherApps
         cellWidth: width / Math.floor(width / 85)
         cellHeight: cellWidth
         anchors {
            top: parent.top
-           leftMargin: appSwitcher.width / 3
            topMargin: appSwitcher.height / 2
         }
         property real tempContentY: 0
