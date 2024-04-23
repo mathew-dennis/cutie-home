@@ -71,6 +71,7 @@ void Launcher::loadAppList()
 						curEntryFile
 							->value("Desktop Entry/NoDisplay")
 							.toString();
+					qDebug() << "Loading app list...";
 					if (appHidden != "true" &&
 					    appNoDisplay != "true")
 						QMetaObject::invokeMethod(
