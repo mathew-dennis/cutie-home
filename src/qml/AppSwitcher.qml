@@ -25,7 +25,9 @@ Item {
     }
 
     function addApp(data) {
-        launcherApps.append(data);
+    console.log("Adding App:", data);
+    launcherApps.append(data);
+    console.log("App added successfully.");
     }
 
     function logLauncherAppsLength() {

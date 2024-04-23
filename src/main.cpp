@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
 
     // Create an instance of the Launcher class and load the app list
     Launcher *launcher = new Launcher();
-    //launcher->loadAppList();
+    launcher->loadAppList();
 
 	QQuickView view;
 
