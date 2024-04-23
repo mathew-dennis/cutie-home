@@ -211,5 +211,4 @@ Item {
             }
         }
     } 
-    ListModel { id: launcherApps }
 }
