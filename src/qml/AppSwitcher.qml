@@ -32,7 +32,7 @@ Item {
     }
 
     function addApp(data) {
-        launcherApps.append(data)
+        launcherApps.append(data);
     }
 
     function logLauncherAppsLength() {
@@ -53,7 +53,7 @@ Item {
 
         Component.onCompleted: {
             logLauncherAppsLength();
-            refreshLauncherApps()
+            refreshLauncherApps();
         }
 
         delegate: Item {
