@@ -13,7 +13,7 @@ Item {
     CutieLabel {
         visible: tabListView.model.length === 0
         anchors.fill: parent
-        text: "No Running s"
+        text: "No Running Apps"
         font.bold: true
         font.pixelSize: 16
         opacity: 1.0 - cutieWlc.blur
@@ -28,9 +28,13 @@ Item {
         launcherApps.append(data)
     }
 
+    function logLauncherAppsLength() {
+        console.log("launcherApps length:", launcherApps.count);
+    }
+
     GridView {
         id: launchAppGrid
-        visible: tabListView.model.length === 0
+        visible: true
         anchors.fill: parent
         model: launcherApps
         cellWidth: width / Math.floor(width / 85)
@@ -38,6 +42,10 @@ Item {
         anchors {
            top: parent.top
            topMargin: appSwitcher.height / 2
+        }
+
+        Component.onCompleted: {
+            logLauncherAppsLength();
         }
 
         delegate: Item {
