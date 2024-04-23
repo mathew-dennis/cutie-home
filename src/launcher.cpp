@@ -78,7 +78,9 @@ void Launcher::loadAppList()
 
    					    if (rootItem) {
           				    qDebug() << "Loading app list...";
-      					    QMetaObject::invokeMethod(rootItem, "addApp", Q_ARG(QVariant, appData));
+      					   QMetaObject::invokeMethod(rootItem, "addApp",
+                                                 Qt::AutoConnection,
+                                                 Q_ARG(QVariant, QVariant::fromValue(appData)));
     					} else {
       					    qDebug() << "Error: Root item is null or cannot be cast to QQuickItem";
    					    }
