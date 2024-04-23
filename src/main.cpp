@@ -1,6 +1,5 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include <QQmlEngine>
 #include <QQmlContext>
 #include "settings.h"
 #include "notifications.h"
@@ -41,14 +40,12 @@ int main(int argc, char *argv[])
 	view.setColor(QColor(Qt::transparent));
 	view.show();
 
-	QQmlApplicationEngine engine;
-	Launcher *launcher = new Launcher(&engine);
-	engine.rootContext()->setContextProperty("launcher", launcher);
-   	
-	const QUrl url(QStringLiteral("qrc:/qml/main.qml"));
-	
-	engine.load(url);
-	launcher->loadAppList();
+ // Create an instance of the Launcher class and load the app list
+    Launcher *launcher = new Launcher();
+    launcher->loadAppList();
+
+    // Set up the launcher object in QML context
+    view.rootContext()->setContextProperty("launcher", launcher);
     
 	Settings *settings = new Settings(view.engine());
 	settings->autostart();
