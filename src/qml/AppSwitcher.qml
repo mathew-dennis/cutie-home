@@ -26,9 +26,10 @@ Item {
 
 
     function refreshLauncherApps() {
+        console.log("refreshing launcherApps length");
         launcherApps.clear();
         launcher.loadAppList();
-        console.log("refreshing launcherApps length");
+        
     }
 
     function addApp(data) {
