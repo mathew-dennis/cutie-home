@@ -9,11 +9,7 @@ Item {
     anchors.fill: parent
     opacity: 0
     enabled: root.state == "appSwitcher"
-    Component.onCompleted: {
-        // Call refreshLauncherApps() when the component is completed
-        refreshLauncherApps();
-    }
-    
+
     CutieLabel {
         visible: tabListView.model.length === 0
         anchors.fill: parent
@@ -27,7 +23,7 @@ Item {
            topMargin: appSwitcher.height / 2
         }
     }
-
+    
     refreshLauncherApps();
 
     function refreshLauncherApps() {
