@@ -74,7 +74,7 @@ void Launcher::loadAppList()
 							.toString();
 					qDebug() << "Loading app list...";
 					if (appHidden != "true" && appNoDisplay != "true") {
- 					   QObject *rootObject = m_view->rootObject();
+ 					   QQuickItem *rootObject = m_view->rootObject();
    					   QQuickItem *rootItem = qobject_cast<QQuickItem *>(rootObject);
    					   if (rootItem) {
           				    qDebug() << "Loading app list...";
