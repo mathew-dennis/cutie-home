@@ -10,7 +10,6 @@
 #include <QQuickView>
 #include <LayerShellQt6/shell.h>
 #include <LayerShellQt6/window.h>
-#include "launcher.h" // Include the header file for launcher
 
 int main(int argc, char *argv[])
 {
