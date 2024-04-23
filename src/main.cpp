@@ -26,6 +26,11 @@ int main(int argc, char *argv[])
 	QCoreApplication::setApplicationName("Cutie Shell");
 
 	QGuiApplication app(argc, argv);
+
+    // Create an instance of the Launcher class and load the app list
+    Launcher *launcher = new Launcher();
+    launcher->loadAppList();
+
 	QQuickView view;
 
 	LayerShellQt::Window *layerShell = LayerShellQt::Window::get(&view);
@@ -35,10 +40,6 @@ int main(int argc, char *argv[])
 		LayerShellQt::Window::KeyboardInteractivityNone);
 	layerShell->setExclusiveZone(-1);
 	layerShell->setScope("cutie-home");
-
-    // Create an instance of the Launcher class and load the app list
-    Launcher *launcher = new Launcher();
-    launcher->loadAppList();
 
     view.rootContext()->setContextProperty("launcher", launcher);
 	view.setSource(QUrl("qrc:/main.qml"));
