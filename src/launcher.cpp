@@ -74,10 +74,9 @@ void Launcher::loadAppList()
 							.toString();
 					qDebug() << "Loading app list...";
 					if (appHidden != "true" && appNoDisplay != "true") {
-                        QObject *rootObject = m_view->rootObject(); // Obtain root object as QObject
-                        QQuickItem *rootItem = qobject_cast<QQuickItem *>(rootObject); // Cast to QQuickItem
+                        QQuickItem *rootItem = m_view->rootObject();
 
-   					   if (rootItem) {
+   					    if (rootItem) {
           				    qDebug() << "Loading app list...";
       					    QMetaObject::invokeMethod(rootItem, "addApp", Q_ARG(QVariant, appData));
     					} else {
