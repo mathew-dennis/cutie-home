@@ -13,11 +13,11 @@ find_package(LayerShellQt6 REQUIRED)
 set(cutie-home_SOURCES 
     src/settings.cpp 
     src/notifications.cpp 
+    src/launcher.cpp
     src/settings.h 
     src/notifications.h 
-    src/main.cpp 
-    src/launcher.cpp
     src/launcher.h
+    src/main.cpp
 )
 
 qt6_add_resources(APP_RESOURCES 
