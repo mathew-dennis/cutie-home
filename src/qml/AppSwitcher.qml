@@ -36,9 +36,6 @@ Item {
            top: parent.top
            topMargin: appSwitcher.height / 2
         }
-        property real tempContentY: 0
-        property bool refreshing: false
-
 
         delegate: Item {
             CutieButton {
