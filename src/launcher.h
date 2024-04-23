@@ -5,6 +5,7 @@
 #include <QSettings>
 #include <QProcess>
 #include <QDir>
+#include <QQuickView>
 
 class Launcher : public QObject {
 	Q_OBJECT
@@ -14,7 +15,7 @@ public:
 
 private:
     QQuickView *m_view; // Store a pointer to the QQuickView instance
-	
+
 	Q_INVOKABLE void loadAppList();
 
     public Q_SLOTS:
