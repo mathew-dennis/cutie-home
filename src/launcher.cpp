@@ -2,6 +2,7 @@
 #include <QQmlContext>
 #include <QtGui/QGuiApplication>
 #include <QStandardPaths>
+#include <QQuickView>
 
 #include <launcher.h>
 
