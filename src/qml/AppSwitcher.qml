@@ -24,8 +24,6 @@ Item {
         }
     }
     
-    refreshLauncherApps();
-
     function refreshLauncherApps() {
         console.log("refreshing launcherApps length");
         launcherApps.clear();
