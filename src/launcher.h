@@ -9,9 +9,12 @@
 class Launcher : public QObject {
 	Q_OBJECT
 
-    public:
-	Launcher(QObject *parent = 0);
+public:
+    explicit Launcher(QQuickView *view, QObject *parent = nullptr);
 
+private:
+    QQuickView *m_view; // Store a pointer to the QQuickView instance
+	
 	Q_INVOKABLE void loadAppList();
 
     public Q_SLOTS:

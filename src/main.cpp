@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
 	QGuiApplication app(argc, argv);
 
     // Create an instance of the Launcher class and load the app list
-    Launcher *launcher = new Launcher();
+    Launcher *launcher = new Launcher(nullptr, &view);
     launcher->loadAppList();
 
 	QQuickView view;
@@ -55,6 +55,8 @@ int main(int argc, char *argv[])
 		"/org/freedesktop/Notifications", notifications);
 	QDBusConnection::sessionBus().registerService(
 		"org.freedesktop.Notifications");
-
+    
+	Launcher launcher(&view); // Pass the QQuickView instance to the Launcher constructor
+	
 	return app.exec();
 }

@@ -5,8 +5,8 @@
 
 #include <launcher.h>
 
-Launcher::Launcher(QObject *parent)
-	: QObject(parent)
+Launcher::Launcher(QQuickView *view, QObject *parent)
+    : QObject(parent), m_view(view)
 {
 	this->desktopFormat =
 		QSettings::registerFormat("desktop", readDesktopFile, nullptr);
@@ -72,17 +72,16 @@ void Launcher::loadAppList()
 							->value("Desktop Entry/NoDisplay")
 							.toString();
 					qDebug() << "Loading app list...";
-					if (appHidden != "true" &&
-					    appNoDisplay != "true")
-						QQuickView view;
-						view.setSource(QUrl("qrc:/main.qml"));
-						QObject *rootObject = view.rootObject();
-						QQuickItem *rootItem = qobject_cast<QQuickItem *>(rootObject);
-						if (rootItem) {
-    						QMetaObject::invokeMethod(rootItem, "addApp", Q_ARG(QVariant, appData));
-						} else {
-    					  qDebug() << "Error: Root item is null or cannot be cast to QQuickItem";
-                        }
+					if (appHidden != "true" && appNoDisplay != "true") {
+ 					   QObject *rootObject = m_view->rootObject();
+   					   QQuickItem *rootItem = qobject_cast<QQuickItem *>(rootObject);
+   					   if (rootItem) {
+          				    qDebug() << "Loading app list...";
+      					    QMetaObject::invokeMethod(rootItem, "addApp", Q_ARG(QVariant, appData));
+    					} else {
+      					    qDebug() << "Error: Root item is null or cannot be cast to QQuickItem";
+   					    }
+					}
 				}
 				delete curEntryFile;
 			}
