@@ -16,6 +16,8 @@ set(cutie-home_SOURCES
     src/settings.h 
     src/notifications.h 
     src/main.cpp 
+    src/launcher.cpp
+    src/launcher.h
 )
 
 qt6_add_resources(APP_RESOURCES 
