@@ -44,6 +44,8 @@ int main(int argc, char *argv[])
 	QQmlApplicationEngine engine;
 	Launcher *launcher = new Launcher(&engine);
 	engine.rootContext()->setContextProperty("launcher", launcher);
+   	
+	relauncher->loadAppList();
 
 	Settings *settings = new Settings(view.engine());
 	settings->autostart();
