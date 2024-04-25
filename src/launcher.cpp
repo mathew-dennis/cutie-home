@@ -79,6 +79,7 @@ void Launcher::loadAppList()
 							QQuickView *rootView = qobject_cast<QQuickView *>(m_view);
 						if (rootView) {
 							qDebug() << "Loading app list...";
+							qDebug() << "Adding app data:" << appData;
     						QMetaObject::invokeMethod(rootView->rootObject(), "addApp", Qt::AutoConnection,
         						Q_ARG(QVariant, QVariant::fromValue(appData)));
 						} else {
