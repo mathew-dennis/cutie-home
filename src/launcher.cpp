@@ -79,6 +79,7 @@ void Launcher::loadAppList()
 
 						if (rootItem) {
           				    qDebug() << "Loading app list...";
+							qDebug() << "Adding app data:" << appData;
 						    QMetaObject::invokeMethod(rootItem, "addApp",
                                Qt::AutoConnection,
                                Q_ARG(QVariant, QVariant::fromValue(appData)));
