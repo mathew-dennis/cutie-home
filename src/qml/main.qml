@@ -72,7 +72,7 @@ Item {
         opacity: Math.max(cutieWlc.blur, notificationScreen.opacity)
     }
 
-    function addApp(data) {
+    Q_INVOKABLE function addApp(data) {
     console.log("App added successfully.");
     console.log("Adding App:", data);
     launcherApps.append(data);
