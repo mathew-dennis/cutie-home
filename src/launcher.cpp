@@ -3,6 +3,7 @@
 #include <QtGui/QGuiApplication>
 #include <QStandardPaths>
 #include <QQuickView>
+#include <QQuickItem>
 
 #include <launcher.h>
 
@@ -74,16 +75,16 @@ void Launcher::loadAppList()
 							.toString();
 					qDebug() << "Loading app list...";
 					if (appHidden != "true" && appNoDisplay != "true") {
-                        QQuickItem *rootItem = m_view->rootObject();
+						QQuickItem *rootItem = m_view->rootObject();
 
-   					    if (rootItem) {
+						if (rootItem) {
           				    qDebug() << "Loading app list...";
-      					   QMetaObject::invokeMethod(rootItem, "addApp",
-                                                 Qt::AutoConnection,
-                                                 Q_ARG(QVariant, QVariant::fromValue(appData)));
-    					} else {
-      					    qDebug() << "Error: Root item is null or cannot be cast to QQuickItem";
-   					    }
+						    QMetaObject::invokeMethod(rootItem, "addApp",
+                               Qt::AutoConnection,
+                               Q_ARG(QVariant, QVariant::fromValue(appData)));
+						} else {
+   						 qDebug() << "Error: Root item is null or cannot be cast to QQuickItem";
+						}
 					}
 				}
 				delete curEntryFile;
