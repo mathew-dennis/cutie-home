@@ -75,16 +75,14 @@ void Launcher::loadAppList()
 							.toString();
 					qDebug() << "Loading app list...";
 					if (appHidden != "true" && appNoDisplay != "true") {
-						QQuickItem *rootItem = m_view->rootObject();
-
-						if (rootItem) {
-          				    qDebug() << "Loading app list...";
-							qDebug() << "Adding app data:" << appData;
-						    QMetaObject::invokeMethod(rootItem, "addApp",
-                               Qt::AutoConnection,
-                               Q_ARG(QVariant, QVariant::fromValue(appData)));
+						
+							QQuickView *rootView = qobject_cast<QQuickView *>(m_view);
+						if (rootView) {
+							qDebug() << "Loading app list...";
+    						QMetaObject::invokeMethod(rootView->rootObject(), "addApp", Qt::AutoConnection,
+        						Q_ARG(QVariant, QVariant::fromValue(appData)));
 						} else {
-   						 qDebug() << "Error: Root item is null or cannot be cast to QQuickItem";
+						    qDebug() << "Error: Unable to cast QQuickView to root object";
 						}
 					}
 				}
