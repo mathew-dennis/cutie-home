@@ -76,7 +76,7 @@ void Launcher::loadAppList()
 					qDebug() << "Loading app list...";
 					if (appHidden != "true" && appNoDisplay != "true") {
 						
-							QQuickView *rootView = qobject_cast<QQuickView *>(m_view);
+						QQuickView *rootView = qobject_cast<QQuickView *>(m_view);
 						if (rootView) {
 							qDebug() << "Loading app list...";
 							qDebug() << "Adding app data:" << appData;

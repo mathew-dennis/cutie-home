@@ -13,7 +13,7 @@ class Launcher : public QObject {
 public:
     explicit Launcher(QQuickView *view, QObject *parent = nullptr);
     Q_INVOKABLE void loadAppList();
-
+    Q_INVOKABLE void addApp(const QVariant &appData);
 private:
     QQuickView *m_view; // Store a pointer to the QQuickView instance
 
