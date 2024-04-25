@@ -74,9 +74,11 @@ Item {
 
     function addApp(data) {
     console.log("App added successfully.");
+    console.log("Adding App:", data);
+    launcherApps.append(data);
     console.log("App added successfully.");
     }
-
+    
     AppSwitcher { id: appSwitcher }
     NotificationScreen { id: notificationScreen }
     ScreenSwipe { id: screenSwipe }
