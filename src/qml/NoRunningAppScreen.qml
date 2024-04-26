@@ -1,6 +1,7 @@
 Item {
     id: noRunningAppScreen
-    
+    anchors.fill: parent
+
     CutieLabel {
         id: noRunningAppsLabel
         visible: tabListView.model.length === 0
@@ -10,7 +11,7 @@ Item {
         font.pixelSize: 16
         opacity: 1.0 - cutieWlc.blur
         anchors {
-           top: parent.top
+           top: appSwitcher.top
            leftMargin: appSwitcher.width / 3
            topMargin: appSwitcher.height / 2
         }
@@ -21,11 +22,11 @@ Item {
         visible: tabListView.model.length === 0
         opacity: 1.0 - cutieWlc.blur
         model: launcherApps
-        width: parent.width 
+        width: appSwitcher.width 
         cellWidth: width / Math.floor(width / 85)
         cellHeight: cellWidth
         anchors {
-            top: parent.bottom
+            top: appSwitcher.bottom
             topMargin: -launchAppGrid.cellHeight - 8
         }
 
