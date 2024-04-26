@@ -35,10 +35,12 @@ Item {
         model: launcherApps
         cellWidth: width / Math.floor(width / 85)
         cellHeight: cellWidth
-        anchors {
-           top: parent.top
-           topMargin: appSwitcher.height / 2
-        }
+    anchors {
+        top: parent.bottom
+        bottom: parent.bottom // Anchor to the bottom of the parent
+        horizontalCenter: parent.horizontalCenter
+        topMargin: -cellHeight // Offset the top margin by the cell height
+    }
 
         Component.onCompleted: {
             logLauncherAppsLength();
