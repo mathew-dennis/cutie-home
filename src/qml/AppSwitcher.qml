@@ -37,7 +37,7 @@ Item {
         cellHeight: cellWidth
         anchors {
             top: parent.bottom
-            topMargin: -launchAppGrid.cellHeight - 4
+            topMargin: -launchAppGrid.cellHeight - 8
         }
 
         Component.onCompleted: {
