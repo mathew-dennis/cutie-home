@@ -24,7 +24,7 @@ Item {
         }
     }
 
-    Item {
+    NoRunningAppScreen {
         id: noRunningAppScreen
     }
 
