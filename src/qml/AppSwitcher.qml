@@ -36,7 +36,7 @@ Item {
         cellWidth: width / Math.floor(width / 85)
         cellHeight: cellWidth
     anchors {
-        top: parent.bottom
+        bottom: parent.bottom 
     }
 
         Component.onCompleted: {
