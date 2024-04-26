@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
 	layerShell->setScope("cutie-home");
 
     // Create an instance of the Launcher class and load the app list
-    Launcher *launcher = new Launcher(nullptr, &view);
+    Launcher *launcher = new Launcher(&view);
     launcher->loadAppList();
 
     view.rootContext()->setContextProperty("launcher", launcher);
