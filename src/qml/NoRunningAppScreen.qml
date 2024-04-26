@@ -19,6 +19,7 @@ NoRunningAppScreen {
 
     GridView {
         id: launchAppGrid
+        anchors.fill: parent
         visible: tabListView.model.length === 0
         opacity: 1.0 - cutieWlc.blur
         model: launcherApps
@@ -26,7 +27,7 @@ NoRunningAppScreen {
         cellWidth: width / Math.floor(width / 85)
         cellHeight: cellWidth
         anchors {
-            top: appSwitcher.bottom
+            top: appSwitcher.top
             topMargin: -launchAppGrid.cellHeight - 8
         }
 
