@@ -32,11 +32,12 @@ Item {
         id: launchAppGrid
         visible: tabListView.model.length === 0
         model: launcherApps
+        width: parent.width 
         cellWidth: width / Math.floor(width / 85)
         cellHeight: cellWidth
         anchors {
             top: parent.bottom
-            topMargin: -launchAppGrid.cellHeight + 4
+            topMargin: -launchAppGrid.cellHeight - 4
         }
 
         Component.onCompleted: {
