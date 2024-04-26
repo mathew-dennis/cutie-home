@@ -35,9 +35,9 @@ Item {
         model: launcherApps
         cellWidth: width / Math.floor(width / 85)
         cellHeight: cellWidth
-    anchors {
-        bottom: parent.bottom 
-    }
+        anchors {
+            bottom: parent.bottom 
+        }
 
         Component.onCompleted: {
             logLauncherAppsLength();
