@@ -30,7 +30,6 @@ Item {
 
     GridView {
         id: launchAppGrid
-        rowCount: 1 // Limiting to one row
         visible: tabListView.model.length === 0
         anchors.fill: parent
         model: launcherApps
