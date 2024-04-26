@@ -1,7 +1,6 @@
 Item {
     id: noRunningAppScreen
-    anchors.fill: parent
-
+    
     CutieLabel {
         id: noRunningAppsLabel
         visible: tabListView.model.length === 0
