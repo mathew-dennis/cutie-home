@@ -31,6 +31,7 @@ Item {
     GridView {
         id: launchAppGrid
         visible: tabListView.model.length === 0
+        opacity: 1.0 - cutieWlc.blur
         model: launcherApps
         width: parent.width 
         cellWidth: width / Math.floor(width / 85)
