@@ -37,8 +37,6 @@ Item {
         cellHeight: cellWidth
     anchors {
         top: parent.bottom
-        horizontalCenter: parent.horizontalCenter
-        topMargin: -cellHeight // Offset the top margin by the cell height
     }
 
         Component.onCompleted: {
