@@ -31,12 +31,11 @@ Item {
     GridView {
         id: launchAppGrid
         visible: tabListView.model.length === 0
-        anchors.fill: parent
         model: launcherApps
         cellWidth: width / Math.floor(width / 85)
         cellHeight: cellWidth
         anchors {
-            bottom: parent.bottom 
+            top: parent.bottom 
         }
 
         Component.onCompleted: {
