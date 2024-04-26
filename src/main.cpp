@@ -37,15 +37,17 @@ int main(int argc, char *argv[])
 	layerShell->setExclusiveZone(-1);
 	layerShell->setScope("cutie-home");
 
-    // Create an instance of the Launcher class and load the app list
+   // Create an instance of the Launcher class and load the app list
     Launcher *launcher = new Launcher(&view);
-    launcher->loadAppList();
+
 
     view.rootContext()->setContextProperty("launcher", launcher);
 	view.setSource(QUrl("qrc:/main.qml"));
 	view.setColor(QColor(Qt::transparent));
 	view.show();
   
+    launcher->loadAppList();
+	
 	Settings *settings = new Settings(view.engine());
 	settings->autostart();
 
