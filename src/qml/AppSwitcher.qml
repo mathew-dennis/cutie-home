@@ -24,9 +24,8 @@ Item {
         }
     }
 
-    LaunchAppGrid {
-        // Instantiate LaunchAppGrid component
-        id: launchAppGrid
+    Item {
+        id: noRunningAppScreen
     }
 
     // old stuff 

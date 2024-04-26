@@ -1,3 +1,22 @@
+Item {
+    id: noRunningAppScreen
+    anchors.fill: parent
+
+    CutieLabel {
+        id: noRunningAppsLabel
+        visible: tabListView.model.length === 0
+        anchors.fill: parent
+        text: "No Running Apps"
+        font.bold: true
+        font.pixelSize: 16
+        opacity: 1.0 - cutieWlc.blur
+        anchors {
+           top: parent.top
+           leftMargin: appSwitcher.width / 3
+           topMargin: appSwitcher.height / 2
+        }
+    }
+
     GridView {
         id: launchAppGrid
         visible: tabListView.model.length === 0
@@ -37,3 +56,4 @@
             }
         }
     }
+}
