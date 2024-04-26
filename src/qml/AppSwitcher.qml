@@ -37,7 +37,6 @@ Item {
         cellHeight: cellWidth
     anchors {
         top: parent.bottom
-        bottom: parent.bottom // Anchor to the bottom of the parent
         horizontalCenter: parent.horizontalCenter
         topMargin: -cellHeight // Offset the top margin by the cell height
     }
