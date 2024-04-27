@@ -23,8 +23,8 @@ Item {
            leftMargin: appSwitcher.width / 3
            topMargin: appSwitcher.height / 2
         }
-        onClicked:{
-             opLevel=  (opLevel === 1.0 - cutieWlc.blur) ? 0 : (1.0 - cutieWlc.blur)
+        onClicked: {
+               opLevel = (opLevel === (1.0 - cutieWlc.blur)) ? 0 : (1.0 - cutieWlc.blur);
         }
     }
 
