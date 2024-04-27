@@ -1,3 +1,11 @@
+import QtQuick
+import Qt5Compat.GraphicalEffects
+import QtQuick.Controls
+import QtMultimedia
+import QtQuick.Window
+import Cutie
+import Cutie.Wlc
+
 NoRunningAppScreen {
     id: noRunningAppScreen
     anchors.fill: parent
