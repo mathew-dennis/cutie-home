@@ -16,15 +16,11 @@ Item {
         text: "No Running Apps"
         font.bold: true
         font.pixelSize: 16
-        opacity: opLevel
-        z: 1
+        opacity: 1.0 - cutieWlc.blur
         anchors {
            top: parent.top
            leftMargin: appSwitcher.width / 3
            topMargin: appSwitcher.height / 2
-        }
-        onClicked: {
-               opLevel = (opLevel === (1.0 - cutieWlc.blur)) ? 0 : (1.0 - cutieWlc.blur);
         }
     }
 
