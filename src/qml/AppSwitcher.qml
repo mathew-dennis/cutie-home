@@ -24,6 +24,10 @@ Item {
         }
     }
 
+    CutieWlc {
+        id: compositor
+    }
+    
     GridView {
         id: launchAppGrid
         visible: tabListView.model.length === 0
