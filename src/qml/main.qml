@@ -82,7 +82,6 @@ Item {
     AppSwitcher { id: appSwitcher }
     NotificationScreen { id: notificationScreen }
     ScreenSwipe { id: screenSwipe }
-    NoRunningAppScreen { id: noRunningAppScreen }
 
     ListModel { id: notifications }
     ListModel { id: launcherApps }
