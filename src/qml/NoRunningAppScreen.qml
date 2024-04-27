@@ -65,4 +65,5 @@ NoRunningAppScreen {
             }
         }
     }
+    ListModel { id: launcherApps }
 }
