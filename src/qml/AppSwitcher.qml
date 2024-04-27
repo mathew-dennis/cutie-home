@@ -41,10 +41,6 @@ Item {
             topMargin: -launchAppGrid.cellHeight - 8
         }
 
-        Component.onCompleted: {
-            logLauncherAppsLength();
-        }
-
         delegate: Item {
             CutieButton {
                 id: appIconButton
