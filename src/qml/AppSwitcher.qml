@@ -12,16 +12,11 @@ Item {
 
     CutieLabel {
         visible: tabListView.model.length === 0
-        anchors.fill: parent
+        anchors.centerIn: parent
         text: "No Running Apps"
         font.bold: true
         font.pixelSize: 16
         opacity: 1.0 - cutieWlc.blur
-        anchors {
-           top: parent.top
-           leftMargin: appSwitcher.width / 3
-           topMargin: appSwitcher.height / 2
-        }
     }
 
     CutieWlc {
