@@ -10,6 +10,14 @@ Item {
     opacity: 0
     enabled: root.state == "appSwitcher"
 
+    CutieLabel {
+        visible: tabListView.model.length === 0
+        anchors.centerIn: parent
+        text: "No Running Apps"
+        font.bold: true
+        font.pixelSize: 16
+        opacity: 1.0 - cutieWlc.blur
+    }
     GridView {
         id: tabListView
         anchors.fill: parent
