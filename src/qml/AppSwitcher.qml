@@ -11,13 +11,30 @@ Item {
     enabled: root.state == "appSwitcher"
 
     CutieLabel {
-        visible: tabListView.model.length === 0
         anchors.centerIn: parent
-        text: "No Running Apps"
+        text: qsTr("No Running Apps")
         font.bold: true
-        font.pixelSize: 16
-        opacity: 1.0 - cutieWlc.blur
+        font.pixelSize: 18
+        opacity: tabListView.model.length === 0
+            ? 1.0 - cutieWlc.blur
+            : 0
+
+        Behavior on opacity {
+            NumberAnimation {
+                duration: 200
+            }
+        }
+
+        layer.enabled: true
+        layer.effect: DropShadow {
+            verticalOffset: 2
+            color: Atmosphere.textColor
+            radius: 5
+            samples: 10
+			opacity: 1/3
+        }
     }
+
     GridView {
         id: tabListView
         anchors.fill: parent
