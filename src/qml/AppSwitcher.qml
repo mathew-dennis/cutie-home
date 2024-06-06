@@ -28,7 +28,7 @@ Item {
         layer.enabled: true
         layer.effect: DropShadow {
             verticalOffset: 2
-            color: Atmosphere.textColor
+            color: Atmosphere.accentColor
             radius: 5
             samples: 10
 			opacity: 1/3
