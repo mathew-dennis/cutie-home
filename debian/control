@@ -19,6 +19,8 @@ Multi-Arch: foreign
 Provides: cutie-shell
 Conflicts: cutie-shell
 Pre-Depends: ${misc:Pre-Depends}
-Depends: ${misc:Depends}, ${shlibs:Depends}
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+         qml6-module-cutiefeedback,
 Description: This package contains Cutie home screen.
 
