@@ -3,6 +3,7 @@ import Qt5Compat.GraphicalEffects
 import QtQuick.Controls
 import QtMultimedia
 import Cutie
+import Cutie.Feedback
 import Cutie.Wlc
 
 Item {
