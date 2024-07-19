@@ -14,7 +14,7 @@ Item {
 
     CutieLabel {
         anchors.centerIn: parent
-        text: qsTr("No Running App")
+        text: qsTr("No Running Apps")
         font.bold: true
         font.pixelSize: 18
         opacity: tabListView.model.length === 0
@@ -33,7 +33,15 @@ Item {
             color: Atmosphere.accentColor
             radius: 5
             samples: 10
-			opacity: 1/3
+            opacity: 1/3
+        }
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                console.log("No Running Apps label clicked");
+                loadFavoriteApps();
+            }
         }
     }
 
@@ -42,14 +50,14 @@ Item {
     CutieWlc {
         id: compositor
     }
-    
+
     GridView {
         id: launchAppGrid
         z: 1
         visible: tabListView.model.length === 0
         opacity: 1.0 - cutieWlc.blur
         model: launcherApps
-        width: parent.width 
+        width: parent.width
         cellWidth: width / Math.floor(width / 85)
         cellHeight: cellWidth
         anchors {
@@ -84,7 +92,7 @@ Item {
         }
     }
 
-   // Running Apps Overview
+    // Running Apps Overview
 
     GridView {
         id: tabListView
@@ -198,7 +206,7 @@ Item {
                             modelData.close();
                             appThumb.opacity = 0;
                             closedTm.start();
-                        } else { 
+                        } else {
                             opacityRestore.start();
                         }
                         xRestore.start();
@@ -206,7 +214,7 @@ Item {
 
                     onPositionChanged: {
                         if (drag.active) {
-                            appThumb.opacity = 1 - Math.abs(appBg.x - 10) / parent.width 
+                            appThumb.opacity = 1 - Math.abs(appBg.x - 10) / parent.width
                         }
                     }
                 }
@@ -218,5 +226,5 @@ Item {
                 onTriggered: appThumb.opacity = 1
             }
         }
-    } 
+    }
 }
