@@ -64,7 +64,7 @@ Item {
                 console.log("found Favorite store data entry ");
                 let appData = favoriteData[key];
                 let data = { 
-                    "Desktop Entry/Name": key.substring(13), 
+                    "Desktop Entry/Name": key.substring(12), 
                     "Desktop Entry/Icon": appData.icon, 
                     "Desktop Entry/Exec": appData.command 
                 };
