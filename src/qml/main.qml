@@ -4,6 +4,7 @@ import QtQuick.Controls
 import QtMultimedia
 import Cutie
 import Cutie.Feedback
+import Cutie.Store
 import Cutie.Wlc
 
 Item {
@@ -46,7 +47,40 @@ Item {
                 notifications.remove(c_i);
         }
     }
-    
+
+    function loadFavoriteApps() {
+        if (!favoriteStore.data) {
+            console.log("Favorite store data is not yet available.");
+            return;
+        }
+        let favoriteData = favoriteStore.data;
+        launcherApps.clear(); 
+        
+        for (let key in favoriteData) {
+            if (key.startsWith("favoriteApp-")) {
+                let appData = favoriteData[key];
+                let data = { "Desktop Entry/Name": key.substring(13), "Desktop Entry/Icon": appData.icon, "Desktop Entry/Exec": appData.command };
+                launcherApps.append(data);
+            }
+        }
+
+        console.log("Favorite apps loaded successfully.");
+    }
+
+    Component.onCompleted: {
+        loadFavoriteApps();
+    }
+
+    CutieStore {
+        id: favoriteStore
+        appName: "cutie-home"
+        storeName: "favoriteItems"
+
+        onDataChanged: {
+            loadFavoriteApps();
+        }
+    }
+
     ForeignToplevelManagerV1 {
         id: toplevelManager
     }
