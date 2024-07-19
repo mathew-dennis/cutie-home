@@ -58,10 +58,15 @@ Item {
         launcherApps.clear(); 
         
         for (let key in favoriteData) {
-            if (key.startsWith("favoriteApp-")) {
+           if (key.startsWith("favoriteApp-")) {
                 console.log("found Favorite store data entry ");
                 let appData = favoriteData[key];
-                let data = { "Desktop Entry/Name": key.substring(13), "Desktop Entry/Icon": appData.icon, "Desktop Entry/Exec": appData.command };
+                let data = { 
+                    "Desktop Entry/Name": key.substring(13), 
+                    "Desktop Entry/Icon": appData.icon, 
+                    "Desktop Entry/Exec": appData.command 
+                };
+                console.log("Appending data:", data);
                 launcherApps.append(data);
             }
         }
