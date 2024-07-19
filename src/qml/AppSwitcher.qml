@@ -61,6 +61,12 @@ Item {
                 elide: Text.ElideRight
                 horizontalAlignment: Text.AlignHCenter
             }
+            
+            Component.onCompleted: {
+                console.log("App name:", model["Desktop Entry/Name"]);
+                console.log("App icon source:", "file://" + model["Desktop Entry/Icon"]);
+                console.log("App exec command:", model["Desktop Entry/Exec"]);
+            }
         }
     }
 
