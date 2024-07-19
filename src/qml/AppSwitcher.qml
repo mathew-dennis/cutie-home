@@ -35,14 +35,6 @@ Item {
             samples: 10
             opacity: 1/3
         }
-
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                console.log("No Running Apps label clicked");
-                loadFavoriteApps();
-            }
-        }
     }
 
     // favorite Apps panel 
