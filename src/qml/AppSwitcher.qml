@@ -14,7 +14,7 @@ Item {
 
     CutieLabel {
         anchors.centerIn: parent
-        text: qsTr("No Running Apps")
+        text: qsTr("No Running App")
         font.bold: true
         font.pixelSize: 18
         opacity: tabListView.model.length === 0

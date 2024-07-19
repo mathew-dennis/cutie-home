@@ -49,6 +49,7 @@ Item {
     }
 
     function loadFavoriteApps() {
+        console.log("loadin Favorite store data ");
         if (!favoriteStore.data) {
             console.log("Favorite store data is not yet available.");
             return;
@@ -58,6 +59,7 @@ Item {
         
         for (let key in favoriteData) {
             if (key.startsWith("favoriteApp-")) {
+                console.log("found Favorite store data entry ");
                 let appData = favoriteData[key];
                 let data = { "Desktop Entry/Name": key.substring(13), "Desktop Entry/Icon": appData.icon, "Desktop Entry/Exec": appData.command };
                 launcherApps.append(data);
