@@ -56,6 +56,8 @@ Item {
         }
         let favoriteData = favoriteStore.data;
         launcherApps.clear(); 
+        console.log("Favorite store data:", JSON.stringify(favoriteData));
+
         
         for (let key in favoriteData) {
            if (key.startsWith("favoriteApp-")) {
@@ -66,12 +68,14 @@ Item {
                     "Desktop Entry/Icon": appData.icon, 
                     "Desktop Entry/Exec": appData.command 
                 };
-                console.log("Appending data:", data);
+                console.log("Appending data:", JSON.stringify(data));
                 launcherApps.append(data);
             }
         }
 
         console.log("Favorite apps loaded successfully.");
+        console.log("Current launcherApps contents:", JSON.stringify(launcherApps));
+
     }
 
     Component.onCompleted: {
