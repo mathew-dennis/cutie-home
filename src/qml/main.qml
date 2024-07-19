@@ -4,11 +4,13 @@ import QtQuick.Controls
 import QtMultimedia
 import Cutie
 import Cutie.Feedback
+import Cutie.Store
 import Cutie.Wlc
+import Cutie.Desktopfileparser
 
 Item {
     id: root
-    state: "appSwitcher" 
+    state: "homeScreen"
     visible: true
     width: Screen.width
     height: Screen.height
@@ -17,11 +19,19 @@ Item {
         State{
             name: "appSwitcher"
             PropertyChanges { target: appSwitcher; opacity: 1 }
+            PropertyChanges { target: homeScreen; opacity: 0 }
+            PropertyChanges { target: notificationScreen; opacity: 0 }
+        },
+        State {
+            name: "homeScreen"
+            PropertyChanges { target: appSwitcher; opacity: 0 }
+            PropertyChanges { target: homeScreen; opacity: 1 }
             PropertyChanges { target: notificationScreen; opacity: 0 }
         },
         State {
             name: "notificationScreen"
             PropertyChanges { target: appSwitcher; opacity: 0 }
+            PropertyChanges { target: homeScreen; opacity: 0 }
             PropertyChanges { target: notificationScreen; opacity: 1 }
         }
     ]
@@ -30,9 +40,9 @@ Item {
         Transition {
             to: "*"
             NumberAnimation { target: notificationScreen; properties: "opacity"; duration: 300; easing.type: Easing.InOutQuad; }
+            NumberAnimation { target: homeScreen; properties: "opacity"; duration: 300; easing.type: Easing.InOutQuad; }
             NumberAnimation { target: appSwitcher; properties: "opacity"; duration: 300; easing.type: Easing.InOutQuad; }
         }
-
     ]
 
     function addNotification(title, body, id) {
@@ -46,7 +56,64 @@ Item {
                 notifications.remove(c_i);
         }
     }
+
+    function loadFavoriteApps() {
+        console.log("home - Loading Favorite store data using DesktopFileParser...");
+        if (!favoriteStore.data) {
+            console.log("home - Favorite store data is not yet available.");
+            return;
+        }
+        launcherApps.clear();
+        let favoriteKeys = Object.keys(favoriteStore.data);
+        let allAppsModel = CutieDesktopFileParser.fetchAllEntriesModel();
+        if (!allAppsModel) {
+            console.log("home - Error: DesktopFileParser model is null.");
+            return;
+        }
+        console.log("allAppsModel received count:", allAppsModel.rowCount());
+        for (let i = 0; i < allAppsModel.rowCount(); i++) {
+            let index = allAppsModel.index(i, 0);
+            let appName = allAppsModel.data(index, 257);
+            if (favoriteKeys.indexOf(appName) !== -1) {
+                launcherApps.append({
+                    name: appName,
+                    icon: allAppsModel.data(index, 259),
+                    exec: allAppsModel.data(index, 258)
+                });
+            }
+        }
+        console.log("home - Favorite apps loaded successfully. Count:", launcherApps.count);
+    }
+
+
+    Component.onCompleted: {
+        loadFavoriteApps();
+        updateVisibility();            
+    }
+
+    CutieStore {
+        id: favoriteStore
+        appName: "cutie-launcher"
+        storeName: "favoriteItems"
+
+        onDataChanged: {
+            loadFavoriteApps();
+            updateVisibility();
+        }
+    }
+
+    property bool favoriteAppsVisibility: "visibility" in favoriteStore.data ? favoriteStore.data["visibility"] : true
     
+    function updateVisibility() {
+        if (favoriteStore.data) {
+            let favoriteData = favoriteStore.data;
+
+            favoriteAppsVisibility = favoriteData.visibility;
+            console.log("home - Visibility variable updated . Current state:", favoriteAppsVisibility);
+            favoriteStore.data = favoriteData;
+        }
+    }
+
     ForeignToplevelManagerV1 {
         id: toplevelManager
     }
@@ -76,6 +143,8 @@ Item {
     AppSwitcher { id: appSwitcher }
     NotificationScreen { id: notificationScreen }
     ScreenSwipe { id: screenSwipe }
+    HomeScreen { id: homeScreen }
 
     ListModel { id: notifications }
+    ListModel { id: launcherApps }
 }
