@@ -12,20 +12,20 @@ Item {
 
     CutieLabel {
         visible: tabListView.model.length === 0
-        anchors.centerIn: parent
+        anchors.fill: parent
         text: "No Running Apps"
         font.bold: true
         font.pixelSize: 16
         opacity: 1.0 - cutieWlc.blur
+        anchors {
+           top: parent.top
+           leftMargin: appSwitcher.width / 3
+           topMargin: appSwitcher.height / 2
+        }
     }
 
-    CutieWlc {
-        id: compositor
-    }
-    
     GridView {
         id: launchAppGrid
-        z: 1
         visible: tabListView.model.length === 0
         opacity: 1.0 - cutieWlc.blur
         model: launcherApps
@@ -35,6 +35,10 @@ Item {
         anchors {
             top: parent.bottom
             topMargin: -launchAppGrid.cellHeight - 8
+        }
+
+        Component.onCompleted: {
+            logLauncherAppsLength();
         }
 
         delegate: Item {
