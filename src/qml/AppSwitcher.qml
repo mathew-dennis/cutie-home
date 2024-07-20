@@ -26,7 +26,7 @@ Item {
     GridView {
         id: launchAppGrid
         z: 1
-        visible: tabListView.model.length === 0
+        visible: true
         model: launcherApps
         width: parent.width 
         cellWidth: width / Math.floor(width / 85)
