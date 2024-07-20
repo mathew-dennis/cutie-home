@@ -27,7 +27,6 @@ Item {
         id: launchAppGrid
         z: 1
         visible: tabListView.model.length === 0
-        opacity: 1.0 - cutieWlc.blur
         model: launcherApps
         width: parent.width 
         cellWidth: width / Math.floor(width / 85)
@@ -66,6 +65,7 @@ Item {
                 console.log("App name:", model["Desktop Entry/Name"]);
                 console.log("App icon source:", "file://" + model["Desktop Entry/Icon"]);
                 console.log("App exec command:", model["Desktop Entry/Exec"]);
+                console.log("Number of items in launchAppGrid:", launchAppGrid.count);
             }
         }
     }
