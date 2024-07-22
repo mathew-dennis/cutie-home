@@ -123,5 +123,5 @@ Item {
     ScreenSwipe { id: screenSwipe }
 
     ListModel { id: notifications }
-    ListModel { id: launchAppGrid }
+    ListModel { id: launcherApps }
 }
