@@ -25,7 +25,7 @@ Item {
     
     GridView {
         id: launchAppGrid
-        z: 1
+        opacity: 1.0 - cutieWlc.blur
         visible: true  // Always visible for testing
         model: launcherApps
         width: parent.width
