@@ -23,10 +23,7 @@ Item {
         id: compositor
     }
 
-    Rectangle {
-            anchors.fill: parent
-            color: "black"
-        }
+ 
     GridView {
         id: launchAppGrid
         opacity: 1.0 - cutieWlc.blur
@@ -38,7 +35,11 @@ Item {
         anchors {
             top: parent.top  // Adjusted from parent.bottom
         }
-
+    
+        Rectangle {
+            anchors.fill: parent
+            color: "black"
+        }
 
         delegate: Item {
             CutieButton {
