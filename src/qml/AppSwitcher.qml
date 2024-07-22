@@ -16,7 +16,7 @@ Item {
         text: "No Running Apps"
         font.bold: true
         font.pixelSize: 16
-        z: 2
+        z: 1
         opacity: 1.0 - cutieWlc.blur
     }
     
@@ -31,7 +31,6 @@ Item {
     
     GridView {
         id: launchAppGrid
-        z: 1
         visible: tabListView.model.length === 0
         model: launcherApps
         width: parent.width 
