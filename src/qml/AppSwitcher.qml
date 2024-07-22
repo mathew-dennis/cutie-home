@@ -34,6 +34,7 @@ Item {
         cellHeight: cellWidth
         anchors {
             bottom: parent.bottom
+            bottomMargin:  launchAppGrid.cellHeight
         }
 
         delegate: Item {
