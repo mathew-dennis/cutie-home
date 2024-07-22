@@ -29,12 +29,10 @@ Item {
         opacity: 1.0 - cutieWlc.blur
         visible: true  // Always visible for testing
         model: launcherApps
-        width: parent.width
+        width: appSwitcher.width
         cellWidth: width / Math.floor(width / 85)
         cellHeight: cellWidth
-        anchors {
-            top: parent.top  // Adjusted from parent.bottom
-        }
+        anchors.fill: parent
     
         Rectangle {
             anchors.fill: parent
