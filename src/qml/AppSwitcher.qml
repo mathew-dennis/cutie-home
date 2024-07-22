@@ -33,11 +33,6 @@ Item {
         cellWidth: width / Math.floor(width / 85)
         cellHeight: cellWidth
         anchors.fill: parent
-    
-        Rectangle {
-            anchors.fill: parent
-            color: "black"
-        }
 
         delegate: Item {
             CutieButton {
