@@ -16,6 +16,7 @@ Item {
         text: "No Running Apps"
         font.bold: true
         font.pixelSize: 16
+        z: 2
         opacity: 1.0 - cutieWlc.blur
     }
     
