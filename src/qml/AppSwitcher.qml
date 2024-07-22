@@ -34,7 +34,7 @@ Item {
         cellHeight: cellWidth
         anchors.fill: parent
         anchors {
-            topMargin:appSwitcher.height - launchAppGrid.cellHeight
+            topMargin:appSwitcher.height - launchAppGrid.cellHeight - 8
         }
 
         delegate: Item {
