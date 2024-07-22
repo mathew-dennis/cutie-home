@@ -19,15 +19,14 @@ Item {
         opacity: 1.0 - cutieWlc.blur
     }
     
+    CutieWlc {
+        id: compositor
+    }
+
     Rectangle {
             anchors.fill: parent
             color: "black"
         }
-
-    CutieWlc {
-        id: compositor
-    }
-    
     GridView {
         id: launchAppGrid
         opacity: 1.0 - cutieWlc.blur
