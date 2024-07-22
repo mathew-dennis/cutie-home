@@ -16,20 +16,29 @@ Item {
         text: "No Running Apps"
         font.bold: true
         font.pixelSize: 16
-        z: 1
         opacity: 1.0 - cutieWlc.blur
     }
-    
+
+    CutieWlc {
+        id: compositor
+    }
     
     GridView {
         id: launchAppGrid
-        visible: tabListView.model.length === 0
+        z: 1
+        visible: true  // Always visible for testing
         model: launcherApps
-        width: parent.width 
+        width: parent.width
         cellWidth: width / Math.floor(width / 85)
         cellHeight: cellWidth
-        anchors.fill: parent
+        anchors {
+            top: parent.top  // Adjusted from parent.bottom
+        }
 
+        Rectangle {
+            anchors.fill: parent
+            color: "black"
+        }
 
         delegate: Item {
             CutieButton {
@@ -61,8 +70,17 @@ Item {
                 console.log("App icon source:", "file://" + model["Desktop Entry/Icon"]);
                 console.log("App exec command:", model["Desktop Entry/Exec"]);
                 console.log("Number of items in launchAppGrid:", launchAppGrid.count);
+                logLauncherAppsLength();
             }
         }
+
+        Component.onCompleted: {
+            logLauncherAppsLength();
+        }
+    }
+
+    function logLauncherAppsLength() {
+        console.log("Number of items in launcherApps after initial load:", launcherApps.count);
     }
 
     // old stuff 
