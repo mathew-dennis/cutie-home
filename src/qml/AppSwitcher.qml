@@ -28,7 +28,7 @@ Item {
         width: parent.width 
         cellWidth: width / Math.floor(width / 85)
         cellHeight: cellWidth
-        anchors.centerIn: parent
+        anchors.fill: parent
 
 
         delegate: Item {
