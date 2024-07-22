@@ -18,6 +18,11 @@ Item {
         font.pixelSize: 16
         opacity: 1.0 - cutieWlc.blur
     }
+    
+    Rectangle {
+            anchors.fill: parent
+            color: "black"
+    }
 
     CutieWlc {
         id: compositor
@@ -33,10 +38,6 @@ Item {
         cellHeight: cellWidth
         anchors.centerIn: parent
 
-        Rectangle {
-            anchors.fill: parent
-            color: "black"
-        }
 
         delegate: Item {
             CutieButton {
