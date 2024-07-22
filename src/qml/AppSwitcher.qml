@@ -33,7 +33,7 @@ Item {
         cellWidth: width / Math.floor(width / 85)
         cellHeight: cellWidth
         anchors {
-            bottom: parent.bottom
+            bottom: appSwitcher.bottom
             bottomMargin: - launchAppGrid.cellHeight
         }
 
