@@ -32,9 +32,9 @@ Item {
         width: appSwitcher.width
         cellWidth: width / Math.floor(width / 85)
         cellHeight: cellWidth
+        anchors.fill: parent
         anchors {
-            top: parent.bottom
-            topMargin: - launchAppGrid.cellHeight - 8
+            topMargin:appSwitcher - launchAppGrid.cellHeight
         }
 
         delegate: Item {
