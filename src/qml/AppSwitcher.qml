@@ -26,14 +26,16 @@ Item {
     GridView {
         id: launchAppGrid
         z: 1
-        visible: true
+        visible: tabListView.model.length === 0
         model: launcherApps
         width: parent.width 
         cellWidth: width / Math.floor(width / 85)
         cellHeight: cellWidth
-        anchors {
-            top: parent.bottom
-            topMargin: -launchAppGrid.cellHeight - 8
+        anchors.centerIn: parent
+
+        Rectangle {
+            anchors.fill: parent
+            color: "black"
         }
 
         delegate: Item {
