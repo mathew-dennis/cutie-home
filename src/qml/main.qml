@@ -84,7 +84,7 @@ Item {
 
     CutieStore {
         id: favoriteStore
-        appName: "cutie-home"
+        appName: "cutie-launcher"
         storeName: "favoriteItems"
 
         onDataChanged: {
