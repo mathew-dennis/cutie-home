@@ -40,8 +40,11 @@ Item {
     }
 
         Rectangle {
+            opacity: 1.0 - cutieWlc.blur
+            visible: tabListView.model.length === 0
             color: Atmosphere.primaryAlphaColor
             radius: 10
+            z:1
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.rightMargin: 5
@@ -52,9 +55,6 @@ Item {
  
             GridView {
                 id: launchAppGrid
-                z:1
-                opacity: 1.0 - cutieWlc.blur
-                visible: tabListView.model.length === 0
                 model: launcherApps
                 width: appSwitcher.width
                 cellWidth: width / Math.floor(width / 85)
