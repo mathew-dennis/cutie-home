@@ -41,14 +41,15 @@ Item {
 
     Flickable {
         id: flickableGrid
-        width: parent.width
+        anchors.fill: parent
         height: launchAppGrid.cellHeight + 8
         contentWidth: launchAppGrid.width
         clip: true
 
         GridView {
             id: launchAppGrid
-        z:1
+            width: flickableGrid.width
+            z: 1
             opacity: 1.0 - cutieWlc.blur
             visible: tabListView.model.length === 0
             model: launcherApps
