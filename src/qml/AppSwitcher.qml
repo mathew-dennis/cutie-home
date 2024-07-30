@@ -44,8 +44,8 @@ Item {
             radius: 10
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.rightMargin: 2
-            anchors.leftMargin: 2
+            anchors.rightMargin: 5
+            anchors.leftMargin: 5
             anchors.fill: parent
             anchors.topMargin:appSwitcher.height - launchAppGrid.cellHeight - 8
             clip: true
@@ -60,7 +60,7 @@ Item {
                 cellWidth: width / Math.floor(width / 85)
                 cellHeight: cellWidth
                 anchors.fill: parent
-                
+
                 delegate: Item {
                     CutieButton {
                         id: appIconButton
