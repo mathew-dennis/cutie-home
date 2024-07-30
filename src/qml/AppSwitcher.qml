@@ -47,7 +47,18 @@ Item {
         height: launchAppGrid.cellHeight
         anchors.topMargin:appSwitcher.height - launchAppGrid.cellHeight - 8
         clip: true
+        
+        Rectangle {
+            width: 2 * parent.width
+            height: parent.height
+            color: "lightblue"
 
+            Text {
+                text: "Flickable Content"
+                anchors.centerIn: parent
+                font.pixelSize: 40
+            }
+        }
         GridView {
             id: launchAppGrid
             width: flickableGrid.width
