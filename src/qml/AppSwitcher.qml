@@ -60,8 +60,7 @@ Item {
                 cellWidth: width / Math.floor(width / 85)
                 cellHeight: cellWidth
                 anchors.fill: parent
-                anchors.topMargin:appSwitcher.height - launchAppGrid.cellHeight - 8
-
+                
                 delegate: Item {
                     CutieButton {
                         id: appIconButton
