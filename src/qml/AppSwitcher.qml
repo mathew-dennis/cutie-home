@@ -53,6 +53,7 @@ Item {
             anchors.bottom: parent.bottom
             clip: true
  
+ 
             GridView {
                 id: launchAppGrid
                 model: launcherApps
