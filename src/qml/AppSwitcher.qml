@@ -62,8 +62,13 @@ Item {
             }
         }
 
-    
-    delegate: Item {
+        ListView {
+              id: launchAppGrid
+              z:2
+             model: launcherApps
+             width: parent.width
+   
+         delegate: Item {
             width: appSwitcher.width / Math.floor(width / 85)
             height: width
 
@@ -91,24 +96,12 @@ Item {
             elide: Text.ElideRight
             horizontalAlignment: Text.AlignHCenter
         }
-
-        Component.onCompleted: {
-            console.log("App name:", model["Desktop Entry/Name"]);
-            console.log("App icon source:", "file://" + model["Desktop Entry/Icon"]);
-            console.log("App exec command:", model["Desktop Entry/Exec"]);
-            console.log("Number of items in launchAppList:", launchAppList.count);
-            logLauncherAppsLength();
-        }
     }
 
-    Component.onCompleted: {
-        logLauncherAppsLength();
     }
-}
 
-        function logLauncherAppsLength() {
-            console.log("Number of items in launcherApps after initial load:", launcherApps.count);
-        }
+
+
     }
 
     // old stuff 
