@@ -41,9 +41,10 @@ Item {
 
     Flickable {
         id: flickableGrid
+        visible: tabListView.model.length === 0
+        opacity: 1.0 - cutieWlc.blur
         anchors.fill: parent
-        height: launchAppGrid.cellHeight + 8
-        contentWidth: parent.width
+        height: launchAppGrid.cellHeight
         anchors.topMargin:appSwitcher.height - launchAppGrid.cellHeight - 8
         clip: true
 
@@ -51,8 +52,6 @@ Item {
             id: launchAppGrid
             width: flickableGrid.width
             z: 1
-            opacity: 1.0 - cutieWlc.blur
-            visible: tabListView.model.length === 0
             model: launcherApps
             cellWidth: width / Math.floor(width / 85)
             cellHeight: cellWidth
