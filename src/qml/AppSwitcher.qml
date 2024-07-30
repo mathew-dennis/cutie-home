@@ -61,7 +61,7 @@ Item {
             }
         }
 
-        ListView {
+        GridView {
           id: launchAppGrid
           z:2
           model: launcherApps
