@@ -45,6 +45,7 @@ Item {
             color: Atmosphere.primaryAlphaColor
             radius: 20
             z:1
+            height: launchAppGrid.cellHeight
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.rightMargin: 2
@@ -74,8 +75,6 @@ Item {
                         onClicked:
                             compositor.execApp(model["Desktop Entry/Exec"]);
                     }
-
-
 
                 }
 
