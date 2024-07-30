@@ -50,7 +50,6 @@ Item {
             anchors.right: parent.right
             anchors.rightMargin: 2
             anchors.leftMargin: 2
-            anchors.fill: parent
             anchors.topMargin:appSwitcher.height - launchAppGrid.cellHeight - 8
             clip: true
  
