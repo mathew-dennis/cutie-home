@@ -39,10 +39,12 @@ Item {
         id: compositor
     }
 
-        Rectangle {
+        Flickable {
             opacity: 1.0 - cutieWlc.blur
             visible: tabListView.model.length === 0
             color: Atmosphere.primaryAlphaColor
+            contentWidth: launchAppList.width
+            contentHeight: launchAppList.height
             radius: 20
             z:1
             height: appSwitcher.width / Math.floor(width / 85)
