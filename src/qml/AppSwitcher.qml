@@ -75,16 +75,7 @@ Item {
                             compositor.execApp(model["Desktop Entry/Exec"]);
                     }
 
-                    CutieLabel {
-                        anchors.bottom: appIconButton.bottom
-                        anchors.horizontalCenter: appIconButton.horizontalCenter
-                        text: model["Desktop Entry/Name"]
-                        font.pixelSize: 12
-                        clip: true
-                        width: 2 * appIconButton.width / 3
-                        elide: Text.ElideRight
-                        horizontalAlignment: Text.AlignHCenter
-                    }
+
 
                 }
 
