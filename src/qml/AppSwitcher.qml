@@ -50,7 +50,7 @@ Item {
         clip: true
         
         Rectangle {
-            width: 2 * parent.width
+            width:  parent.width
             height: parent.height
             color: Atmosphere.secondaryAlphaColor
             radius: 10
@@ -62,12 +62,7 @@ Item {
             }
         }
 
-     ListView {
-          id: launchAppGrid
-          z:2
-         model: launcherApps
-         width: parent.width
-   
+    
     delegate: Item {
             width: appSwitcher.width / Math.floor(width / 85)
             height: width
