@@ -50,7 +50,7 @@ Item {
             anchors.right: parent.right
             anchors.rightMargin: 2
             anchors.leftMargin: 2
-            anchors.topMargin:appSwitcher.height - launchAppGrid.cellHeight - 8
+            anchors.bottom: parent.bottom
             clip: true
  
             GridView {
