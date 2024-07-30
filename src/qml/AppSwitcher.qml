@@ -56,9 +56,10 @@ Item {
             ListView {
                 id: launchAppList
                 model: launcherApps
-                width: appSwitcher.width
-                height: parent.height
                 anchors.fill: parent
+                orientation: Qt.Horizontal
+                clip: false
+                spacing: -20
 
                 delegate: Item {
                     width: parent.height
