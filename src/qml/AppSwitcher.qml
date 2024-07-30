@@ -64,7 +64,7 @@ Item {
             }
         }
 
-        ListView {
+        GridView {
           id: launchAppGrid
           z:2
           model: launcherApps
@@ -72,7 +72,7 @@ Item {
           cellWidth: appSwitcher.width / Math.floor(width / 85)
           cellHeight: cellWidth
           anchors.fill: parent
-
+          
             delegate: Item {
                 CutieButton {
                     id: appIconButton
