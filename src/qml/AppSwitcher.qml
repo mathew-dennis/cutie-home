@@ -43,12 +43,12 @@ Item {
         id: flickableGrid
         anchors.fill: parent
         height: launchAppGrid.cellHeight + 8
-        contentWidth: launchAppGrid.width
+        contentWidth: parent.width
         clip: true
 
         GridView {
             id: launchAppGrid
-            width: flickableGrid.width
+            width: appSwitcher.width
             z: 1
             opacity: 1.0 - cutieWlc.blur
             visible: tabListView.model.length === 0
@@ -56,7 +56,6 @@ Item {
             cellWidth: width / Math.floor(width / 85)
             cellHeight: cellWidth
             orientation: GridView.Horizontal
-            spacing: 10 // Optional: spacing between items
 
             delegate: Item {
                 CutieButton {
