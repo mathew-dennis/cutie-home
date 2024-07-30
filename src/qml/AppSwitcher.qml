@@ -41,6 +41,7 @@ Item {
 
     Flickable {
         id: flickableGrid
+        z:1
         visible: tabListView.model.length === 0
         opacity: 1.0 - cutieWlc.blur
         anchors.fill: parent
@@ -59,10 +60,10 @@ Item {
                 font.pixelSize: 40
             }
         }
-        
+
         GridView {
           id: launchAppGrid
-          z:1
+          z:2
           model: launcherApps
           width: appSwitcher.width
           cellWidth: width / Math.floor(width / 85)
