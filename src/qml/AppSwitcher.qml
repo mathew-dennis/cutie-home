@@ -40,6 +40,7 @@ Item {
     }
 
         Flickable {
+            id: flickableContainer
             opacity: 1.0 - cutieWlc.blur
             visible: tabListView.model.length === 0
             color: Atmosphere.primaryAlphaColor
