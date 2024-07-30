@@ -61,19 +61,17 @@ Item {
             }
         }
 
-        GridView {
+        ListView {
           id: launchAppGrid
           z:2
           model: launcherApps
           width: 12 * appSwitcher.width
-          cellWidth: appSwitcher.width / Math.floor(width / 85)
-          cellHeight: cellWidth
           anchors.fill: parent
           
             delegate: Item {
                 CutieButton {
                     id: appIconButton
-                    width: launchAppGrid.cellWidth
+                    width: appSwitcher.width / Math.floor(width / 85)
                     height: width
                     icon.name: model["Desktop Entry/Icon"]
                     icon.source: "file://" + model["Desktop Entry/Icon"]
