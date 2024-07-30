@@ -67,9 +67,7 @@ Item {
           z:2
     model: launcherApps
     width: parent.width
-    orientation: ListView.Horizontal // Set orientation to horizontal
-    spacing: 10 // Adjust the spacing between items as needed
-
+   
     delegate: Item {
         width: launchAppList.width
         height: appIconButton.height + appNameLabel.height + 10 // Adjust height to fit the content
