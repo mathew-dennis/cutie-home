@@ -54,7 +54,7 @@ Item {
             height: parent.height
             color: Atmosphere.secondaryAlphaColor
             radius: 10
-            
+
             Text {
                 text: "Flickable Content"
                 anchors.centerIn: parent
@@ -65,50 +65,53 @@ Item {
         GridView {
           id: launchAppGrid
           z:2
-          model: launcherApps
-          width: 12 * appSwitcher.width
-          cellWidth: appSwitcher.width / Math.floor(width / 85)
-          cellHeight: cellWidth
-          anchors.fill: parent
-          
-            delegate: Item {
-                CutieButton {
-                    id: appIconButton
-                    width: launchAppGrid.cellWidth
-                    height: width
-                    icon.name: model["Desktop Entry/Icon"]
-                    icon.source: "file://" + model["Desktop Entry/Icon"]
-                    icon.height: width / 2
-                    icon.width: height / 2
-                    background: null
+    model: launcherApps
+    width: parent.width
+    orientation: ListView.Horizontal // Set orientation to horizontal
+    spacing: 10 // Adjust the spacing between items as needed
+
+    delegate: Item {
+        width: launchAppList.width
+        height: appIconButton.height + appNameLabel.height + 10 // Adjust height to fit the content
+
+        CutieButton {
+            id: appIconButton
+            width: parent.width
+            height: parent.height - appNameLabel.height - 10 // Adjust height as needed
+            icon.name: model["Desktop Entry/Icon"]
+            icon.source: "file://" + model["Desktop Entry/Icon"]
+            icon.height: width / 2
+            icon.width: height / 2
+            background: null
                     onClicked:
                         compositor.execApp(model["Desktop Entry/Exec"]);
-                }
-
-                CutieLabel {
-                    anchors.bottom: appIconButton.bottom
-                    anchors.horizontalCenter: appIconButton.horizontalCenter
-                    text: model["Desktop Entry/Name"]
-                    font.pixelSize: 12
-                    clip: true
-                    width: 2 * appIconButton.width / 3
-                    elide: Text.ElideRight
-                    horizontalAlignment: Text.AlignHCenter
-                }
-
-                Component.onCompleted: {
-                    console.log("App name:", model["Desktop Entry/Name"]);
-                    console.log("App icon source:", "file://" + model["Desktop Entry/Icon"]);
-                    console.log("App exec command:", model["Desktop Entry/Exec"]);
-                    console.log("Number of items in launchAppGrid:", launchAppGrid.count);
-                    logLauncherAppsLength();
-                }
-            }
-
-            Component.onCompleted: {
-                logLauncherAppsLength();
-            }
         }
+
+        CutieLabel {
+            id: appNameLabel
+            anchors.bottom: parent.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
+            text: model["Desktop Entry/Name"]
+            font.pixelSize: 12
+            clip: true
+                    width: 2 * appIconButton.width / 3
+            elide: Text.ElideRight
+            horizontalAlignment: Text.AlignHCenter
+        }
+
+        Component.onCompleted: {
+            console.log("App name:", model["Desktop Entry/Name"]);
+            console.log("App icon source:", "file://" + model["Desktop Entry/Icon"]);
+            console.log("App exec command:", model["Desktop Entry/Exec"]);
+            console.log("Number of items in launchAppList:", launchAppList.count);
+            logLauncherAppsLength();
+        }
+    }
+
+    Component.onCompleted: {
+        logLauncherAppsLength();
+    }
+}
 
         function logLauncherAppsLength() {
             console.log("Number of items in launcherApps after initial load:", launcherApps.count);
