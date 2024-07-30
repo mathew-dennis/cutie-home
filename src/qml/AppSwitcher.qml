@@ -45,7 +45,7 @@ Item {
         visible: tabListView.model.length === 0
         opacity: 1.0 - cutieWlc.blur
         anchors.fill: parent
-        height: launchAppGrid.cellHeight
+        height: appIconButton.height
         anchors.topMargin:appSwitcher.height - launchAppGrid.cellHeight - 8
         clip: true
         
