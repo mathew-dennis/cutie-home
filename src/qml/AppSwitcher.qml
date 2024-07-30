@@ -31,68 +31,74 @@ Item {
             color: Atmosphere.accentColor
             radius: 5
             samples: 10
-			opacity: 1/3
+            opacity: 1/3
         }
     }
-    
+
     CutieWlc {
         id: compositor
     }
 
- 
-    GridView {
-        id: launchAppGrid
+    Flickable {
+        id: flickableGrid
+        width: parent.width
+        height: launchAppGrid.cellHeight + 8
+        contentWidth: launchAppGrid.width
+        clip: true
+
+        GridView {
+            id: launchAppGrid
         z:1
-        opacity: 1.0 - cutieWlc.blur
-        visible: tabListView.model.length === 0
-        model: launcherApps
-        width: appSwitcher.width
-        cellWidth: width / Math.floor(width / 85)
-        cellHeight: cellWidth
-        anchors.fill: parent
-        anchors.topMargin:appSwitcher.height - launchAppGrid.cellHeight - 8
+            opacity: 1.0 - cutieWlc.blur
+            visible: tabListView.model.length === 0
+            model: launcherApps
+            cellWidth: width / Math.floor(width / 85)
+            cellHeight: cellWidth
+            orientation: GridView.Horizontal
+            spacing: 10 // Optional: spacing between items
 
-        delegate: Item {
-            CutieButton {
-                id: appIconButton
-                width: launchAppGrid.cellWidth
-                height: width
-                icon.name: model["Desktop Entry/Icon"]
-                icon.source: "file://" + model["Desktop Entry/Icon"]
-                icon.height: width / 2
-                icon.width: height / 2
-                background: null
-                onClicked:
-                    compositor.execApp(model["Desktop Entry/Exec"]);
+            delegate: Item {
+                CutieButton {
+                    id: appIconButton
+                    width: launchAppGrid.cellWidth
+                    height: width
+                    icon.name: model["Desktop Entry/Icon"]
+                    icon.source: "file://" + model["Desktop Entry/Icon"]
+                    icon.height: width / 2
+                    icon.width: height / 2
+                    background: null
+                    onClicked:
+                        compositor.execApp(model["Desktop Entry/Exec"]);
+                }
+
+                CutieLabel {
+                    anchors.bottom: appIconButton.bottom
+                    anchors.horizontalCenter: appIconButton.horizontalCenter
+                    text: model["Desktop Entry/Name"]
+                    font.pixelSize: 12
+                    clip: true
+                    width: 2 * appIconButton.width / 3
+                    elide: Text.ElideRight
+                    horizontalAlignment: Text.AlignHCenter
+                }
+
+                Component.onCompleted: {
+                    console.log("App name:", model["Desktop Entry/Name"]);
+                    console.log("App icon source:", "file://" + model["Desktop Entry/Icon"]);
+                    console.log("App exec command:", model["Desktop Entry/Exec"]);
+                    console.log("Number of items in launchAppGrid:", launchAppGrid.count);
+                    logLauncherAppsLength();
+                }
             }
 
-            CutieLabel {
-                anchors.bottom: appIconButton.bottom
-                anchors.horizontalCenter: appIconButton.horizontalCenter
-                text: model["Desktop Entry/Name"]
-                font.pixelSize: 12
-                clip: true
-                width: 2 * appIconButton.width / 3
-                elide: Text.ElideRight
-                horizontalAlignment: Text.AlignHCenter
-            }
-            
             Component.onCompleted: {
-                console.log("App name:", model["Desktop Entry/Name"]);
-                console.log("App icon source:", "file://" + model["Desktop Entry/Icon"]);
-                console.log("App exec command:", model["Desktop Entry/Exec"]);
-                console.log("Number of items in launchAppGrid:", launchAppGrid.count);
                 logLauncherAppsLength();
             }
         }
 
-        Component.onCompleted: {
-            logLauncherAppsLength();
+        function logLauncherAppsLength() {
+            console.log("Number of items in launcherApps after initial load:", launcherApps.count);
         }
-    }
-
-    function logLauncherAppsLength() {
-        console.log("Number of items in launcherApps after initial load:", launcherApps.count);
     }
 
     // old stuff 
@@ -208,7 +214,7 @@ Item {
                             modelData.close();
                             appThumb.opacity = 0;
                             closedTm.start();
-                        } else { 
+                        } else {
                             opacityRestore.start();
                         }
                         xRestore.start();
@@ -228,5 +234,5 @@ Item {
                 onTriggered: appThumb.opacity = 1
             }
         }
-    } 
+    }
 }
