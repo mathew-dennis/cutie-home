@@ -51,7 +51,7 @@ Item {
         
         Rectangle {
             width:  parent.width
-            height: parent.height
+            height: flickableGrid.height
             color: Atmosphere.secondaryAlphaColor
             radius: 10
 
