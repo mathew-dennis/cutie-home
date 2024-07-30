@@ -59,13 +59,15 @@ Item {
                 font.pixelSize: 40
             }
         }
+        
         GridView {
-            id: launchAppGrid
-            width: flickableGrid.width
-            z: 1
-            model: launcherApps
-            cellWidth: width / Math.floor(width / 85)
-            cellHeight: cellWidth
+          id: launchAppGrid
+          z:1
+          model: launcherApps
+          width: appSwitcher.width
+          cellWidth: width / Math.floor(width / 85)
+          cellHeight: cellWidth
+          anchors.fill: parent
 
             delegate: Item {
                 CutieButton {
