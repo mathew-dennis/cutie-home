@@ -100,8 +100,6 @@ Item {
 
     }
 
-
-
     }
 
     // old stuff 
