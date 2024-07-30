@@ -44,6 +44,7 @@ Item {
         anchors.fill: parent
         height: launchAppGrid.cellHeight + 8
         contentWidth: parent.width
+        anchors.topMargin:appSwitcher.height - launchAppGrid.cellHeight - 8
         clip: true
 
         GridView {
