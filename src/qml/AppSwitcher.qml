@@ -62,20 +62,20 @@ Item {
             }
         }
 
-        ListView {
+     ListView {
           id: launchAppGrid
           z:2
-    model: launcherApps
-    width: parent.width
+         model: launcherApps
+         width: parent.width
    
     delegate: Item {
-        width: launchAppList.width
-        height: appIconButton.height + appNameLabel.height + 10 // Adjust height to fit the content
+            width: appSwitcher.width / Math.floor(width / 85)
+            height: width
 
         CutieButton {
             id: appIconButton
-            width: parent.width
-            height: parent.height - appNameLabel.height - 10 // Adjust height as needed
+            width: appSwitcher.width / Math.floor(width / 85)
+            height: width
             icon.name: model["Desktop Entry/Icon"]
             icon.source: "file://" + model["Desktop Entry/Icon"]
             icon.height: width / 2
