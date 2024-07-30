@@ -61,12 +61,12 @@ Item {
                 anchors.fill: parent
 
                 delegate: Item {
-                    width: launchAppList.width
-                    height: appSwitcher.width / Math.floor(width / 85)
+                    width: 100
+                    height: 100
 
                     CutieButton {
                         id: appIconButton
-                        width: height // Make the button square
+                        width: 100
                         height: height
                         icon.name: model["Desktop Entry/Icon"]
                         icon.source: "file://" + model["Desktop Entry/Icon"]
