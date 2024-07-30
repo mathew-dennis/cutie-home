@@ -62,45 +62,10 @@ Item {
             }
         }
 
-        ListView {
-              id: launchAppGrid
-              z:2
-             model: launcherApps
-             width: parent.width
-   
-         delegate: Item {
-            width: appSwitcher.width / Math.floor(width / 85)
-            height: width
-
-        CutieButton {
-            id: appIconButton
-            width: appSwitcher.width / Math.floor(width / 85)
-            height: width
-            icon.name: model["Desktop Entry/Icon"]
-            icon.source: "file://" + model["Desktop Entry/Icon"]
-            icon.height: width / 2
-            icon.width: height / 2
-            background: null
-                    onClicked:
-                        compositor.execApp(model["Desktop Entry/Exec"]);
-        }
-
-        CutieLabel {
-            id: appNameLabel
-            anchors.bottom: parent.bottom
-            anchors.horizontalCenter: parent.horizontalCenter
-            text: model["Desktop Entry/Name"]
-            font.pixelSize: 12
-            clip: true
-                    width: 2 * appIconButton.width / 3
-            elide: Text.ElideRight
-            horizontalAlignment: Text.AlignHCenter
-        }
+ 
     }
 
-    }
 
-    }
 
     // old stuff 
     GridView {
