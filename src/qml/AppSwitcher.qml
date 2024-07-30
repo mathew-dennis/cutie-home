@@ -61,13 +61,13 @@ Item {
                 anchors.fill: parent
 
                 delegate: Item {
-                    width: 1parent.height
-                    height: parent.height
-
+                    width: parent.height
+                    height: width
+                    
                     CutieButton {
                         id: appIconButton
                         width: parent.height
-                        height: parent.height
+                        height: width
                         icon.name: model["Desktop Entry/Icon"]
                         icon.source: "file://" + model["Desktop Entry/Icon"]
                         icon.height: height / 2
