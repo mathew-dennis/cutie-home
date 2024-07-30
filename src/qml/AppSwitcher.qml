@@ -52,8 +52,9 @@ Item {
         Rectangle {
             width: 2 * parent.width
             height: parent.height
-            color: "lightblue"
-
+            color: Atmosphere.secondaryAlphaColor
+            radius: 10
+            
             Text {
                 text: "Flickable Content"
                 anchors.centerIn: parent
