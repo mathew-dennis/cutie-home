@@ -40,7 +40,6 @@ Item {
     }
 
         Rectangle {
-            height: 160
             color: Atmosphere.primaryAlphaColor
             radius: 10
             anchors.left: parent.left
