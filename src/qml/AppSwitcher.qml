@@ -65,7 +65,7 @@ Item {
           id: launchAppGrid
           z:2
           model: launcherApps
-          width: 2 * appSwitcher.width
+          width: 12 * appSwitcher.width
           cellWidth: appSwitcher.width / Math.floor(width / 85)
           cellHeight: cellWidth
           anchors.fill: parent
