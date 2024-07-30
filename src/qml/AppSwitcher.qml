@@ -43,12 +43,12 @@ Item {
             opacity: 1.0 - cutieWlc.blur
             visible: tabListView.model.length === 0
             color: Atmosphere.primaryAlphaColor
-            radius: 10
+            radius: 20
             z:1
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.rightMargin: 5
-            anchors.leftMargin: 5
+            anchors.rightMargin: 2
+            anchors.leftMargin: 2
             anchors.fill: parent
             anchors.topMargin:appSwitcher.height - launchAppGrid.cellHeight - 8
             clip: true
