@@ -31,41 +31,68 @@ Item {
             color: Atmosphere.accentColor
             radius: 5
             samples: 10
-            opacity: 1/3
+			opacity: 1/3
         }
     }
-
+    
     CutieWlc {
         id: compositor
     }
 
-    Flickable {
-        id: flickableGrid
-        z:1
-        visible: tabListView.model.length === 0
-        opacity: 1.0 - cutieWlc.blur
-        anchors.fill: parent
-        height: appSwitcher.width / Math.floor(width / 85)
-        anchors.topMargin:appSwitcher.height - launchAppGrid.cellHeight - 8
-        clip: true
-        
         Rectangle {
-            width:  parent.width
-            height: flickableGrid.height
-            color: Atmosphere.secondaryAlphaColor
+            height: 160
+            color: Atmosphere.primaryAlphaColor
             radius: 10
-
-            Text {
-                text: "Flickable Content"
-                anchors.centerIn: parent
-                font.pixelSize: 40
-            }
-        }
-
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.rightMargin: 2
+            anchors.leftMargin: 2
+            anchors.fill: parent
+            anchors.topMargin:appSwitcher.height - launchAppGrid.cellHeight - 8
+            clip: true
  
-    }
+            GridView {
+                id: launchAppGrid
+                z:1
+                opacity: 1.0 - cutieWlc.blur
+                visible: tabListView.model.length === 0
+                model: launcherApps
+                width: appSwitcher.width
+                cellWidth: width / Math.floor(width / 85)
+                cellHeight: cellWidth
+                anchors.fill: parent
+                anchors.topMargin:appSwitcher.height - launchAppGrid.cellHeight - 8
 
+                delegate: Item {
+                    CutieButton {
+                        id: appIconButton
+                        width: launchAppGrid.cellWidth
+                        height: width
+                        icon.name: model["Desktop Entry/Icon"]
+                        icon.source: "file://" + model["Desktop Entry/Icon"]
+                        icon.height: width / 2
+                        icon.width: height / 2
+                        background: null
+                        onClicked:
+                            compositor.execApp(model["Desktop Entry/Exec"]);
+                    }
 
+                    CutieLabel {
+                        anchors.bottom: appIconButton.bottom
+                        anchors.horizontalCenter: appIconButton.horizontalCenter
+                        text: model["Desktop Entry/Name"]
+                        font.pixelSize: 12
+                        clip: true
+                        width: 2 * appIconButton.width / 3
+                        elide: Text.ElideRight
+                        horizontalAlignment: Text.AlignHCenter
+                    }
+
+                }
+
+            }
+
+ }
 
     // old stuff 
     GridView {
@@ -180,7 +207,7 @@ Item {
                             modelData.close();
                             appThumb.opacity = 0;
                             closedTm.start();
-                        } else {
+                        } else { 
                             opacityRestore.start();
                         }
                         xRestore.start();
@@ -200,5 +227,5 @@ Item {
                 onTriggered: appThumb.opacity = 1
             }
         }
-    }
+    } 
 }
