@@ -45,42 +45,41 @@ Item {
             color: Atmosphere.primaryAlphaColor
             radius: 20
             z:1
-            height: launchAppGrid.cellHeight
+            height: appSwitcher.width / Math.floor(width / 85)
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.rightMargin: 2
             anchors.leftMargin: 2
             anchors.bottom: parent.bottom
             clip: true
- 
- 
-            GridView {
-                id: launchAppGrid
+
+            ListView {
+                id: launchAppList
                 model: launcherApps
                 width: appSwitcher.width
-                cellWidth: width / Math.floor(width / 85)
-                cellHeight: cellWidth
+                height: parent.height
                 anchors.fill: parent
 
                 delegate: Item {
+                    width: launchAppList.width
+                    height: appSwitcher.width / Math.floor(width / 85)
+
                     CutieButton {
                         id: appIconButton
-                        width: launchAppGrid.cellWidth
-                        height: width
+                        width: height // Make the button square
+                        height: height
                         icon.name: model["Desktop Entry/Icon"]
                         icon.source: "file://" + model["Desktop Entry/Icon"]
-                        icon.height: width / 2
+                        icon.height: height / 2
                         icon.width: height / 2
                         background: null
                         onClicked:
                             compositor.execApp(model["Desktop Entry/Exec"]);
                     }
-
                 }
-
             }
 
- }
+        }
 
     // old stuff 
     GridView {
