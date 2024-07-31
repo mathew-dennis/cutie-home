@@ -56,7 +56,6 @@ Item {
                 id: launchAppList
                 model: launcherApps
                 anchors.fill: parent
-                anchors.margin: 10
                 orientation: Qt.Horizontal
                 clip: false
                 spacing: 10
