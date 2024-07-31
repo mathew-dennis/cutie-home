@@ -61,7 +61,7 @@ Item {
                 spacing: -20
 
                 delegate: Item {
-                    width: appSwitcher.width / Math.floor(width / 85) / 2
+                    width: ( appSwitcher.width / Math.floor(width / 85) ) / 2
                     height: width
                     
                     CutieButton {
