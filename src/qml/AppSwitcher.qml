@@ -48,8 +48,8 @@ Item {
             height: appSwitcher.width / Math.floor(width / 85)
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.rightMargin: 4
-            anchors.leftMargin: 4
+            anchors.rightMargin: 1
+            anchors.leftMargin: 1
             anchors.bottom: parent.bottom
 
             ListView {
