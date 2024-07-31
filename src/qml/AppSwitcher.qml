@@ -58,10 +58,10 @@ Item {
                 anchors.fill: parent
                 orientation: Qt.Horizontal
                 clip: false
-                spacing: -20
+                spacing: 20
 
                 delegate: Item {
-                    width: parent.height
+                    width: appSwitcher.width / Math.floor(width / 170)
                     height: width
                     
                     CutieButton {
@@ -70,8 +70,8 @@ Item {
                         height: width
                         icon.name: model["Desktop Entry/Icon"]
                         icon.source: "file://" + model["Desktop Entry/Icon"]
-                        icon.height: height / 2
-                        icon.width: height / 2
+                        icon.height: height
+                        icon.width: height
                         background: null
                         onClicked:
                             compositor.execApp(model["Desktop Entry/Exec"]);
