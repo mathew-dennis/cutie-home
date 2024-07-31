@@ -39,10 +39,11 @@ Item {
         id: compositor
     }
 
-        Rectangle {
+        Flickable {
             opacity: 1.0 - cutieWlc.blur
             visible: tabListView.model.length === 0
             color: Atmosphere.primaryAlphaColor
+            contentWidth: launchAppList.width
             radius: 20
             z:1
             height: appSwitcher.width / Math.floor(width / 85)
@@ -62,9 +63,8 @@ Item {
                 spacing: -20
 
                 delegate: Item {
-                    width: parent.height
-                    height: width
-                    
+                    height: parent.height
+
                     CutieButton {
                         id: appIconButton
                         width: parent.height
