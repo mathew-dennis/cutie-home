@@ -52,7 +52,6 @@ Item {
             anchors.rightMargin: 2
             anchors.leftMargin: 2
             anchors.bottom: parent.bottom
-            clip: true
 
             ListView {
                 id: launchAppList
