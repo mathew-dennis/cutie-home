@@ -45,7 +45,7 @@ Item {
             color: Atmosphere.secondaryAlphaColor
             radius: 20
             z:1
-            height: appSwitcher.width / Math.floor(width / 85)
+            height: appSwitcher.width / Math.floor(appSwitcher.width / 170)
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.rightMargin: 1
