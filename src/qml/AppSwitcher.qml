@@ -45,7 +45,7 @@ Item {
             color: Atmosphere.secondaryAlphaColor
             radius: 20
             z:1
-            height: appSwitcher.width / Math.floor(appSwitcher.width / 170)
+            height: appSwitcher.width / Math.floor(appSwitcher.width / 42)
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.rightMargin: 1
@@ -58,7 +58,7 @@ Item {
                 anchors.fill: parent
                 orientation: Qt.Horizontal
                 clip: false
-                spacing: -20
+                spacing: 10
 
                 delegate: Item {
                     width: parent.height
@@ -70,8 +70,8 @@ Item {
                         height: width
                         icon.name: model["Desktop Entry/Icon"]
                         icon.source: "file://" + model["Desktop Entry/Icon"]
-                        icon.height: height / 2
-                        icon.width: height / 2
+                        icon.height: height
+                        icon.width: height
                         background: null
                         onClicked:
                             compositor.execApp(model["Desktop Entry/Exec"]);
