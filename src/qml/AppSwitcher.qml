@@ -45,7 +45,7 @@ Item {
             color: Atmosphere.secondaryAlphaColor
             radius: 20
             z:1
-            height: appSwitcher.width / Math.floor(width / 85)
+            height: ( appSwitcher.width / Math.floor(width / 85) / 2 ) + 10
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.rightMargin: 1
@@ -70,8 +70,8 @@ Item {
                         height: width
                         icon.name: model["Desktop Entry/Icon"]
                         icon.source: "file://" + model["Desktop Entry/Icon"]
-                        icon.height: height / 2
-                        icon.width: height / 2
+                        icon.height: height -10
+                        icon.width: height -10
                         background: null
                         onClicked:
                             compositor.execApp(model["Desktop Entry/Exec"]);
