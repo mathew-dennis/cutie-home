@@ -66,7 +66,7 @@ Item {
                     
                     CutieButton {
                         id: appIconButton
-                        width: parent.height
+                        width: appSwitcher.width / Math.floor(width / 170)
                         height: width
                         icon.name: model["Desktop Entry/Icon"]
                         icon.source: "file://" + model["Desktop Entry/Icon"]
