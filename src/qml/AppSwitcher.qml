@@ -45,7 +45,6 @@ Item {
             color: Atmosphere.secondaryAlphaColor
             radius: 20
             z:1
-            height: appSwitcher.width / Math.floor(appSwitcher.width / 50)
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.rightMargin: 1
@@ -57,6 +56,7 @@ Item {
                 model: launcherApps
                 anchors.fill: parent
                 orientation: Qt.Horizontal
+                height: appSwitcher.width / Math.floor(appSwitcher.width / 50)
                 clip: false
                 spacing: 10
 
