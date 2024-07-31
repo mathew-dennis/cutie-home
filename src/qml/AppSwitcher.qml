@@ -57,11 +57,11 @@ Item {
                 model: launcherApps
                 anchors.fill: parent
                 anchors.topMargin: 10
-                anchors.leftMargin: 15
-                anchors.rightMargin: 15
+                anchors.leftMargin: 16
+                anchors.rightMargin: 16
                 orientation: Qt.Horizontal
                 clip: false
-                spacing: 15
+                spacing: 16
 
                 delegate: Item {
                     width: appSwitcher.width / Math.floor(appSwitcher.width / 51)
