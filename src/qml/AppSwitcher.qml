@@ -45,7 +45,7 @@ Item {
             color: Atmosphere.secondaryAlphaColor
             radius: 20
             z:1
-            height: appSwitcher.width / Math.floor(width / 170) + 20
+            height: appSwitcher.width / Math.floor(width / 85)
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.rightMargin: 1
@@ -58,20 +58,20 @@ Item {
                 anchors.fill: parent
                 orientation: Qt.Horizontal
                 clip: false
-                spacing: 1
+                spacing: -20
 
                 delegate: Item {
-                    width: appSwitcher.width / Math.floor(width / 170)
+                    width: parent.height
                     height: width
                     
                     CutieButton {
                         id: appIconButton
-                        width: appSwitcher.width / Math.floor(width / 170)
+                        width: parent.height
                         height: width
                         icon.name: model["Desktop Entry/Icon"]
                         icon.source: "file://" + model["Desktop Entry/Icon"]
-                        icon.height: height
-                        icon.width: height
+                        icon.height: height / 2
+                        icon.width: height / 2
                         background: null
                         onClicked:
                             compositor.execApp(model["Desktop Entry/Exec"]);
