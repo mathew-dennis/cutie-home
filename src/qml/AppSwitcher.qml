@@ -57,6 +57,8 @@ Item {
                 model: launcherApps
                 anchors.fill: parent
                 anchors.topMargin: 10
+                anchors.leftMargin: 10
+                anchors.rightMargin: 10
                 orientation: Qt.Horizontal
                 clip: false
                 spacing: 10
