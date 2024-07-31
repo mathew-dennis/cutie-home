@@ -56,12 +56,11 @@ Item {
                 model: launcherApps
                 anchors.fill: parent
                 orientation: Qt.Horizontal
-                height: appSwitcher.width / Math.floor(appSwitcher.width / 50)
                 clip: false
                 spacing: 10
 
                 delegate: Item {
-                    width: parent.height
+                    width: appSwitcher.width / Math.floor(appSwitcher.width / 50)
                     height: width
                     
                     CutieButton {
