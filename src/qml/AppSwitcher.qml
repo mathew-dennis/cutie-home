@@ -59,7 +59,7 @@ Item {
                 orientation: Qt.Horizontal
                 clip: false
                 spacing: -20
-
+                
                 delegate: Item {
                     width: parent.height
                     height: width
