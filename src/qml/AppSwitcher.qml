@@ -43,7 +43,7 @@ Item {
             opacity: 1.0 - cutieWlc.blur
             visible: tabListView.model.length === 0
             color: Atmosphere.secondaryAlphaColor
-            height: appSwitcher.width / Math.floor(appSwitcher.width / 50) + 20
+            height: appSwitcher.width / Math.floor(appSwitcher.width / 52) + 20
             radius: 20
             z:1
             anchors.left: parent.left
@@ -61,7 +61,7 @@ Item {
                 spacing: 10
 
                 delegate: Item {
-                    width: appSwitcher.width / Math.floor(appSwitcher.width / 50)
+                    width: appSwitcher.width / Math.floor(appSwitcher.width / 52)
                     height: width
                     
                     CutieButton {
