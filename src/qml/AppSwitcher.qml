@@ -43,6 +43,7 @@ Item {
             opacity: 1.0 - cutieWlc.blur
             visible: tabListView.model.length === 0
             color: Atmosphere.secondaryAlphaColor
+            height: appSwitcher.width / Math.floor(appSwitcher.width / 50) + 20
             radius: 20
             z:1
             anchors.left: parent.left
@@ -55,6 +56,7 @@ Item {
                 id: launchAppList
                 model: launcherApps
                 anchors.fill: parent
+                anchors.margin: 10
                 orientation: Qt.Horizontal
                 clip: false
                 spacing: 10
