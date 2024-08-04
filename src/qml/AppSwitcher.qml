@@ -43,7 +43,7 @@ Item {
             opacity: 1.0 - cutieWlc.blur
             visible: tabListView.model.length === 0
             color: Atmosphere.secondaryAlphaColor
-            height: appSwitcher.width / Math.floor(appSwitcher.width / 51) + 20
+            height: appSwitcher.width / Math.floor(appSwitcher.width / 51) + 8
             radius: 20
             z:1
             anchors.left: parent.left
