@@ -44,7 +44,7 @@ Item {
             visible: tabListView.model.length === 0
             color: Atmosphere.secondaryAlphaColor
             height: appSwitcher.width / Math.floor(appSwitcher.width / 51) + 8
-            radius: 0
+
             z:1
             anchors.left: parent.left
             anchors.right: parent.right
