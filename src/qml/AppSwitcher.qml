@@ -57,6 +57,7 @@ Item {
                 id: launchAppList
                 model: launcherApps
                 anchors.fill: parent
+                width: parent.width -16
                 anchors.topMargin: 8
                 anchors.bottomMargin: 8
                 anchors.leftMargin: 8
