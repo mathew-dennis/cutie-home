@@ -39,6 +39,7 @@ Item {
         id: compositor
     }
 
+
         Rectangle {
             opacity: 1.0 - cutieWlc.blur
             visible: tabListView.model.length === 0
@@ -59,8 +60,8 @@ Item {
                 anchors.fill: parent
                 anchors.topMargin: 8
                 anchors.bottomMargin: 8
-                anchors.leftMargin: 8
-                anchors.rightMargin: 8
+                anchors.leftMargin: 1
+                anchors.rightMargin: 1
                 orientation: Qt.Horizontal
                 clip: true
                 spacing: 16
