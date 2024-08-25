@@ -63,7 +63,7 @@ Item {
                 anchors.rightMargin: 1
                 orientation: Qt.Horizontal
                 clip: true
-                spacing: 18
+                spacing: 20
 
                 delegate: Item {
                     width: appSwitcher.width / Math.floor(appSwitcher.width / 51)
