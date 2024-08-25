@@ -39,7 +39,6 @@ Item {
         id: compositor
     }
 
-
         Rectangle {
             opacity: 1.0 - cutieWlc.blur
             visible: tabListView.model.length === 0
@@ -57,11 +56,7 @@ Item {
             ListView {
                 id: launchAppList
                 model: launcherApps
-                anchors.fill: parent
-                anchors.topMargin: 8
-                anchors.bottomMargin: 8
-                anchors.leftMargin: 1
-                anchors.rightMargin: 1
+                anchors.centerIn: parent
                 orientation: Qt.Horizontal
                 clip: true
                 spacing: 16
