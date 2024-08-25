@@ -56,9 +56,11 @@ Item {
             ListView {
                 id: launchAppList
                 model: launcherApps
-                anchors.centerIn: parent
+                anchors.fill: parent
                 anchors.topMargin: 8
                 anchors.bottomMargin: 8
+                anchors.leftMargin: 1
+                anchors.rightMargin: 1
                 orientation: Qt.Horizontal
                 clip: true
                 spacing: 16
