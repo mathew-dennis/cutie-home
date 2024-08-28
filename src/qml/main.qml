@@ -80,6 +80,7 @@ Item {
 
     Component.onCompleted: {
         loadFavoriteApps();
+        updateVisibility();
     }
 
     CutieStore {
@@ -92,6 +93,21 @@ Item {
         }
     }
 
+    property bool favoriteAppsVisibility: true
+    
+    function updateVisibility() {
+        if (favoriteStore.data) {
+            let favoriteData = favoriteStore.data;
+
+            if (favoriteData.visibility === undefined) {
+                favoriteData.visibility = true;
+            }
+
+            favoriteAppsVisibility = favoriteData.visibility;
+
+            favoriteStore.data = favoriteData;
+        }
+    }
 
     ForeignToplevelManagerV1 {
         id: toplevelManager
