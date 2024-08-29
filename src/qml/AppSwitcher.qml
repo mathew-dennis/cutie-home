@@ -41,7 +41,7 @@ Item {
 
         Rectangle {
             opacity: 1.0 - cutieWlc.blur
-            visible: FavoriteAppsVisiblity && tabListView.model.length === 0
+            visible: FavoriteAppsVisiblity && (tabListView.model.length === 0)
             color: Atmosphere.secondaryAlphaColor
             height: appSwitcher.width / Math.floor(appSwitcher.width / 51) + 16
             radius: 15
