@@ -90,6 +90,7 @@ Item {
 
         onDataChanged: {
             loadFavoriteApps();
+            updateVisibility();
         }
     }
 
