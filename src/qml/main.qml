@@ -105,7 +105,7 @@ Item {
             }
 
             favoriteAppsVisibility = favoriteData.visibility;
-
+            console.log("home: Visibility variable updated . Current state:", favoriteAppsVisibility);
             favoriteStore.data = favoriteData;
         }
     }
