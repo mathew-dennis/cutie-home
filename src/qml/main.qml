@@ -100,8 +100,8 @@ Item {
         if (favoriteStore.data) {
             let favoriteData = favoriteStore.data;
 
-            if (favoriteData.visibility === undefined) {
-                favoriteData.visibility = true;
+            if (!favoriteStore.data.hasOwnProperty("visibility")) {
+                favoriteStore.data = { "visibility": true };
             }
 
             favoriteAppsVisibility = favoriteData.visibility;
