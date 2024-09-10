@@ -94,15 +94,11 @@ Item {
         }
     }
 
-    property bool favoriteAppsVisibility: true
+    property bool favoriteAppsVisibility: "visibility" in favoriteStore.data ? favoriteStore.data["visibility"] : true
     
     function updateVisibility() {
         if (favoriteStore.data) {
             let favoriteData = favoriteStore.data;
-
-            if (!favoriteStore.data.hasOwnProperty("visibility")) {
-                favoriteStore.data = { "visibility": true };
-            }
 
             favoriteAppsVisibility = favoriteData.visibility;
             console.log("home: Visibility variable updated . Current state:", favoriteAppsVisibility);
