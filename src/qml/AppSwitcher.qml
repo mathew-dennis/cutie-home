@@ -39,7 +39,7 @@ Item {
         id: compositor
     }
 
-        Rectangle {
+    Rectangle {
             opacity: 1.0 - cutieWlc.blur
             visible: favoriteAppsVisibility && (tabListView.model.length === 0)
             color: Atmosphere.secondaryAlphaColor
@@ -82,8 +82,7 @@ Item {
                             compositor.execApp(model["Desktop Entry/Exec"])
                         onPressAndHold:
                             menu.open()
-            }
-                    }
+                        }
 
                     CutieMenu {
                         id: menu
@@ -102,7 +101,7 @@ Item {
                         }
                     }
                 }
-
+            }
         }
 
     // old stuff 
