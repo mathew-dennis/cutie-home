@@ -91,11 +91,12 @@ Item {
                         CutieMenuItem {
                             text: qsTr("Remove from favorites")
                             onTriggered: {
-                                let appName = (model["Desktop Entry/Name"]);
                                 let data = favoriteStore.data;
-                                if (data.hasOwnProperty("favoriteApp-" + appName))
-                                    delete data["favoriteApp-" + appName];
-                                favoriteStore.data = data;
+                                let appKey = "favoriteApp-" + model["Desktop Entry/Name"];
+                                if (data.hasOwnProperty(appKey)) {
+                                    delete data[appKey];
+                                    favoriteStore.data = data;
+                                }
                             }
                         }
                     }
