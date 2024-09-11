@@ -79,7 +79,10 @@ Item {
                         icon.width: height
                         background: null
                         onClicked:
-                            compositor.execApp(model["Desktop Entry/Exec"]);
+                            compositor.execApp(model["Desktop Entry/Exec"])
+                        onPressAndHold:
+                            menu.open()
+            }
                     }
 
                     CutieMenu {
