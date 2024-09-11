@@ -87,6 +87,7 @@ Item {
 
                 CutieMenu {
                     id: menu
+                    opacity: 1.0 - cutieWlc.blur
                     width: appSwitcher.width * 2 / 3
                     CutieMenuItem {
                         text: qsTr("Remove from favorites")
