@@ -87,7 +87,7 @@ Item {
 
                     CutieMenu {
                         id: menu
-                        width: window.width * 2 / 3
+                        width: window.width
                         CutieMenuItem {
                             text: qsTr("Remove from favorites")
                             onTriggered: {
