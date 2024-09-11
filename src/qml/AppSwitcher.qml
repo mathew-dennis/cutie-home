@@ -95,6 +95,7 @@ Item {
                                 let appKey = "favoriteApp-" + model["Desktop Entry/Name"];
                                 if (data.hasOwnProperty(appKey)) {
                                     delete data[appKey];
+                                    console.log("Removing app from favorites:", appKey);
                                     favoriteStore.data = data;
                                 }
                             }
