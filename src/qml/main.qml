@@ -75,7 +75,7 @@ Item {
 
         console.log("Favorite apps loaded successfully.");
         console.log("Current launcherApps contents:", JSON.stringify(launcherApps));
-        console.log("Number of items in launchAppGrid:", launchAppGrid.count);
+        console.log("Number of items in launchAppList:", launchAppGrid.count);
     }
 
     Component.onCompleted: {
