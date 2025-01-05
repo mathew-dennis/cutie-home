@@ -5,18 +5,17 @@ Item {
         x: 0
         y: 0
         height: root.height
-        width: 20
+        width: 25
 
         MouseArea { 
             drag.target: parent; drag.axis: Drag.XAxis; drag.minimumX: 0; drag.maximumX: root.width
             anchors.fill: parent
 
             function getNextState() {
-                if (root.state == "appSwitcher")
+                if (root.state == "homeScreen")
                     return "notificationScreen";
-                else if (root.state == "notificationScreen")
-                    return "appSwitcher";
-                else return "";
+                else 
+                    return "homeScreen";
             }
 
             onReleased: {
@@ -43,21 +42,20 @@ Item {
     }
 
     Item {
-        x: root.width - 20
+        x: root.width - 25
         y: 0
         height: root.height
-        width: 20
+        width: 25
 
         MouseArea { 
             drag.target: parent; drag.axis: Drag.XAxis; drag.minimumX: -20; drag.maximumX: root.width - 20
             anchors.fill: parent
 
             function getNextState() {
-                if (root.state == "appSwitcher")
-                    return "notificationScreen";
-                else if (root.state == "notificationScreen")
+                if (root.state == "homeScreen")
                     return "appSwitcher";
-                else return "";
+                else
+                    return "homeScreen";
             }
 
             onReleased: {

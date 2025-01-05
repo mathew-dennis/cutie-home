@@ -9,7 +9,7 @@ import Cutie.Wlc
 
 Item {
     id: root
-    state: "appSwitcher" 
+    state: "homeScreen" 
     visible: true
     width: Screen.width
     height: Screen.height
@@ -18,11 +18,19 @@ Item {
         State{
             name: "appSwitcher"
             PropertyChanges { target: appSwitcher; opacity: 1 }
+            PropertyChanges { target: homeScreen; opacity: 0 }
+            PropertyChanges { target: notificationScreen; opacity: 0 }
+        },
+        State {
+            name: "homeScreen"
+            PropertyChanges { target: appSwitcher; opacity: 0 }
+            PropertyChanges { target: homeScreen; opacity: 1 }
             PropertyChanges { target: notificationScreen; opacity: 0 }
         },
         State {
             name: "notificationScreen"
             PropertyChanges { target: appSwitcher; opacity: 0 }
+            PropertyChanges { target: homeScreen; opacity: 0 }
             PropertyChanges { target: notificationScreen; opacity: 1 }
         }
     ]
@@ -31,6 +39,7 @@ Item {
         Transition {
             to: "*"
             NumberAnimation { target: notificationScreen; properties: "opacity"; duration: 300; easing.type: Easing.InOutQuad; }
+            NumberAnimation { target: homeScreen; properties: "opacity"; duration: 300; easing.type: Easing.InOutQuad; }
             NumberAnimation { target: appSwitcher; properties: "opacity"; duration: 300; easing.type: Easing.InOutQuad; }
         }
 
@@ -135,6 +144,7 @@ Item {
     AppSwitcher { id: appSwitcher }
     NotificationScreen { id: notificationScreen }
     ScreenSwipe { id: screenSwipe }
+    HomeScreen { id: homeScreen }
 
     ListModel { id: notifications }
     ListModel { id: launcherApps }
