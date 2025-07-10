@@ -114,7 +114,6 @@ Item {
                     anchors.bottomMargin: 25
                     wlc: cutieWlc
                     toplevel: modelData
-                    visible: appSwitcher.enabled
                 }
 
                 Item {
