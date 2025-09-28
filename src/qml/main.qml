@@ -70,15 +70,11 @@ Item {
         console.log("Favorite store data:", JSON.stringify(favoriteData));
 
         // Fetch all available applications
-        let allApps = CutieDesktopFileParser.fetchAllEntries();
-        console.log("Total applications available:", allApps.length);
-
+ 
+        let allApps = CutieDesktopFileParser.fetchAllEntries()
         for (let app of allApps) {
-            let appName = app["Desktop Entry/Name"];
-            // Only append if this app is in the favorites list
-            if (favoriteData.hasOwnProperty(appName)) {
-                console.log("Appending favorite app:", appName);
-                launcherApps.append(app);
+            if (favoriteData.hasOwnProperty(app.name)) {
+            launcherApps.append(app)
             }
         }
 
