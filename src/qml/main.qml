@@ -72,6 +72,8 @@ Item {
         // Fetch all available applications
  
         let allApps = CutieDesktopFileParser.fetchAllEntriesModel()
+        console.log("allApps receved count:", allApps ? allApps.count : "null")
+
         for (let i = 0; i < allApps.count; i++) {
             let app = allApps.get(i)
             console.log("Checking app:", app.name, "against favorites")
