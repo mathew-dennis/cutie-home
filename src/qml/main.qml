@@ -73,6 +73,7 @@ Item {
  
         let allApps = CutieDesktopFileParser.fetchAllEntries()
         for (let app of allApps) {
+            console.log("Favorite store current check:", JSON.stringify(app));
             if (favoriteData.hasOwnProperty(app.name)) {
             launcherApps.append(app)
             }
