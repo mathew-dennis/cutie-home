@@ -75,9 +75,9 @@ Item {
         console.log("allApps receved count:", allApps ? allApps.rowCount() : "null")
 
         for (let i = 0; i < allApps.rowCount(); i++) {
-            let app = allApps.get(i)
-            console.log("Checking app:", app.name, "against favorites")
-            if (favoriteData.hasOwnProperty(app.name)) {
+            let appName = allApps.data(allApps.index(i), "name");
+            console.log("Checking app:", appName, "against favorites")
+            if (favoriteData.hasOwnProperty(appName)) {
                 launcherApps.append(app)
             }
         }
