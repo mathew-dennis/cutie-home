@@ -6,6 +6,7 @@ import Cutie
 import Cutie.Feedback
 import Cutie.Store
 import Cutie.Wlc
+import Cutie.Desktopfileparser
 
 Item {
     id: root
@@ -58,34 +59,33 @@ Item {
     }
 
     function loadFavoriteApps() {
-        console.log("loadin Favorite store data ");
+        console.log("Loading Favorite store data using DesktopFileParser...");
         if (!favoriteStore.data) {
             console.log("Favorite store data is not yet available.");
             return;
         }
+
         let favoriteData = favoriteStore.data;
         launcherApps.clear(); 
         console.log("Favorite store data:", JSON.stringify(favoriteData));
 
-        
-        for (let key in favoriteData) {
-           if (key.startsWith("favoriteApp-")) {
-                console.log("found Favorite store data entry ");
-                let appData = favoriteData[key];
-                let data = { 
-                    "Desktop Entry/Name": key.substring(12), 
-                    "Desktop Entry/Icon": appData.icon, 
-                    "Desktop Entry/Exec": appData.command 
-                };
-                console.log("Appending data:", JSON.stringify(data));
-                launcherApps.append(data);
+        // Fetch all available applications
+        let allApps = CutieDesktopFileParser.fetchAllEntries();
+        console.log("Total applications available:", allApps.length);
+
+        for (let app of allApps) {
+            let appName = app["Desktop Entry/Name"];
+            // Only append if this app is in the favorites list
+            if (favoriteData.hasOwnProperty(appName)) {
+                console.log("Appending favorite app:", appName);
+                launcherApps.append(app);
             }
         }
 
         console.log("Favorite apps loaded successfully.");
-        console.log("Current launcherApps contents:", JSON.stringify(launcherApps));
-        console.log("Number of items in launchAppList:", launchAppGrid.count);
+        console.log("Number of items in launcherApps:", launcherApps.count);
     }
+
 
     Component.onCompleted: {
         loadFavoriteApps();
