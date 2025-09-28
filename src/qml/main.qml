@@ -74,7 +74,7 @@ Item {
         let allApps = CutieDesktopFileParser.fetchAllEntriesModel()
         for (let i = 0; i < allApps.count; i++) {
             let app = allApps.get(i)
-            console.log("Favorite store current check:", JSON.stringify(app))
+            console.log("Checking app:", app.name, "against favorites")
             if (favoriteData.hasOwnProperty(app.name)) {
                 launcherApps.append(app)
             }
