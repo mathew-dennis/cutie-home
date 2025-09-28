@@ -72,12 +72,14 @@ Item {
         // Fetch all available applications
  
         let allApps = CutieDesktopFileParser.fetchAllEntriesModel()
-        for (let app of allApps) {
-            console.log("Favorite store current check:", app);
+        for (let i = 0; i < allApps.count; i++) {
+            let app = allApps.get(i)
+            console.log("Favorite store current check:", JSON.stringify(app))
             if (favoriteData.hasOwnProperty(app.name)) {
-            launcherApps.append(app)
+                launcherApps.append(app)
             }
         }
+
 
         console.log("Favorite apps loaded successfully.");
         console.log("Number of items in launcherApps:", launcherApps.count);
