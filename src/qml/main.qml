@@ -43,7 +43,6 @@ Item {
             NumberAnimation { target: homeScreen; properties: "opacity"; duration: 300; easing.type: Easing.InOutQuad; }
             NumberAnimation { target: appSwitcher; properties: "opacity"; duration: 300; easing.type: Easing.InOutQuad; }
         }
-
     ]
 
     function addNotification(title, body, id) {
@@ -68,7 +67,7 @@ Item {
         let favoriteData = favoriteStore.data;
         launcherApps.clear();
 
-        // Get the C++ model instance
+        // Get the C++ model instance. Explicitly passing [] to resolve overload.
         let allAppsModel = CutieDesktopFileParser.fetchAllEntriesModel([])
         if (!allAppsModel) {
             console.log("Error: DesktopFileParser model is null.");
@@ -79,10 +78,12 @@ Item {
 
         // Iterate through the C++ QAbstractListModel
         for (let i = 0; i < allAppsModel.rowCount(); i++) {
-            let index = allAppsModel.index(i);
+            
+            // *** CRITICAL FIX: Pass the column index (0) explicitly ***
+            let index = allAppsModel.index(i, 0); 
             
             // CRITICAL FIX 1: Get data using the QML role name "name"
-            let appName = allAppsModel.data(index, "name"); 
+            let appName = allAppsModel.data(index, "name");
             
             if (favoriteData.hasOwnProperty(appName)) {
                 
@@ -162,4 +163,4 @@ Item {
 
     ListModel { id: notifications }
     ListModel { id: launcherApps }
-                            }
+}
