@@ -106,6 +106,20 @@ Item {
     Component.onCompleted: {
         loadFavoriteApps();
         updateVisibility();
+        let allApps = CutieDesktopFileParser.fetchAllEntriesModel()
+
+            console.log("=== Dumping allApps model ===")
+                if (allApps && allApps.count !== undefined) {
+                            for (let i = 0; i < allApps.count; i++) {
+                                            let app = allApps.get(i)
+                                                        console.log("App[" + i + "]:", JSON.stringify(app))
+                            }
+                } else {
+                            console.log("allApps is not a valid ListModel or has no count property")
+                }
+                
+                        
+                
     }
 
     CutieStore {
