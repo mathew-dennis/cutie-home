@@ -85,7 +85,7 @@ Item {
             // CRITICAL FIX 1: Get data using the QML role name "name"
             let appName = allAppsModel.data(index, "name");
             console.log("Checking App:", appName);
-            
+            console.log("Checking Index (JSON):", JSON.stringify(index));
             if (favoriteData.hasOwnProperty(appName)) {
                 
                 // CRITICAL FIX 2: Create a clean JavaScript object for the QML ListModel
