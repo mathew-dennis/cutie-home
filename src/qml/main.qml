@@ -10,7 +10,7 @@ import Cutie.Desktopfileparser
 
 Item {
     id: root
-    state: "homeScreen" 
+    state: "homeScreen"
     visible: true
     width: Screen.width
     height: Screen.height
@@ -66,25 +66,38 @@ Item {
         }
 
         let favoriteData = favoriteStore.data;
-        launcherApps.clear(); 
-        console.log("Favorite store data:", JSON.stringify(favoriteData));
+        launcherApps.clear();
 
-        // Fetch all available applications
- 
-        let allApps = CutieDesktopFileParser.fetchAllEntriesModel()
-        console.log("allApps receved count:", allApps ? allApps.rowCount() : "null")
+        // Get the C++ model instance
+        let allAppsModel = CutieDesktopFileParser.fetchAllEntriesModel()
+        if (!allAppsModel) {
+            console.log("Error: DesktopFileParser model is null.");
+            return;
+        }
 
-        for (let i = 0; i < allApps.rowCount(); i++) {
-            let appName = allApps.data(allApps.index(i), "name");
-            console.log("Checking app:", appName, "against favorites")
+        console.log("allAppsModel received count:", allAppsModel.rowCount())
+
+        // Iterate through the C++ QAbstractListModel
+        for (let i = 0; i < allAppsModel.rowCount(); i++) {
+            let index = allAppsModel.index(i);
+            
+            // CRITICAL FIX 1: Get data using the QML role name "name"
+            let appName = allAppsModel.data(index, "name"); 
+            
             if (favoriteData.hasOwnProperty(appName)) {
-                launcherApps.append(app)
+                
+                // CRITICAL FIX 2: Create a clean JavaScript object for the QML ListModel
+                let appData = {
+                    "name": appName, // Used for menu and comparison
+                    "icon": allAppsModel.data(index, "icon"),
+                    "exec": allAppsModel.data(index, "exec")
+                }
+                
+                launcherApps.append(appData);
             }
         }
 
-
-        console.log("Favorite apps loaded successfully.");
-        console.log("Number of items in launcherApps:", launcherApps.count);
+        console.log("Favorite apps loaded successfully. Count:", launcherApps.count);
     }
 
 
@@ -149,4 +162,4 @@ Item {
 
     ListModel { id: notifications }
     ListModel { id: launcherApps }
-}
+                            }

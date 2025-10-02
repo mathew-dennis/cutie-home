@@ -10,7 +10,7 @@ Item {
     id: homeScreen
     anchors.fill: parent
     opacity: 0
-    enabled: root.state == "homeScreen"
+    enabled: root.state == "homeScreen" 
 
     CutieWlc { id: compositor }
 
@@ -31,7 +31,7 @@ Item {
 
         ListView {
             id: launchAppList
-            model: launcherApps
+            model: launcherApps 
             anchors.fill: parent
             anchors.topMargin: 8
             anchors.bottomMargin: 8
@@ -68,11 +68,12 @@ Item {
                         text: qsTr("Remove from favorites")
                         onTriggered: {
                             let data = favoriteStore.data;
-                            let appName = model["Desktop Entry/Name"];
+                            let appName = model.name;
+                            
                             if (data.hasOwnProperty(appName)) {
                                 delete data[appName];
                                 console.log("Removed favorite app:", appName);
-                                favoriteStore.data = data;
+                                favoriteStore.data = data; 
                             }
                         }
                     }
