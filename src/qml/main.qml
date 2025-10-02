@@ -68,7 +68,7 @@ Item {
         launcherApps.clear();
 
         // Get the C++ model instance. Explicitly passing [] to resolve overload.
-        let allAppsModel = CutieDesktopFileParser.fetchAllEntriesModel([])
+        let allAppsModel = CutieDesktopFileParser.fetchAllEntriesModel()
         if (!allAppsModel) {
             console.log("Error: DesktopFileParser model is null.");
             return;
