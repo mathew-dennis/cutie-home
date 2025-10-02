@@ -84,6 +84,7 @@ Item {
             
             // CRITICAL FIX 1: Get data using the QML role name "name"
             let appName = allAppsModel.data(index, "name");
+            console.log("Checking App:", appName);
             
             if (favoriteData.hasOwnProperty(appName)) {
                 
