@@ -67,14 +67,9 @@ Item {
         let favoriteData = favoriteStore.data;
         launcherApps.clear();
 
-        // Print all favorite keys for debugging
-        let favoriteKeys = Object.keys(favoriteData);
-        console.log("favoriteData keys:", favoriteKeys);
-
         // Normalize favorite keys for robust comparison
         let normalizedFavoriteKeys = favoriteKeys.map(k => k.trim().toLowerCase());
 
-        // Get the C++ model instance. Explicitly passing [] to resolve overload.
         let allAppsModel = CutieDesktopFileParser.fetchAllEntriesModel();
         if (!allAppsModel) {
             console.log("Error: DesktopFileParser model is null.");
@@ -82,8 +77,6 @@ Item {
         }
 
         console.log("allAppsModel received count:", allAppsModel.rowCount());
-        console.log("Role names:", allAppsModel.roleNames ? allAppsModel.roleNames() : "No roleNames function");
-
         // Iterate through the C++ QAbstractListModel
         for (let i = 0; i < allAppsModel.rowCount(); i++) {
             let index = allAppsModel.index(i, 0);
@@ -108,21 +101,7 @@ Item {
 
     Component.onCompleted: {
         loadFavoriteApps();
-        updateVisibility();
-        let allApps = CutieDesktopFileParser.fetchAllEntriesModel()
-
-            console.log("=== Dumping allApps model ===")
-                if (allApps && allApps.count !== undefined) {
-                            for (let i = 0; i < allApps.count; i++) {
-                                            let app = allApps.get(i)
-                                                        console.log("App[" + i + "]:", JSON.stringify(app))
-                            }
-                } else {
-                            console.log("allApps is not a valid ListModel or has no count property")
-                }
-                
-                        
-                
+        updateVisibility();            
     }
 
     CutieStore {
