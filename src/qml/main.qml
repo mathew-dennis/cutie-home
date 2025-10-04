@@ -90,7 +90,6 @@ Item {
             let appName = allAppsModel.data(index, 257); // 257 = Qt.UserRole + 1
             let normalizedAppName = appName ? appName.trim().toLowerCase() : "";
             console.log("Checking App:", appName, "(normalized:", normalizedAppName, ")");
-            console.log("Checking Index (JSON):", JSON.stringify(index));
             if (normalizedFavoriteKeys.indexOf(normalizedAppName) !== -1) {
                 let appData = {
                     "name": appName,
