@@ -63,38 +63,25 @@ Item {
             console.log("Favorite store data is not yet available.");
             return;
         }
-
-        let favoriteData = favoriteStore.data;
         launcherApps.clear();
-
-        // Normalize favorite keys for robust comparison
-        let normalizedFavoriteKeys = favoriteKeys.map(k => k.trim().toLowerCase());
-
+        let favoriteKeys = Object.keys(favoriteStore.data);
         let allAppsModel = CutieDesktopFileParser.fetchAllEntriesModel();
         if (!allAppsModel) {
             console.log("Error: DesktopFileParser model is null.");
             return;
         }
-
         console.log("allAppsModel received count:", allAppsModel.rowCount());
-        // Iterate through the C++ QAbstractListModel
         for (let i = 0; i < allAppsModel.rowCount(); i++) {
             let index = allAppsModel.index(i, 0);
-            let appName = allAppsModel.data(index, 257); // name
-            let appExec = allAppsModel.data(index, 258); // exec
-            let appIcon = allAppsModel.data(index, 259); // icon
-            let normalizedAppName = appName ? appName.trim().toLowerCase() : "";
-            console.log("Checking App:", appName, "(normalized:", normalizedAppName, ")");
-            if (normalizedFavoriteKeys.indexOf(normalizedAppName) !== -1) {
-                let appData = {
-                    "name": appName,
-                    "icon": appIcon,
-                    "exec": appExec
-                };
-                launcherApps.append(appData);
+            let appName = allAppsModel.data(index, 257);
+            if (favoriteKeys.indexOf(appName) !== -1) {
+                launcherApps.append({
+                    name: appName,
+                    icon: allAppsModel.data(index, 259),
+                    exec: allAppsModel.data(index, 258)
+                });
             }
         }
-
         console.log("Favorite apps loaded successfully. Count:", launcherApps.count);
     }
 
