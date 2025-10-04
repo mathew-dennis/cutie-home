@@ -87,14 +87,16 @@ Item {
         // Iterate through the C++ QAbstractListModel
         for (let i = 0; i < allAppsModel.rowCount(); i++) {
             let index = allAppsModel.index(i, 0);
-            let appName = allAppsModel.data(index, 257); // 257 = Qt.UserRole + 1
+            let appName = allAppsModel.data(index, 257); // name
+            let appExec = allAppsModel.data(index, 258); // exec
+            let appIcon = allAppsModel.data(index, 259); // icon
             let normalizedAppName = appName ? appName.trim().toLowerCase() : "";
             console.log("Checking App:", appName, "(normalized:", normalizedAppName, ")");
             if (normalizedFavoriteKeys.indexOf(normalizedAppName) !== -1) {
                 let appData = {
                     "name": appName,
-                    "icon": allAppsModel.data(index, "icon"),
-                    "exec": allAppsModel.data(index, "exec")
+                    "icon": appIcon,
+                    "exec": appExec
                 };
                 launcherApps.append(appData);
             }
