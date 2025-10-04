@@ -82,11 +82,12 @@ Item {
         }
 
         console.log("allAppsModel received count:", allAppsModel.rowCount());
+        console.log("Role names:", allAppsModel.roleNames ? allAppsModel.roleNames() : "No roleNames function");
 
         // Iterate through the C++ QAbstractListModel
         for (let i = 0; i < allAppsModel.rowCount(); i++) {
             let index = allAppsModel.index(i, 0);
-            let appName = allAppsModel.data(index, "name");
+            let appName = allAppsModel.data(index, 257); // 257 = Qt.UserRole + 1
             let normalizedAppName = appName ? appName.trim().toLowerCase() : "";
             console.log("Checking App:", appName, "(normalized:", normalizedAppName, ")");
             console.log("Checking Index (JSON):", JSON.stringify(index));
