@@ -67,34 +67,35 @@ Item {
         let favoriteData = favoriteStore.data;
         launcherApps.clear();
 
+        // Print all favorite keys for debugging
+        let favoriteKeys = Object.keys(favoriteData);
+        console.log("favoriteData keys:", favoriteKeys);
+
+        // Normalize favorite keys for robust comparison
+        let normalizedFavoriteKeys = favoriteKeys.map(k => k.trim().toLowerCase());
+
         // Get the C++ model instance. Explicitly passing [] to resolve overload.
-        let allAppsModel = CutieDesktopFileParser.fetchAllEntriesModel()
+        let allAppsModel = CutieDesktopFileParser.fetchAllEntriesModel();
         if (!allAppsModel) {
             console.log("Error: DesktopFileParser model is null.");
             return;
         }
 
-        console.log("allAppsModel received count:", allAppsModel.rowCount())
+        console.log("allAppsModel received count:", allAppsModel.rowCount());
 
         // Iterate through the C++ QAbstractListModel
         for (let i = 0; i < allAppsModel.rowCount(); i++) {
-            
-            // *** CRITICAL FIX: Pass the column index (0) explicitly ***
-            let index = allAppsModel.index(i, 0); 
-            
-            // CRITICAL FIX 1: Get data using the QML role name "name"
+            let index = allAppsModel.index(i, 0);
             let appName = allAppsModel.data(index, "name");
-            console.log("Checking App:", appName);
+            let normalizedAppName = appName ? appName.trim().toLowerCase() : "";
+            console.log("Checking App:", appName, "(normalized:", normalizedAppName, ")");
             console.log("Checking Index (JSON):", JSON.stringify(index));
-            if (favoriteData.hasOwnProperty(appName)) {
-                
-                // CRITICAL FIX 2: Create a clean JavaScript object for the QML ListModel
+            if (normalizedFavoriteKeys.indexOf(normalizedAppName) !== -1) {
                 let appData = {
-                    "name": appName, // Used for menu and comparison
+                    "name": appName,
                     "icon": allAppsModel.data(index, "icon"),
                     "exec": allAppsModel.data(index, "exec")
-                }
-                
+                };
                 launcherApps.append(appData);
             }
         }
