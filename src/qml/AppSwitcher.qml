@@ -18,7 +18,7 @@ Item {
             let delegateItem = tabListView.itemAtIndex(i)
             if (delegateItem && delegateItem.thumbImage) {
             if (thumbnailsFrozen)
-                delegateItem.thumbImage.freeze()
+                delegateItem.thumbImage.resume()
             else
                 delegateItem.thumbImage.resume()
             }
