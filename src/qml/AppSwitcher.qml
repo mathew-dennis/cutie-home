@@ -17,9 +17,10 @@ Item {
         for (let i = 0; i < tabListView.count; i++) {
             let delegateItem = tabListView.itemAtIndex(i)
             if (delegateItem && delegateItem.thumbImage) {
-            if (thumbnailsFrozen)
+                console.log("home - found a deligatwe")
+                if (thumbnailsFrozen)
                 delegateItem.thumbImage.resume()
-            else
+                else
                 delegateItem.thumbImage.resume()
             }
        }
