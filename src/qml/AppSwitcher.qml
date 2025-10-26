@@ -12,17 +12,7 @@ Item {
 
     // Global freeze/resume property from parent shell
     property bool thumbnailsFrozen: root.thumbnailsFrozen
-    onThumbnailsFrozenChanged: {
-       for (let i = 0; i < tabListView.count; i++) {
-        let delegateItem = tabListView.itemAtIndex(i)
-        if (delegateItem && delegateItem.thumbImage) {
-            if (thumbnailsFrozen)
-                delegateItem.thumbImage.freeze()
-            else
-                delegateItem.thumbImage.resume()
-        }
-       }
-    }
+
     
     CutieLabel {
         anchors.centerIn: parent
