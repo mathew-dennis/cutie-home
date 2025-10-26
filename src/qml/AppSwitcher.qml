@@ -12,19 +12,6 @@ Item {
 
     // Global freeze/resume property from parent shell
     property bool thumbnailsFrozen: root.thumbnailsFrozen
-    onThumbnailsFrozenChanged: {
-        console.log("home - rootstate updated")
-        for (let i = 0; i < tabListView.count; i++) {
-            let delegateItem = tabListView.itemAtIndex(i)
-            if (delegateItem && delegateItem.thumbImage) {
-                console.log("home - found a deligatwe")
-                if (thumbnailsFrozen)
-                delegateItem.thumbImage.resume()
-                else
-                delegateItem.thumbImage.resume()
-            }
-       }
-    }
 
     CutieLabel {
         anchors.centerIn: parent
@@ -36,9 +23,7 @@ Item {
             : 0
 
         Behavior on opacity {
-            NumberAnimation {
-                duration: 200
-            }
+            NumberAnimation { duration: 200 }
         }
 
         layer.enabled: true
@@ -64,6 +49,16 @@ Item {
             id: appThumb
             width: tabListView.cellWidth
             height: tabListView.cellHeight
+
+            // Bind the delegate's property to the global freeze state
+            property bool globalFrozen: appSwitcher.thumbnailsFrozen
+            onGlobalFrozenChanged: {
+                console.log("delegate - globalFrozen changed to", globalFrozen, "for", modelData.title)
+                if (globalFrozen)
+                    thumbImage.freeze()
+                else
+                    thumbImage.resume()
+            }
 
             Item {
                 id: appBg
@@ -119,7 +114,7 @@ Item {
                     radius: 10
                 }
 
-                // Thumbnail with freeze/resume
+                // Thumbnail
                 CutieAppThumbnail {
                     id: thumbImage
                     anchors.fill: appBg
@@ -128,12 +123,9 @@ Item {
                     toplevel: modelData
 
                     Component.onCompleted: {
-                        if (appSwitcher.thumbnailsFrozen)
-                            thumbImage.freeze()
-                        else
-                            thumbImage.resume()
+                        if (globalFrozen) thumbImage.freeze()
+                        else thumbImage.resume()
                     }
-
                 }
 
                 Item {
@@ -192,7 +184,7 @@ Item {
                 id: closedTm
                 interval: 1000; running: false; repeat: false
                 onTriggered: appThumb.opacity = 1
-            }
         }
     }
+}
 }
