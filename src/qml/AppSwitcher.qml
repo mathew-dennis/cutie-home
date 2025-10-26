@@ -13,6 +13,7 @@ Item {
     // Global freeze/resume property from parent shell
     property bool thumbnailsFrozen: root.thumbnailsFrozen
     onThumbnailsFrozenChanged: {
+        console.log("home - rootstate updated");
         for (let i = 0; i < tabListView.count; i++) {
             let delegateItem = tabListView.itemAtIndex(i)
             if (delegateItem && delegateItem.thumbImage) {
