@@ -18,9 +18,11 @@ Item {
             let delegateItem = tabListView.itemAtIndex(i)
             if (delegateItem && delegateItem.thumbImage) {
             if (thumbnailsFrozen)
-                delegateItem.thumbImage.freeze()
+                delegateItem.thumbImage.freeze();
+                console.log("home - deligate frozen");
             else
-                delegateItem.thumbImage.resume()
+                delegateItem.thumbImage.resume();
+                console.log("home - deligate resumed");
             }
        }
     }
