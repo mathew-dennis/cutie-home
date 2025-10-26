@@ -15,8 +15,19 @@ Item {
     width: Screen.width
     height: Screen.height
 
+    // Global property to control all thumbnails
+    property bool thumbnailsFrozen: state !== "appSwitcher"
+    
+    onStateChanged: {
+        // Freeze thumbnails when leaving appSwitcher, resume when entering
+        if (state === "appSwitcher")
+            thumbnailsFrozen = false
+        else
+            thumbnailsFrozen = true
+    }
+    
     states: [
-        State{
+        State {
             name: "appSwitcher"
             PropertyChanges { target: appSwitcher; opacity: 1 }
             PropertyChanges { target: homeScreen; opacity: 0 }
@@ -85,10 +96,9 @@ Item {
         console.log("home - Favorite apps loaded successfully. Count:", launcherApps.count);
     }
 
-
     Component.onCompleted: {
         loadFavoriteApps();
-        updateVisibility();            
+        updateVisibility();
     }
 
     CutieStore {
@@ -103,11 +113,10 @@ Item {
     }
 
     property bool favoriteAppsVisibility: "visibility" in favoriteStore.data ? favoriteStore.data["visibility"] : true
-    
+
     function updateVisibility() {
         if (favoriteStore.data) {
             let favoriteData = favoriteStore.data;
-
             favoriteAppsVisibility = favoriteData.visibility;
             console.log("home - Visibility variable updated . Current state:", favoriteAppsVisibility);
             favoriteStore.data = favoriteData;

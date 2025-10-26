@@ -10,6 +10,20 @@ Item {
     opacity: 0
     enabled: root.state == "appSwitcher"
 
+    // Global freeze/resume property from parent shell
+    property bool thumbnailsFrozen: root.thumbnailsFrozen
+    onThumbnailsFrozenChanged: {
+       for (let i = 0; i < tabListView.count; i++) {
+        let delegateItem = tabListView.itemAtIndex(i)
+        if (delegateItem && delegateItem.thumbImage) {
+            if (thumbnailsFrozen)
+                delegateItem.thumbImage.freeze()
+            else
+                delegateItem.thumbImage.resume()
+        }
+       }
+    }
+    
     CutieLabel {
         anchors.centerIn: parent
         text: qsTr("No Running Apps")
@@ -31,7 +45,7 @@ Item {
             color: Atmosphere.accentColor
             radius: 5
             samples: 10
-			opacity: 1/3
+            opacity: 1/3
         }
     }
 
@@ -79,6 +93,7 @@ Item {
                     height: Screen.height
                     clip: true
                     visible: false
+
                     Rectangle {
                         width: appBg.width
                         height: appBg.height
@@ -102,12 +117,28 @@ Item {
                     radius: 10
                 }
 
+                // Thumbnail with freeze/resume
                 CutieAppThumbnail {
                     id: thumbImage
                     anchors.fill: appBg
                     anchors.bottomMargin: 25
                     wlc: cutieWlc
                     toplevel: modelData
+
+                    Component.onCompleted: {
+                        if (appSwitcher.thumbnailsFrozen)
+                            thumbImage.freeze()
+                        else
+                            thumbImage.resume()
+                    }
+
+                    // Update dynamically when global freeze state changes
+                    onFreezeResumeTriggerChanged: {
+                        if (appSwitcher.thumbnailsFrozen)
+                            thumbImage.freeze()
+                        else
+                            thumbImage.resume()
+                    }
                 }
 
                 Item {
@@ -140,6 +171,7 @@ Item {
                     drag.target: appBg; drag.axis: Drag.XAxis; drag.minimumX: -parent.width; drag.maximumX: parent.width
                     onClicked: {
                         modelData.state = [ForeignToplevelHandleV1.Activated];
+                        root.thumbnailsFrozen = true;
                     }
 
                     onReleased: {
@@ -147,7 +179,7 @@ Item {
                             modelData.close();
                             appThumb.opacity = 0;
                             closedTm.start();
-                        } else { 
+                        } else {
                             opacityRestore.start();
                         }
                         xRestore.start();
@@ -155,7 +187,7 @@ Item {
 
                     onPositionChanged: {
                         if (drag.active) {
-                            appThumb.opacity = 1 - Math.abs(appBg.x - 10) / parent.width 
+                            appThumb.opacity = 1 - Math.abs(appBg.x - 10) / parent.width
                         }
                     }
                 }
@@ -167,5 +199,5 @@ Item {
                 onTriggered: appThumb.opacity = 1
             }
         }
-    } 
+    }
 }
