@@ -17,10 +17,10 @@ Item {
         for (let i = 0; i < tabListView.count; i++) {
             let delegateItem = tabListView.itemAtIndex(i)
             if (delegateItem && delegateItem.thumbImage) {
-            if (thumbnailsFrozen)
+            if (thumbnailsFrozen) {
                 delegateItem.thumbImage.freeze();
                 console.log("home - deligate frozen");
-            else
+            } else { 
                 delegateItem.thumbImage.resume();
                 console.log("home - deligate resumed");
             }
