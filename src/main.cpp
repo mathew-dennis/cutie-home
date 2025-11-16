@@ -7,8 +7,8 @@
 #include <QLoggingCategory>
 #include <QIcon>
 #include <QQuickView>
-#include <LayerShellQt6/shell.h>
-#include <LayerShellQt6/window.h>
+#include <LayerShellQt/shell.h>
+#include <LayerShellQt/window.h>
 
 int main(int argc, char *argv[])
 {

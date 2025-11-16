@@ -8,7 +8,7 @@ set(CMAKE_AUTOMOC ON)
 include( GNUInstallDirs )
 
 find_package(Qt6 REQUIRED COMPONENTS Core Gui Quick Network Qml DBus)
-find_package(LayerShellQt6 REQUIRED)
+find_package(LayerShellQt REQUIRED)
 
 set(cutie-home_SOURCES 
     src/settings.cpp 
@@ -30,6 +30,6 @@ qt_add_executable(cutie-home ${cutie-home_SOURCES} ${APP_RESOURCES})
 target_include_directories(cutie-home  PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
-target_link_libraries(cutie-home PUBLIC LayerShellQtInterface6 Qt::Core Qt::Gui Qt::GuiPrivate Qt::DBus Qt::Quick Qt::Network Qt::Qml)
+target_link_libraries(cutie-home PUBLIC LayerShellQtInterface Qt::Core Qt::Gui Qt::GuiPrivate Qt::DBus Qt::Quick Qt::Network Qt::Qml)
 
 install(TARGETS cutie-home RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}")
