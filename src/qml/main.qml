@@ -88,7 +88,7 @@ Item {
 
     Component.onCompleted: {
         loadFavoriteApps();
-        updateVisibility();            
+        updateInterfaceMode();            
     }
 
     CutieStore {
@@ -98,19 +98,19 @@ Item {
 
         onDataChanged: {
             loadFavoriteApps();
-            updateVisibility();
+            updateInterfaceMode();
         }
     }
-
-    property bool favoriteAppsVisibility: "visibility" in favoriteStore.data ? favoriteStore.data["visibility"] : true
+    readonly property bool split: true
+    readonly property bool merged: false
+    property bool interfaceMode: "InterfaceMode" in favoriteStore.data ? favoriteStore.data["InterfaceMode"] : merged
     
-    function updateVisibility() {
+    function updateInterfaceMode() {
         if (favoriteStore.data) {
             let favoriteData = favoriteStore.data;
 
-            favoriteAppsVisibility = favoriteData.visibility;
-            console.log("home - Visibility variable updated . Current state:", favoriteAppsVisibility);
-            favoriteStore.data = favoriteData;
+            interfaceMode = favoriteData.InterfaceMode;
+            console.log("home - InterfaceMode updated. Current state:", interfaceMode === split ? "split" : "merged");        
         }
     }
 

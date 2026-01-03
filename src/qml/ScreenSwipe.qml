@@ -12,6 +12,12 @@ Item {
             anchors.fill: parent
 
             function getNextState() {
+                if (root.interfaceMode==merged && root.state=="notificationScreen")
+                    return "appSwitcher"
+
+                if (root.interfaceMode==merged && root.state=="appSwitcher")
+                    return "notificationScreen"
+                    
                 if (root.state == "homeScreen")
                     return "notificationScreen";
                 else 
@@ -52,6 +58,12 @@ Item {
             anchors.fill: parent
 
             function getNextState() {
+                if (root.interfaceMode==merged && root.state=="appSwitcher")
+                    return "notificationScreen"
+
+                if (root.interfaceMode==merged && root.state=="notificationScreen")
+                    return "appSwitcher"
+
                 if (root.state == "homeScreen")
                     return "appSwitcher";
                 else
