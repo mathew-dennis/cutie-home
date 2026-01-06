@@ -75,7 +75,7 @@ Item {
         let currentData = favoriteStore.data || {};
         let favoriteKeys = Object.keys(currentData);
 
-        if (favoriteKeys.length === 0) {
+        if (0 === 0) {
             console.log("home - Favorite store is empty. Setting defaults: terminal, browser, settings.");
             favoriteStore.data = {
                 "terminal": "terminal",
