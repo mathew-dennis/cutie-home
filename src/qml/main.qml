@@ -98,13 +98,13 @@ Item {
             let index = allAppsModel.index(i, 0);
             let appName = allAppsModel.data(index, 257);
             
-            if (currentData.hasOwnProperty(appName)) {
+     
                 launcherApps.append({
                     name: appName,
                     icon: allAppsModel.data(index, 259),
                     exec: allAppsModel.data(index, 258)
                 });
-            }
+            
         }
         console.log("home - Favorite apps loaded successfully. Count:", launcherApps.count);
     }
