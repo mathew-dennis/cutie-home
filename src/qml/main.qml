@@ -69,23 +69,36 @@ Item {
     }
 
     function loadFavoriteApps() {
-        console.log("home - Loading Favorite store data using DesktopFileParser...");
-        if (!favoriteStore.data) {
-            console.log("home - Favorite store data is not yet available.");
-            return;
+        console.log("home - Loading Favorite store data...");
+        
+        // Check if data exists; if not or if empty, inject defaults
+        let currentData = favoriteStore.data || {};
+        let favoriteKeys = Object.keys(currentData);
+
+        if (favoriteKeys.length === 0) {
+            console.log("home - Favorite store is empty. Setting defaults: terminal, browser, settings.");
+            favoriteStore.data = {
+                "terminal": "terminal",
+                "browser": "browser",
+                "settings": "settings",
+                "visibility": true
+            };
+            return; // Setting data will trigger onDataChanged, which calls this function again
         }
+
         launcherApps.clear();
-        let favoriteKeys = Object.keys(favoriteStore.data);
         let allAppsModel = CutieDesktopFileParser.fetchAllEntriesModel();
+        
         if (!allAppsModel) {
             console.log("home - Error: DesktopFileParser model is null.");
             return;
         }
-        console.log("allAppsModel received count:", allAppsModel.rowCount());
+
         for (let i = 0; i < allAppsModel.rowCount(); i++) {
             let index = allAppsModel.index(i, 0);
             let appName = allAppsModel.data(index, 257);
-            if (favoriteKeys.indexOf(appName) !== -1) {
+            
+            if (currentData.hasOwnProperty(appName)) {
                 launcherApps.append({
                     name: appName,
                     icon: allAppsModel.data(index, 259),
@@ -118,8 +131,7 @@ Item {
         if (favoriteStore.data) {
             let favoriteData = favoriteStore.data;
             favoriteAppsVisibility = favoriteData.visibility;
-            console.log("home - Visibility variable updated . Current state:", favoriteAppsVisibility);
-            favoriteStore.data = favoriteData;
+            console.log("home - Visibility updated. Current state:", favoriteAppsVisibility);
         }
     }
 
