@@ -21,18 +21,22 @@ Item {
             PropertyChanges { target: appSwitcher; opacity: 1 }
             PropertyChanges { target: homeScreen; opacity: 0 }
             PropertyChanges { target: notificationScreen; opacity: 0 }
+            PropertyChanges { target: footer; opacity: 0 }
         },
         State {
             name: "homeScreen"
             PropertyChanges { target: appSwitcher; opacity: 0 }
             PropertyChanges { target: homeScreen; opacity: 1 }
             PropertyChanges { target: notificationScreen; opacity: 0 }
+            PropertyChanges { target: footer; opacity: 1 }
         },
         State {
             name: "notificationScreen"
             PropertyChanges { target: appSwitcher; opacity: 0 }
             PropertyChanges { target: homeScreen; opacity: 0 }
             PropertyChanges { target: notificationScreen; opacity: 1 }
+            PropertyChanges { target: footer; opacity: 0 }
+
         }
     ]
 
@@ -144,6 +148,7 @@ Item {
     NotificationScreen { id: notificationScreen }
     ScreenSwipe { id: screenSwipe }
     HomeScreen { id: homeScreen }
+    Footer { id: footer }
 
     ListModel { id: notifications }
     ListModel { id: launcherApps }
