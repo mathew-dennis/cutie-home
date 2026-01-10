@@ -21,21 +21,18 @@ Item {
             PropertyChanges { target: appSwitcher; opacity: 1 }
             PropertyChanges { target: homeScreen; opacity: 0 }
             PropertyChanges { target: notificationScreen; opacity: 0 }
-            PropertyChanges { target: footer; opacity: 1 } // Footer visible here
         },
         State {
             name: "homeScreen"
             PropertyChanges { target: appSwitcher; opacity: 0 }
             PropertyChanges { target: homeScreen; opacity: 1 }
             PropertyChanges { target: notificationScreen; opacity: 0 }
-            PropertyChanges { target: footer; opacity: 1 } // Footer visible here
         },
         State {
             name: "notificationScreen"
             PropertyChanges { target: appSwitcher; opacity: 0 }
             PropertyChanges { target: homeScreen; opacity: 0 }
             PropertyChanges { target: notificationScreen; opacity: 1 }
-            PropertyChanges { target: footer; opacity: 0 } // Hide footer here
         }
     ]
 
@@ -45,7 +42,6 @@ Item {
             NumberAnimation { target: notificationScreen; properties: "opacity"; duration: 300; easing.type: Easing.InOutQuad; }
             NumberAnimation { target: homeScreen; properties: "opacity"; duration: 300; easing.type: Easing.InOutQuad; }
             NumberAnimation { target: appSwitcher; properties: "opacity"; duration: 300; easing.type: Easing.InOutQuad; }
-            NumberAnimation { target: footer; properties: "opacity"; duration: 300; easing.type: Easing.InOutQuad; }
         }
     ]
 
@@ -148,7 +144,6 @@ Item {
     NotificationScreen { id: notificationScreen }
     ScreenSwipe { id: screenSwipe }
     HomeScreen { id: homeScreen }
-    Footer { id: footer }
 
     ListModel { id: notifications }
     ListModel { id: launcherApps }
