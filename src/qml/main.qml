@@ -45,6 +45,7 @@ Item {
             NumberAnimation { target: notificationScreen; properties: "opacity"; duration: 300; easing.type: Easing.InOutQuad; }
             NumberAnimation { target: homeScreen; properties: "opacity"; duration: 300; easing.type: Easing.InOutQuad; }
             NumberAnimation { target: appSwitcher; properties: "opacity"; duration: 300; easing.type: Easing.InOutQuad; }
+            NumberAnimation { target: footer; properties: "opacity"; duration: 300; easing.type: Easing.InOutQuad; }
         }
     ]
 
@@ -148,7 +149,7 @@ Item {
     ScreenSwipe { id: screenSwipe }
     HomeScreen { id: homeScreen }
     Footer { id: footer }
-    
+
     ListModel { id: notifications }
     ListModel { id: launcherApps }
 }
