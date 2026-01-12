@@ -105,10 +105,11 @@ Item {
             updateInterfaceMode();
         }
     }
+
     readonly property bool split: true
     readonly property bool merged: false
     property bool interfaceMode: "InterfaceMode" in favoriteStore.data ? favoriteStore.data["InterfaceMode"] : merged
-    
+
     function updateInterfaceMode() {
         if (favoriteStore.data) {
             let favoriteData = favoriteStore.data;
@@ -116,6 +117,14 @@ Item {
             interfaceMode = favoriteData.InterfaceMode;
             console.log("home - InterfaceMode updated. Current state:", interfaceMode === split ? "split" : "merged");        
         }
+    }
+
+    readonly property real dockScale: {
+        if (!favoriteStore.data)
+            return 1.0
+
+        const v = favoriteStore.data.dockScale
+        return (v !== undefined && v > 0) ? v : 1.0
     }
 
     ForeignToplevelManagerV1 {
