@@ -10,7 +10,7 @@ import Cutie.Desktopfileparser
 
 Item {
     id: root
-    state: "homeScreen"
+    state: "appSwitcher"
     visible: true
     width: Screen.width
     height: Screen.height
@@ -46,6 +46,8 @@ Item {
             NumberAnimation { target: notificationScreen; properties: "opacity"; duration: 300; easing.type: Easing.InOutQuad; }
             NumberAnimation { target: homeScreen; properties: "opacity"; duration: 300; easing.type: Easing.InOutQuad; }
             NumberAnimation { target: appSwitcher; properties: "opacity"; duration: 300; easing.type: Easing.InOutQuad; }
+            NumberAnimation { target: footer; properties: "opacity"; duration: 300; easing.type: Easing.InOutQuad; }
+
         }
     ]
 
@@ -92,7 +94,6 @@ Item {
 
     Component.onCompleted: {
         loadFavoriteApps();
-        updateInterfaceMode();            
     }
 
     CutieStore {
@@ -100,23 +101,36 @@ Item {
         appName: "cutie-launcher"
         storeName: "favoriteItems"
 
-        onDataChanged: {
-            loadFavoriteApps();
-            updateInterfaceMode();
-        }
+        onDataChanged:
+            loadFavoriteApps()  
     }
+    
+    CutieStore {
+        id: homeConfigStore
+        appName: "cutie-home"
+        storeName: "homeConfigs"
+    }
+
     readonly property bool split: true
     readonly property bool merged: false
-    property bool interfaceMode: "InterfaceMode" in favoriteStore.data ? favoriteStore.data["InterfaceMode"] : merged
-    
-    function updateInterfaceMode() {
-        if (favoriteStore.data) {
-            let favoriteData = favoriteStore.data;
+    property bool interfaceMode:
+                    homeConfigStore.data && "InterfaceMode" in homeConfigStore.data 
+                    ? homeConfigStore.data["InterfaceMode"] 
+                    : merged
 
-            interfaceMode = favoriteData.InterfaceMode;
-            console.log("home - InterfaceMode updated. Current state:", interfaceMode === split ? "split" : "merged");        
-        }
+    readonly property real dockScale: {
+        if (!homeConfigStore.data)
+        return 1.0
+
+        const v = homeConfigStore.data.dockScale
+        const raw = (v !== undefined && v > 0) ? v : 1.0
+
+        return Math.round(raw * 10) / 10
     }
+    property bool panelMode: 
+                    homeConfigStore.data && "PanelMode" in homeConfigStore.data  
+                    ? homeConfigStore.data["PanelMode"] 
+                    : true
 
     ForeignToplevelManagerV1 {
         id: toplevelManager
