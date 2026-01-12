@@ -6,6 +6,11 @@ import Cutie.Store
 
 Item {
     id: footer
+
+    // Dock size multiplier (0.1 – 2.0)
+    // 1.0 = current behavior
+    property real dockScale: 1.0
+
     anchors.left: parent.left
     anchors.right: parent.right
     anchors.bottom: parent.bottom
@@ -15,7 +20,11 @@ Item {
     opacity: 0
     z: 1
 
-    height: appSwitcher.width / Math.floor(appSwitcher.width / 51) + 16
+    // Base cell size calculation
+    readonly property real baseCellSize:
+        appSwitcher.width / Math.floor(appSwitcher.width / 51)
+
+    height: (baseCellSize * dockScale) + 16
 
     Rectangle {
         color: Atmosphere.secondaryAlphaColor
@@ -35,7 +44,7 @@ Item {
             spacing: 20
 
             delegate: Item {
-                width: appSwitcher.width / Math.floor(appSwitcher.width / 51)
+                width: baseCellSize * dockScale
                 height: width
 
                 CutieButton {
