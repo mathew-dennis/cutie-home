@@ -19,10 +19,9 @@ Item {
     readonly property real baseCellSize:
         appSwitcher.width / Math.floor(appSwitcher.width / 51)
 
-    height: (baseCellSize * root.dockScale) + 16
-
     Rectangle {
         color: Atmosphere.secondaryAlphaColor
+        height: (baseCellSize * root.dockScale) + 16
         radius: 15
         anchors.fill: parent
 
