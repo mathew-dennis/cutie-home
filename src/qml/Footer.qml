@@ -19,12 +19,24 @@ Item {
     readonly property real baseCellSize:
         appSwitcher.width / Math.floor(appSwitcher.width / 51)
 
+    readonly property int maxVisibleItems: 5
+
     height: (baseCellSize * root.dockScale) + 16
 
     Rectangle {
         color: Atmosphere.secondaryAlphaColor
         radius: 15
-        anchors.fill: parent
+
+        width: Math.min(
+            parent.width,
+            (baseCellSize * root.dockScale * maxVisibleItems)
+            + (launchAppList.spacing * (maxVisibleItems - 1))
+            + 16
+        )
+
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
 
         ListView {
             id: launchAppList
