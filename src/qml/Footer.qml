@@ -47,6 +47,9 @@ Item {
                     height: width
                     icon.name: model.icon
                     icon.source: "file://" + model.icon
+                    icon.width: width
+                    icon.height: height
+
                     background: null
 
                     onClicked: cutieWlc.execApp(model.exec)
