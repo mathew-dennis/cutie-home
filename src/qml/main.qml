@@ -118,13 +118,14 @@ Item {
             console.log("home - InterfaceMode updated. Current state:", interfaceMode === split ? "split" : "merged");        
         }
     }
-
     readonly property real dockScale: {
         if (!favoriteStore.data)
-            return 1.0
+        return 1.0
 
         const v = favoriteStore.data.dockScale
-        return (v !== undefined && v > 0) ? v : 1.0
+        const raw = (v !== undefined && v > 0) ? v : 1.0
+
+        return Math.round(raw * 10) / 10
     }
 
     ForeignToplevelManagerV1 {
