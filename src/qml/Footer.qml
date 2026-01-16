@@ -16,12 +16,24 @@ Item {
     opacity: 0
     z: 1
 
+    Component {
+        id: smoothResize
+        Behavior {
+            NumberAnimation {
+                duration: 200
+                easing.type: Easing.OutCubic
+            }
+        }
+    }
+
+
     readonly property real baseCellSize:
         appSwitcher.width / Math.floor(appSwitcher.width / 51)
 
     readonly property int maxVisibleItems: 5
 
     height: (baseCellSize * root.dockScale) + 16
+    Behavior on height: smoothResize
 
     Rectangle {
         color: Atmosphere.secondaryAlphaColor
@@ -37,6 +49,7 @@ Item {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
         anchors.bottom: parent.bottom
+        Behavior on width: smoothResize
 
         ListView {
             id: launchAppList
@@ -53,6 +66,7 @@ Item {
             delegate: Item {
                 width: baseCellSize * root.dockScale
                 height: width
+                Behavior on width: smoothResize
 
                 CutieButton {
                     width: parent.height
@@ -61,7 +75,6 @@ Item {
                     icon.source: "file://" + model.icon
                     icon.width: width
                     icon.height: height
-
                     background: null
 
                     onClicked: cutieWlc.execApp(model.exec)
