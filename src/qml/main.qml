@@ -130,7 +130,7 @@ Item {
 
         return Math.round(raw * 10) / 10
     }
-    property bool panelMode: "PanelMode" in favoriteStore.data  ? favoriteStore.data.["PanelMode"] : false
+    property bool panelMode: "PanelMode" in favoriteStore.data  ? favoriteStore.data["PanelMode"] : false
 
     ForeignToplevelManagerV1 {
         id: toplevelManager
