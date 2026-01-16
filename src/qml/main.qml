@@ -116,6 +116,8 @@ Item {
 
             interfaceMode = favoriteData.InterfaceMode;
             console.log("home - InterfaceMode updated. Current state:", interfaceMode === split ? "split" : "merged");        
+            console.log("home - panelMode updated. Current state:", panelMode === true ? "panel mode" : "dock mode");        
+
         }
     }
     readonly property real dockScale: {
