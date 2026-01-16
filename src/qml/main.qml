@@ -115,8 +115,9 @@ Item {
             let favoriteData = favoriteStore.data;
 
             interfaceMode = favoriteData.InterfaceMode;
+            panelMode: favoriteStore.data.PanelMode;
             console.log("home - InterfaceMode updated. Current state:", interfaceMode === split ? "split" : "merged");        
-            console.log("home - panelMode updated. Current state:", panelMode === true ? "panel mode" : "dock mod");        
+            console.log("home - panelMode updated. Current state:", panelMode === true ? "panel mode" : "dock mode");        
 
         }
     }
