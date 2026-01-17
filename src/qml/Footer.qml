@@ -34,7 +34,7 @@ Item {
         color: Atmosphere.secondaryAlphaColor
         radius: 15
         width: root.panelMode ? parent.width - 16 : Math.min( parent.width,
-            (baseCellSize * dockScaleRounded * launcherApps.count)
+            (baseCellSize * launcherApps.count)
             + (launchAppList.spacing * Math.max(launcherApps.count - 1, 0)) + 16)
 
 
