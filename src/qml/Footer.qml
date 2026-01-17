@@ -34,8 +34,8 @@ Item {
         color: Atmosphere.secondaryAlphaColor
         radius: 15
         width: root.panelMode ? parent.width  : Math.min( parent.width,
-            (baseCellSize * launcherApps.count)
-            + (launchAppList.spacing * Math.max(launcherApps.count - 1, 0)))
+            (baseCellSize * Math.min(launcherApps.count - 1, 5))
+            + (launchAppList.spacing * Math.max( Math.min(launcherApps.count - 1, 5) -1 , 0)))
 
 
         anchors.horizontalCenter: parent.horizontalCenter
