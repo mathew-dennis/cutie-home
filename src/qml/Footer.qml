@@ -35,7 +35,7 @@ Item {
         radius: 15
         width: root.panelMode ? parent.width - 16 : Math.min( parent.width,
             (baseCellSize * launcherApps.count)
-            + (launchAppList.spacing * Math.max(launcherApps.count - 1, 0)) + 16)
+            + (launchAppList.spacing * Math.max(launcherApps.count - 1, 0)))
 
 
         anchors.horizontalCenter: parent.horizontalCenter
