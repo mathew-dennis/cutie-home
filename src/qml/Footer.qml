@@ -11,12 +11,15 @@ Item {
     anchors.right: parent.right
     anchors.bottom: parent.bottom
     anchors.margins: 8
-    opacity: 0
+    z: 1
     
     readonly property real baseCellSize:
         appSwitcher.width / Math.floor(appSwitcher.width / 51)
 
     readonly property int maxVisibleItems: 5
+
+    readonly property int visibleCount:
+        Math.min(launcherApps.count - 1, maxVisibleItems)
 
     height: (baseCellSize * root.dockScale) + 16
 
@@ -30,9 +33,8 @@ Item {
     Rectangle {
         color: Atmosphere.secondaryAlphaColor
         radius: 15
-        width: root.panelMode ? parent.width  : Math.min( parent.width,
-            (baseCellSize * Math.min(launcherApps.count - 1, 5))
-            + (launchAppList.spacing * Math.max( Math.min(launcherApps.count - 1, 5) -1 , 0)))
+        width: root.panelMode ? parent.width : Math.min(parent.width,
+            (baseCellSize * visibleCount) + (launchAppList.spacing * Math.max(visibleCount - 1, 0)))
 
 
         anchors.horizontalCenter: parent.horizontalCenter
