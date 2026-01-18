@@ -113,7 +113,10 @@ Item {
 
     readonly property bool split: true
     readonly property bool merged: false
-    property bool interfaceMode: homeConfigStore.data && "InterfaceMode" in homeConfigStore.data ? homeConfigStore.data["InterfaceMode"] : merged
+    property bool interfaceMode:
+                    homeConfigStore.data && "InterfaceMode" in homeConfigStore.data 
+                    ? homeConfigStore.data["InterfaceMode"] 
+                    : merged
 
     readonly property real dockScale: {
         if (!homeConfigStore.data)
@@ -124,7 +127,10 @@ Item {
 
         return Math.round(raw * 10) / 10
     }
-    property bool panelMode: homeConfigStore.data && "PanelMode" in homeConfigStore.data  ? homeConfigStore.data["PanelMode"] : true
+    property bool panelMode: 
+                    homeConfigStore.data && "PanelMode" in homeConfigStore.data  
+                    ? homeConfigStore.data["PanelMode"] 
+                    : true
 
     ForeignToplevelManagerV1 {
         id: toplevelManager
