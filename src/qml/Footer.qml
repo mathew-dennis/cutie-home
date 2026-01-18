@@ -10,12 +10,9 @@ Item {
     anchors.left: parent.left
     anchors.right: parent.right
     anchors.bottom: parent.bottom
-    anchors.leftMargin: 8
-    anchors.rightMargin: 8
-    anchors.bottomMargin: 8
+    anchors.margins: 8
     opacity: 0
-    z: 1
-
+    
     readonly property real baseCellSize:
         appSwitcher.width / Math.floor(appSwitcher.width / 51)
 
