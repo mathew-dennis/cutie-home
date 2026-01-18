@@ -124,7 +124,7 @@ Item {
 
         return Math.round(raw * 10) / 10
     }
-    property bool panelMode: homeConfigStore.data && "PanelMode" in homeConfigStore.data  ? homeConfigStore.data["PanelMode"] : false
+    property bool panelMode: homeConfigStore.data && "PanelMode" in homeConfigStore.data  ? homeConfigStore.data["PanelMode"] : true
 
     ForeignToplevelManagerV1 {
         id: toplevelManager
