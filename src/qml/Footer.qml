@@ -19,7 +19,7 @@ Item {
     readonly property int maxVisibleItems: 5
 
     readonly property int visibleCount:
-        Math.min(launcherApps.count - 1, maxVisibleItems)
+        Math.min(launcherApps.rowCount() - 1, maxVisibleItems)
 
     height: (baseCellSize * root.dockScale) + 16
 
