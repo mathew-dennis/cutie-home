@@ -3,6 +3,7 @@ import QtQuick.Controls
 import Cutie
 import Cutie.Wlc
 import Cutie.Store
+import Cutie.Wlc
 
 Item {
     id: footer
@@ -33,6 +34,7 @@ Item {
     Rectangle {
         color: Atmosphere.secondaryAlphaColor
         radius: 15
+        opacity: 1.0 - cutieWlc.blur
         width: root.panelMode ? parent.width : Math.min(parent.width,
             (baseCellSize * visibleCount) + (launchAppList.spacing * Math.max(visibleCount - 1, 0)))
 
