@@ -51,7 +51,7 @@ Item {
         }
     ]
     
-    property var launcherApps: CutieDesktopFileParser.createFilterModel()
+    property var launcherApps: null
     readonly property bool split: true
     readonly property bool merged: false
 
@@ -89,7 +89,9 @@ Item {
 
 
     Component.onCompleted: {
-        launcherApps.favoriteKeys = Object.keys(favoriteStore.data || {})
+        let model = CutieDesktopFileParser.createFilterModel()
+        model.favoriteKeys = Object.keys(favoriteStore.data || {})
+        launcherApps = model    
     }
 
     CutieStore {

@@ -3,7 +3,6 @@ import QtQuick.Controls
 import Cutie
 import Cutie.Wlc
 import Cutie.Store
-import Cutie.Wlc
 
 Item {
     id: footer
@@ -20,7 +19,7 @@ Item {
     readonly property int maxVisibleItems: 5
 
     readonly property int visibleCount:
-        Math.min(launcherApps.rowCount() - 1, maxVisibleItems)
+        Math.min(launcherApps.rowCount(), maxVisibleItems)
 
     height: (baseCellSize * root.dockScale) + 16
 
