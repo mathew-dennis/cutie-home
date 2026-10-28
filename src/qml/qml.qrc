@@ -6,5 +6,7 @@
         <file>ScreenSwipe.qml</file>
         <file>HomeScreen.qml</file>
         <file>Footer.qml</file>
+        <file>ExternalDesktop.qml</file>
+        <file>ExternalDock.qml</file>
     </qresource>
 </RCC>
