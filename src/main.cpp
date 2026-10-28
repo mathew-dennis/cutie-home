@@ -8,10 +8,12 @@
 #include <QIcon>
 #include <QDebug>
 #include <QQuickView>
+#include <QQuickItem>
 #include <QQmlError>
 #include <QHash>
 #include <QScreen>
 #include <QSize>
+#include <QSizeF>
 #include <LayerShellQt/shell.h>
 #include <LayerShellQt/window.h>
 
@@ -109,12 +111,17 @@ int main(int argc, char *argv[])
 		desktopView->setSource(QUrl("qrc:/ExternalDesktop.qml"));
 		desktopView->setColor(QColor(Qt::transparent));
 		desktopView->resize(screenSize);
+		auto *desktopRoot =
+			qobject_cast<QQuickItem *>(desktopView->rootObject());
+		if (desktopRoot)
+			desktopRoot->setSize(QSizeF(screenSize));
 		desktopView->show();
 		qInfo() << "[cutie-home] wallpaper window screen"
 			<< desktopView->screen() << desktopView->screen()->name()
 			<< "geometry" << desktopView->screen()->geometry()
 			<< "matches requested" << (desktopView->screen() == screen)
-			<< "window size" << desktopView->size();
+			<< "window size" << desktopView->size() << "root size"
+			<< (desktopRoot ? desktopRoot->size() : QSizeF());
 
 		auto *dockView = new QQuickView(view.engine(), nullptr);
 		watchQml(dockView, QStringLiteral("[cutie-home dock]"));
@@ -138,12 +145,16 @@ int main(int argc, char *argv[])
 		dockView->setSource(QUrl("qrc:/ExternalDock.qml"));
 		dockView->setColor(QColor(Qt::transparent));
 		dockView->resize(screenSize.width(), 88);
+		auto *dockRoot = qobject_cast<QQuickItem *>(dockView->rootObject());
+		if (dockRoot)
+			dockRoot->setSize(QSizeF(screenSize.width(), 88));
 		dockView->show();
 		qInfo() << "[cutie-home] dock window screen"
 			<< dockView->screen() << dockView->screen()->name()
 			<< "geometry" << dockView->screen()->geometry()
 			<< "matches requested" << (dockView->screen() == screen)
-			<< "window size" << dockView->size();
+			<< "window size" << dockView->size() << "root size"
+			<< (dockRoot ? dockRoot->size() : QSizeF());
 
 		externalViews.insert(
 			screen, QList<QQuickView *>{ desktopView, dockView });
