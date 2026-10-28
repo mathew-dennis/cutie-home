@@ -99,9 +99,7 @@ int main(int argc, char *argv[])
 		desktopLayer->setLayer(LayerShellQt::Window::LayerBackground);
 		LayerShellQt::Window::Anchors desktopAnchors;
 		desktopAnchors.setFlag(LayerShellQt::Window::AnchorTop);
-		desktopAnchors.setFlag(LayerShellQt::Window::AnchorBottom);
 		desktopAnchors.setFlag(LayerShellQt::Window::AnchorLeft);
-		desktopAnchors.setFlag(LayerShellQt::Window::AnchorRight);
 		desktopLayer->setAnchors(desktopAnchors);
 		desktopLayer->setDesiredSize(screenSize);
 		desktopLayer->setKeyboardInteractivity(
@@ -135,7 +133,6 @@ int main(int argc, char *argv[])
 		LayerShellQt::Window::Anchors dockAnchors;
 		dockAnchors.setFlag(LayerShellQt::Window::AnchorBottom);
 		dockAnchors.setFlag(LayerShellQt::Window::AnchorLeft);
-		dockAnchors.setFlag(LayerShellQt::Window::AnchorRight);
 		dockLayer->setAnchors(dockAnchors);
 		dockLayer->setDesiredSize(QSize(screenSize.width(), 88));
 		dockLayer->setKeyboardInteractivity(
