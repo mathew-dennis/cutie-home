@@ -80,8 +80,10 @@ int main(int argc, char *argv[])
 		    externalViews.contains(screen))
 			return;
 		qInfo() << "[cutie-home] creating external desktop for"
-			<< screen->name() << screen->geometry() << "screen size"
-			<< screen->size();
+			<< "requested screen" << screen << screen->name()
+			<< "geometry" << screen->geometry() << "size"
+			<< screen->size() << "device pixel ratio"
+			<< screen->devicePixelRatio();
 		const QSize screenSize = screen->geometry().size();
 
 		auto *desktopView = new QQuickView(view.engine(), nullptr);
@@ -109,8 +111,10 @@ int main(int argc, char *argv[])
 		desktopView->resize(screenSize);
 		desktopView->show();
 		qInfo() << "[cutie-home] wallpaper window screen"
-			<< desktopView->screen()->name() << "window size"
-			<< desktopView->size();
+			<< desktopView->screen() << desktopView->screen()->name()
+			<< "geometry" << desktopView->screen()->geometry()
+			<< "matches requested" << (desktopView->screen() == screen)
+			<< "window size" << desktopView->size();
 
 		auto *dockView = new QQuickView(view.engine(), nullptr);
 		watchQml(dockView, QStringLiteral("[cutie-home dock]"));
@@ -136,8 +140,10 @@ int main(int argc, char *argv[])
 		dockView->resize(screenSize.width(), 88);
 		dockView->show();
 		qInfo() << "[cutie-home] dock window screen"
-			<< dockView->screen()->name() << "window size"
-			<< dockView->size();
+			<< dockView->screen() << dockView->screen()->name()
+			<< "geometry" << dockView->screen()->geometry()
+			<< "matches requested" << (dockView->screen() == screen)
+			<< "window size" << dockView->size();
 
 		externalViews.insert(
 			screen, QList<QQuickView *>{ desktopView, dockView });
