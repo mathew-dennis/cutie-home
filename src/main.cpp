@@ -6,7 +6,9 @@
 #include "NotificationsAdaptor.h"
 #include <QLoggingCategory>
 #include <QIcon>
+#include <QDebug>
 #include <QQuickView>
+#include <QQmlError>
 #include <QHash>
 #include <QScreen>
 #include <QSize>
@@ -53,6 +55,19 @@ int main(int argc, char *argv[])
 		"org.freedesktop.Notifications");
 
 	QHash<QScreen *, QList<QQuickView *>> externalViews;
+	auto watchQml = [](QQuickView *window, const QString &label) {
+		QObject::connect(window, &QQuickView::statusChanged, window,
+				 [window, label](QQuickView::Status status) {
+					 if (status == QQuickView::Ready)
+						 qInfo() << label << "QML ready; size"
+							<< window->size();
+					 else if (status == QQuickView::Error)
+						 for (const QQmlError &error :
+					      window->errors())
+							 qWarning().noquote()
+								 << label << error.toString();
+				 });
+	};
 	auto removeExternalScreen = [&externalViews](QScreen *screen) {
 		const QList<QQuickView *> windows = externalViews.take(screen);
 		for (auto it = windows.crbegin(); it != windows.crend(); ++it) {
@@ -60,12 +75,16 @@ int main(int argc, char *argv[])
 			delete *it;
 		}
 	};
-	auto addExternalScreen = [&view, &externalViews](QScreen *screen) {
+	auto addExternalScreen = [&view, &externalViews,
+				  watchQml](QScreen *screen) {
 		if (!screen || screen == view.screen() ||
 		    externalViews.contains(screen))
 			return;
+		qInfo() << "[cutie-home] creating external desktop for"
+			<< screen->name() << screen->geometry();
 
 		auto *desktopView = new QQuickView(view.engine(), nullptr);
+		watchQml(desktopView, QStringLiteral("[cutie-home wallpaper]"));
 		desktopView->setScreen(screen);
 		LayerShellQt::Window *desktopLayer =
 			LayerShellQt::Window::get(desktopView);
@@ -89,6 +108,7 @@ int main(int argc, char *argv[])
 		desktopView->show();
 
 		auto *dockView = new QQuickView(view.engine(), nullptr);
+		watchQml(dockView, QStringLiteral("[cutie-home dock]"));
 		dockView->setScreen(screen);
 		LayerShellQt::Window *dockLayer =
 			LayerShellQt::Window::get(dockView);
