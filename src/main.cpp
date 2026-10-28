@@ -65,17 +65,19 @@ int main(int argc, char *argv[])
 		    externalViews.contains(screen))
 			return;
 
-		auto *desktopView = new QQuickView(view.engine());
+		auto *desktopView = new QQuickView(view.engine(), nullptr);
 		desktopView->setScreen(screen);
 		LayerShellQt::Window *desktopLayer =
 			LayerShellQt::Window::get(desktopView);
 		desktopLayer->setScreenConfiguration(
 			LayerShellQt::Window::ScreenFromQWindow);
 		desktopLayer->setLayer(LayerShellQt::Window::LayerBackground);
-		desktopLayer->setAnchors(LayerShellQt::Window::AnchorTop |
-					 LayerShellQt::Window::AnchorBottom |
-					 LayerShellQt::Window::AnchorLeft |
-					 LayerShellQt::Window::AnchorRight);
+		LayerShellQt::Window::Anchors desktopAnchors;
+		desktopAnchors.setFlag(LayerShellQt::Window::AnchorTop);
+		desktopAnchors.setFlag(LayerShellQt::Window::AnchorBottom);
+		desktopAnchors.setFlag(LayerShellQt::Window::AnchorLeft);
+		desktopAnchors.setFlag(LayerShellQt::Window::AnchorRight);
+		desktopLayer->setAnchors(desktopAnchors);
 		desktopLayer->setDesiredSize(screen->size());
 		desktopLayer->setKeyboardInteractivity(
 			LayerShellQt::Window::KeyboardInteractivityNone);
@@ -86,16 +88,18 @@ int main(int argc, char *argv[])
 		desktopView->resize(screen->size());
 		desktopView->show();
 
-		auto *dockView = new QQuickView(view.engine());
+		auto *dockView = new QQuickView(view.engine(), nullptr);
 		dockView->setScreen(screen);
 		LayerShellQt::Window *dockLayer =
 			LayerShellQt::Window::get(dockView);
 		dockLayer->setScreenConfiguration(
 			LayerShellQt::Window::ScreenFromQWindow);
 		dockLayer->setLayer(LayerShellQt::Window::LayerTop);
-		dockLayer->setAnchors(LayerShellQt::Window::AnchorBottom |
-				      LayerShellQt::Window::AnchorLeft |
-				      LayerShellQt::Window::AnchorRight);
+		LayerShellQt::Window::Anchors dockAnchors;
+		dockAnchors.setFlag(LayerShellQt::Window::AnchorBottom);
+		dockAnchors.setFlag(LayerShellQt::Window::AnchorLeft);
+		dockAnchors.setFlag(LayerShellQt::Window::AnchorRight);
+		dockLayer->setAnchors(dockAnchors);
 		dockLayer->setDesiredSize(QSize(screen->size().width(), 88));
 		dockLayer->setKeyboardInteractivity(
 			LayerShellQt::Window::KeyboardInteractivityNone);
@@ -106,7 +110,8 @@ int main(int argc, char *argv[])
 		dockView->resize(screen->size().width(), 88);
 		dockView->show();
 
-		externalViews.insert(screen, { desktopView, dockView });
+		externalViews.insert(
+			screen, QList<QQuickView *>{ desktopView, dockView });
 	};
 
 	QObject::connect(&app, &QGuiApplication::screenAdded, &app,
