@@ -2,8 +2,8 @@ import QtQuick
 import Cutie
 
 Item {
-	width: Screen.width
-	height: Screen.height
+	width: parent ? parent.width : Screen.width
+	height: parent ? parent.height : Screen.height
 
 	Image {
 		anchors.fill: parent

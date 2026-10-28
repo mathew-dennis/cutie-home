@@ -6,7 +6,7 @@ import Cutie.Desktopfileparser
 
 Item {
 	id: root
-	width: Screen.width
+	width: parent ? parent.width : Screen.width
 	height: 88
 
 	property var launcherApps: null
@@ -51,7 +51,7 @@ Item {
 	Item {
 		id: appSwitcher
 		width: root.width
-		height: Screen.height
+		height: root.height
 		visible: false
 	}
 
