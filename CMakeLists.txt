@@ -16,8 +16,8 @@ set(cutie-home_SOURCES
     src/settings.h 
     src/notifications.h 
     src/main.cpp
-    AdditionalScreen.cpp
-    AdditionalScreen.h
+    src/AdditionalScreen.cpp
+    src/AdditionalScreen.h
 )
 
 qt6_add_resources(APP_RESOURCES 
