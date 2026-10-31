@@ -77,7 +77,11 @@ void AdditionalScreen::add(QScreen *screen)
     desktopLayer->setDesiredSize(screenSize);
     desktopLayer->setKeyboardInteractivity(LayerShellQt::Window::KeyboardInteractivityNone);
     desktopLayer->setExclusiveZone(-1);
-    desktopLayer->setScope(QStringLiteral("cutie-home-external-%1").arg(screen->name()));
+    // The compositor only reroutes layer surfaces whose scope ENDS with
+    // "-external" to the big screen (cutie-panel does the same with
+    // "cutie-panel-external"). The screen name has to go in the middle,
+    // not at the end, or the external views stay on the phone screen.
+    desktopLayer->setScope(QStringLiteral("cutie-home-%1-external").arg(screen->name()));
 
     desktopView->setSource(QUrl("qrc:/ExternalDesktop.qml"));
     desktopView->setColor(QColor(Qt::transparent));
@@ -106,7 +110,8 @@ void AdditionalScreen::add(QScreen *screen)
     dockLayer->setDesiredSize(QSize(screenSize.width(), 88));
     dockLayer->setKeyboardInteractivity(LayerShellQt::Window::KeyboardInteractivityNone);
     dockLayer->setExclusiveZone(88); // Fixes dock overlap issues
-    dockLayer->setScope(QStringLiteral("cutie-dock-external-%1").arg(screen->name()));
+    // Same contract as above: the scope must end with "-external".
+    dockLayer->setScope(QStringLiteral("cutie-dock-%1-external").arg(screen->name()));
 
     dockView->setSource(QUrl("qrc:/ExternalDock.qml"));
     dockView->setColor(QColor(Qt::transparent));
