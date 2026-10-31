@@ -5,7 +5,7 @@ import Cutie.Wlc
 import Cutie.Store
 
 Item {
-    id: footer
+    id: favourits
 
     property var launcherApps
     property var favoriteStoreObject
