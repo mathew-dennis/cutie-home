@@ -10,7 +10,7 @@ Item {
 	property real menuWidth: width * 2 / 3
 	width: parent ? parent.width : Screen.width
 	height: 88
-    anchors.left: parent.leftMargin
+    anchors.left: parent.left
 	ancors.right: parent.right
 	ancors.bottom: parent.bottom
 
