@@ -5,7 +5,7 @@ import Cutie.Wlc
 import Cutie.Desktopfileparser
 
 Item {
-	id: root
+	id: footer
 	width: parent ? parent.width : Screen.width
 	height: 88
 

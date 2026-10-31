@@ -121,40 +121,8 @@ int main(int argc, char *argv[])
 			<< "window size" << desktopView->size() << "root size"
 			<< (desktopRoot ? desktopRoot->size() : QSizeF());
 
-		auto *dockView = new QQuickView(view.engine(), nullptr);
-		watchQml(dockView, QStringLiteral("[cutie-home dock]"));
-		dockView->setResizeMode(QQuickView::SizeRootObjectToView);
-		dockView->setScreen(screen);
-		LayerShellQt::Window *dockLayer =
-			LayerShellQt::Window::get(dockView);
-		dockLayer->setScreenConfiguration(
-			LayerShellQt::Window::ScreenFromQWindow);
-		dockLayer->setLayer(LayerShellQt::Window::LayerTop);
-		LayerShellQt::Window::Anchors dockAnchors;
-		dockAnchors.setFlag(LayerShellQt::Window::AnchorBottom);
-		dockAnchors.setFlag(LayerShellQt::Window::AnchorLeft);
-		dockLayer->setAnchors(dockAnchors);
-		dockLayer->setDesiredSize(QSize(screenSize.width(), 88));
-		dockLayer->setKeyboardInteractivity(
-			LayerShellQt::Window::KeyboardInteractivityNone);
-		dockLayer->setExclusiveZone(0);
-		dockLayer->setScope("cutie-dock-external");
-		dockView->setSource(QUrl("qrc:/ExternalDock.qml"));
-		dockView->setColor(QColor(Qt::transparent));
-		dockView->resize(screenSize.width(), 88);
-		auto *dockRoot = qobject_cast<QQuickItem *>(dockView->rootObject());
-		if (dockRoot)
-			dockRoot->setSize(QSizeF(screenSize.width(), 88));
-		dockView->show();
-		qInfo() << "[cutie-home] dock window screen"
-			<< dockView->screen() << dockView->screen()->name()
-			<< "geometry" << dockView->screen()->geometry()
-			<< "matches requested" << (dockView->screen() == screen)
-			<< "window size" << dockView->size() << "root size"
-			<< (dockRoot ? dockRoot->size() : QSizeF());
-
 		externalViews.insert(
-			screen, QList<QQuickView *>{ desktopView, dockView });
+			screen, QList<QQuickView *>{ desktopView });
 	};
 
 	QObject::connect(&app, &QGuiApplication::screenAdded, &app,

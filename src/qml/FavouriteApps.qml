@@ -21,7 +21,7 @@ Item {
     readonly property int visibleCount:
         launcherApps ? Math.min(launcherApps.rowCount(), maxVisibleItems) : 0
 
-    height: (baseCellSize * root.dockScale) + 16
+    height: (baseCellSize * footer.dockScale) + 16
 
     Behavior on height {
         NumberAnimation {
@@ -34,7 +34,7 @@ Item {
         color: Atmosphere.secondaryAlphaColor
         radius: 15
         opacity: 1.0 - cutieWlc.blur
-        width: root.panelMode ? parent.width : Math.min(parent.width,
+        width: footer.panelMode ? parent.width : Math.min(parent.width,
             (baseCellSize * visibleCount) + (launchAppList.spacing * Math.max(visibleCount - 1, 0)))
 
 
@@ -62,7 +62,7 @@ Item {
             spacing: 20
 
             delegate: Item {
-                width: baseCellSize * root.dockScale
+                width: baseCellSize * footer.dockScale
                 height: width
 
                 Behavior on width {
