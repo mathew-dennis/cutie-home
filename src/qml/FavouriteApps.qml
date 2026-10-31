@@ -7,13 +7,6 @@ import Cutie.Store
 Item {
     id: favourits
 
-    property var launcherApps
-    property var favoriteStoreObject
-    property var wlcController
-    property real dockScale: 1.0
-    property bool panelMode: true
-    property real layoutWidth: parent ? parent.width : Screen.width
-
     anchors.left: parent.left
     anchors.right: parent.right
     anchors.bottom: parent.bottom
@@ -21,14 +14,14 @@ Item {
     z: 1
     
     readonly property real baseCellSize:
-        layoutWidth / Math.max(1, Math.floor(layoutWidth / 51))
+        parentwidth / Math.floor(appSwitcher.width / 51)
 
     readonly property int maxVisibleItems: 5
 
     readonly property int visibleCount:
-        launcherApps ? Math.min(launcherApps.rowCount(), maxVisibleItems) : 0
+        Math.min(launcherApps.rowCount(), maxVisibleItems)
 
-    height: (baseCellSize * dockScale) + 16
+    height: (baseCellSize * root.dockScale) + 16
 
     Behavior on height {
         NumberAnimation {
@@ -40,8 +33,8 @@ Item {
     Rectangle {
         color: Atmosphere.secondaryAlphaColor
         radius: 15
-        opacity: 1.0 - wlcController.blur
-        width: panelMode ? parent.width : Math.min(parent.width,
+        opacity: 1.0 - cutieWlc.blur
+        width: root.panelMode ? parent.width : Math.min(parent.width,
             (baseCellSize * visibleCount) + (launchAppList.spacing * Math.max(visibleCount - 1, 0)))
 
 
@@ -69,7 +62,7 @@ Item {
             spacing: 20
 
             delegate: Item {
-            width: baseCellSize * dockScale
+                width: baseCellSize * root.dockScale
                 height: width
 
                 Behavior on width {
@@ -89,20 +82,20 @@ Item {
 
                     background: null
 
-                    onClicked: wlcController.execApp(model.exec)
+                    onClicked: cutieWlc.execApp(model.exec)
                     onPressAndHold: menu.open()
                 }
 
                 CutieMenu {
                     id: menu
-                    width: layoutWidth * 2 / 3
+                    width: appSwitcher.width * 2 / 3
 
                     CutieMenuItem {
                         text: qsTr("Remove from favorites")
                         onTriggered: {
-                            let data = favoriteStoreObject.data
+                            let data = favoriteStore.data
                             delete data[model.name]
-                            favoriteStoreObject.data = data
+                            favoriteStore.data = data
                         }
                     }
                 }
