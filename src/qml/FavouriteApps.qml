@@ -7,6 +7,9 @@ import Cutie.Store
 Item {
     id: favourits
 
+    property var wlc: null
+    property real menuWidth: 300
+
     anchors.left: parent.left
     anchors.right: parent.right
     anchors.bottom: parent.bottom
@@ -33,7 +36,7 @@ Item {
     Rectangle {
         color: Atmosphere.secondaryAlphaColor
         radius: 15
-        opacity: 1.0 - cutieWlc.blur
+        opacity: 1.0 - (favourits.wlc ? favourits.wlc.blur : 0)
         width: footer.panelMode ? parent.width : Math.min(parent.width,
             (baseCellSize * visibleCount) + (launchAppList.spacing * Math.max(visibleCount - 1, 0)))
 
@@ -82,13 +85,13 @@ Item {
 
                     background: null
 
-                    onClicked: cutieWlc.execApp(model.exec)
+                    onClicked: { if (favourits.wlc) favourits.wlc.execApp(model.exec) }
                     onPressAndHold: menu.open()
                 }
 
                 CutieMenu {
                     id: menu
-                    width: appSwitcher.width * 2 / 3
+                    width: favourits.menuWidth
 
                     CutieMenuItem {
                         text: qsTr("Remove from favorites")
