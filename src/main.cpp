@@ -4,12 +4,16 @@
 #include "settings.h"
 #include "notifications.h"
 #include "NotificationsAdaptor.h"
-#include "AdditionalScreen.h"
 #include <QLoggingCategory>
 #include <QIcon>
 #include <QDebug>
 #include <QQuickView>
 #include <QQuickItem>
+#include <QQmlError>
+#include <QHash>
+#include <QScreen>
+#include <QSize>
+#include <QSizeF>
 #include <LayerShellQt/shell.h>
 #include <LayerShellQt/window.h>
 
@@ -52,8 +56,123 @@ int main(int argc, char *argv[])
 	QDBusConnection::sessionBus().registerService(
 		"org.freedesktop.Notifications");
 
-	// Clean delegation to AdditionalScreen
-	AdditionalScreen additionalScreen(&app, view.engine(), view.screen(), &app);
+	QHash<QScreen *, QList<QQuickView *>> externalViews;
+	auto watchQml = [](QQuickView *window, const QString &label) {
+		QObject::connect(window, &QQuickView::statusChanged, window,
+				 [window, label](QQuickView::Status status) {
+					 if (status == QQuickView::Ready)
+						 qInfo() << label << "QML ready";
+					 else if (status == QQuickView::Error)
+						 for (const QQmlError &error :
+					      window->errors())
+							 qWarning().noquote()
+								 << label << error.toString();
+				 });
+	};
+	auto removeExternalScreen = [&externalViews](QScreen *screen) {
+		const QList<QQuickView *> windows = externalViews.take(screen);
+		for (auto it = windows.crbegin(); it != windows.crend(); ++it) {
+			(*it)->hide();
+			delete *it;
+		}
+	};
+	auto addExternalScreen = [&view, &externalViews,
+				  watchQml](QScreen *screen) {
+		if (!screen || screen == view.screen() ||
+		    externalViews.contains(screen))
+			return;
+		qInfo() << "[cutie-home] creating external desktop for"
+			<< "requested screen" << screen << screen->name()
+			<< "geometry" << screen->geometry() << "size"
+			<< screen->size() << "device pixel ratio"
+			<< screen->devicePixelRatio();
+		const QSize screenSize = screen->geometry().size();
+
+		auto *desktopView = new QQuickView(view.engine(), nullptr);
+		watchQml(desktopView, QStringLiteral("[cutie-home wallpaper]"));
+		desktopView->setResizeMode(QQuickView::SizeRootObjectToView);
+		desktopView->setScreen(screen);
+		LayerShellQt::Window *desktopLayer =
+			LayerShellQt::Window::get(desktopView);
+		desktopLayer->setScreenConfiguration(
+			LayerShellQt::Window::ScreenFromQWindow);
+		desktopLayer->setLayer(LayerShellQt::Window::LayerBackground);
+		LayerShellQt::Window::Anchors desktopAnchors;
+		desktopAnchors.setFlag(LayerShellQt::Window::AnchorTop);
+		desktopAnchors.setFlag(LayerShellQt::Window::AnchorLeft);
+		desktopLayer->setAnchors(desktopAnchors);
+		desktopLayer->setDesiredSize(screenSize);
+		desktopLayer->setKeyboardInteractivity(
+			LayerShellQt::Window::KeyboardInteractivityNone);
+		desktopLayer->setExclusiveZone(-1);
+		desktopLayer->setScope("cutie-home-external");
+		desktopView->setSource(QUrl("qrc:/ExternalDesktop.qml"));
+		desktopView->setColor(QColor(Qt::transparent));
+		desktopView->resize(screenSize);
+		auto *desktopRoot =
+			qobject_cast<QQuickItem *>(desktopView->rootObject());
+		if (desktopRoot)
+			desktopRoot->setSize(QSizeF(screenSize));
+		desktopView->show();
+		qInfo() << "[cutie-home] wallpaper window screen"
+			<< desktopView->screen() << desktopView->screen()->name()
+			<< "geometry" << desktopView->screen()->geometry()
+			<< "matches requested" << (desktopView->screen() == screen)
+			<< "window size" << desktopView->size() << "root size"
+			<< (desktopRoot ? desktopRoot->size() : QSizeF());
+
+		auto *dockView = new QQuickView(view.engine(), nullptr);
+		watchQml(dockView, QStringLiteral("[cutie-home dock]"));
+		dockView->setResizeMode(QQuickView::SizeRootObjectToView);
+		dockView->setScreen(screen);
+		LayerShellQt::Window *dockLayer =
+			LayerShellQt::Window::get(dockView);
+		dockLayer->setScreenConfiguration(
+			LayerShellQt::Window::ScreenFromQWindow);
+		dockLayer->setLayer(LayerShellQt::Window::LayerTop);
+		LayerShellQt::Window::Anchors dockAnchors;
+		dockAnchors.setFlag(LayerShellQt::Window::AnchorBottom);
+		dockAnchors.setFlag(LayerShellQt::Window::AnchorLeft);
+		dockLayer->setAnchors(dockAnchors);
+		dockLayer->setDesiredSize(QSize(screenSize.width(), 88));
+		dockLayer->setKeyboardInteractivity(
+			LayerShellQt::Window::KeyboardInteractivityNone);
+		dockLayer->setExclusiveZone(0);
+		dockLayer->setScope("cutie-dock-external");
+		dockView->setSource(QUrl("qrc:/ExternalDock.qml"));
+		dockView->setColor(QColor(Qt::transparent));
+		dockView->resize(screenSize.width(), 88);
+		auto *dockRoot = qobject_cast<QQuickItem *>(dockView->rootObject());
+		if (dockRoot)
+			dockRoot->setSize(QSizeF(screenSize.width(), 88));
+		dockView->show();
+		qInfo() << "[cutie-home] dock window screen"
+			<< dockView->screen() << dockView->screen()->name()
+			<< "geometry" << dockView->screen()->geometry()
+			<< "matches requested" << (dockView->screen() == screen)
+			<< "window size" << dockView->size() << "root size"
+			<< (dockRoot ? dockRoot->size() : QSizeF());
+
+		externalViews.insert(
+			screen, QList<QQuickView *>{ desktopView, dockView });
+	};
+
+	QObject::connect(&app, &QGuiApplication::screenAdded, &app,
+			 [addExternalScreen](QScreen *screen) {
+				 addExternalScreen(screen);
+			 });
+	QObject::connect(&app, &QGuiApplication::screenRemoved, &app,
+			 [removeExternalScreen](QScreen *screen) {
+				 removeExternalScreen(screen);
+			 });
+	for (QScreen *screen : app.screens())
+		addExternalScreen(screen);
+	QObject::connect(&app, &QCoreApplication::aboutToQuit, &app,
+			 [&externalViews, &removeExternalScreen]() {
+				 const auto screens = externalViews.keys();
+				 for (QScreen *screen : screens)
+					 removeExternalScreen(screen);
+			 });
 
 	return app.exec();
 }

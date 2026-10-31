@@ -6,8 +6,13 @@ import Cutie.Store
 
 Item {
     id: footer
-    property real layoutWidth: parent ? parent.width : Screen.width
+
+    property var launcherApps
+    property var favoriteStoreObject
+    property var wlcController
+    property real dockScale: 1.0
     property bool panelMode: true
+    property real layoutWidth: parent ? parent.width : Screen.width
 
     anchors.left: parent.left
     anchors.right: parent.right
@@ -21,9 +26,9 @@ Item {
     readonly property int maxVisibleItems: 5
 
     readonly property int visibleCount:
-        Math.min(launcherApps.rowCount(), maxVisibleItems)
+        launcherApps ? Math.min(launcherApps.rowCount(), maxVisibleItems) : 0
 
-    height: (baseCellSize * root.dockScale) + 16
+    height: (baseCellSize * dockScale) + 16
 
     Behavior on height {
         NumberAnimation {
@@ -35,8 +40,8 @@ Item {
     Rectangle {
         color: Atmosphere.secondaryAlphaColor
         radius: 15
-        opacity: 1.0 - cutieWlc.blur
-        width: root.panelMode ? parent.width : Math.min(parent.width,
+        opacity: 1.0 - wlcController.blur
+        width: panelMode ? parent.width : Math.min(parent.width,
             (baseCellSize * visibleCount) + (launchAppList.spacing * Math.max(visibleCount - 1, 0)))
 
 
@@ -64,7 +69,7 @@ Item {
             spacing: 20
 
             delegate: Item {
-                width: baseCellSize * root.dockScale
+            width: baseCellSize * dockScale
                 height: width
 
                 Behavior on width {
@@ -84,7 +89,7 @@ Item {
 
                     background: null
 
-                    onClicked: cutieWlc.execApp(model.exec)
+                    onClicked: wlcController.execApp(model.exec)
                     onPressAndHold: menu.open()
                 }
 
@@ -95,9 +100,9 @@ Item {
                     CutieMenuItem {
                         text: qsTr("Remove from favorites")
                         onTriggered: {
-                            let data = favoriteStore.data
+                            let data = favoriteStoreObject.data
                             delete data[model.name]
-                            favoriteStore.data = data
+                            favoriteStoreObject.data = data
                         }
                     }
                 }

@@ -55,5 +55,12 @@ Item {
 		visible: false
 	}
 
-    Footer { }
+	Footer {
+		launcherApps: root.launcherApps
+		favoriteStoreObject: favoriteStore
+		wlcController: cutieWlc
+		dockScale: root.dockScale
+		panelMode: root.panelMode
+		layoutWidth: root.width
+	}
 }
