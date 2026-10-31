@@ -5,28 +5,27 @@ import Cutie.Wlc
 import Cutie.Desktopfileparser
 
 Item {
-	id: footer
-	property var wlc: null
-	property real menuWidth: width * 2 / 3
-	width: parent ? parent.width : Screen.width
-	height: 88
+    id: footer
+    property var wlc: null
+    property real menuWidth: width * 2 / 3
+    width: parent ? parent.width : Screen.width
+    height: 88
     anchors.left: parent.left
-	ancors.right: parent.right
-	ancors.bottom: parent.bottom
+    anchors.right: parent.right
+    anchors.bottom: parent.bottom
 
-	  
     property var launcherApps: null
     readonly property bool split: true
     readonly property bool merged: false
 
-    property bool interfaceMode:
-                    homeConfigStore.data && "InterfaceMode" in homeConfigStore.data 
-                    ? homeConfigStore.data["InterfaceMode"] 
-                    : merged
+    property bool interfaceMode: 
+        homeConfigStore.data && "InterfaceMode" in homeConfigStore.data 
+        ? homeConfigStore.data["InterfaceMode"] 
+        : merged
 
     readonly property real dockScale: {
         if (!homeConfigStore.data)
-        return 1.0
+            return 1.0
 
         const v = homeConfigStore.data.dockScale
         const raw = (v !== undefined && v > 0) ? v : 1.0
@@ -35,11 +34,11 @@ Item {
     }
     
     property bool panelMode: 
-                    homeConfigStore.data && "PanelMode" in homeConfigStore.data  
-                    ? homeConfigStore.data["PanelMode"] 
-                    : true
+        homeConfigStore.data && "PanelMode" in homeConfigStore.data  
+        ? homeConfigStore.data["PanelMode"]  
+        : true
 
-	  Component.onCompleted: {
+    Component.onCompleted: {
         let model = CutieDesktopFileParser.createFilterModel()
         model.favoriteKeys = Object.keys(favoriteStore.data || {})
         launcherApps = model    
@@ -50,8 +49,11 @@ Item {
         appName: "cutie-launcher"
         storeName: "favoriteItems"
 
-        onDataChanged:
-            launcherApps.favoriteKeys = Object.keys(favoriteStore.data || {})
+        onDataChanged: {
+            if (launcherApps) {
+                launcherApps.favoriteKeys = Object.keys(favoriteStore.data || {})
+            }
+        }
     }
 
     CutieStore {
@@ -60,10 +62,9 @@ Item {
         storeName: "homeConfigs"
     }
 
-
-	FavouriteApps {
-		id: favourits
-		wlc: footer.wlc
-		menuWidth: footer.menuWidth
-	}
+    FavouriteApps {
+        id: favourits
+        wlc: footer.wlc
+        menuWidth: footer.menuWidth
+    }
 }
