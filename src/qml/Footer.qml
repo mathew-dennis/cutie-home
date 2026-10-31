@@ -7,6 +7,7 @@ import Cutie.Store
 Item {
     id: footer
     property real layoutWidth: parent ? parent.width : Screen.width
+    property bool panelMode: true
 
     anchors.left: parent.left
     anchors.right: parent.right
