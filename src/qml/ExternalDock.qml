@@ -55,5 +55,5 @@ Item {
 		visible: false
 	}
 
-    Footer { }
+     Footer { id: footer }
 }
