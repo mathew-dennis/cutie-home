@@ -6,8 +6,6 @@ import Cutie.Store
 
 Item {
     id: footer
-    property real layoutWidth: parent ? parent.width : Screen.width
-    property bool panelMode: true
 
     anchors.left: parent.left
     anchors.right: parent.right
@@ -16,12 +14,12 @@ Item {
     z: 1
     
     readonly property real baseCellSize:
-        layoutWidth / Math.max(1, Math.floor(layoutWidth / 51))
+        appSwitcher.width / Math.floor(appSwitcher.width / 51)
 
     readonly property int maxVisibleItems: 5
 
     readonly property int visibleCount:
-        Math.min(launcherApps.rowCount(), maxVisibleItems)
+        Math.min(launcherApps.count - 1, maxVisibleItems)
 
     height: (baseCellSize * root.dockScale) + 16
 
@@ -35,7 +33,6 @@ Item {
     Rectangle {
         color: Atmosphere.secondaryAlphaColor
         radius: 15
-        opacity: 1.0 - cutieWlc.blur
         width: root.panelMode ? parent.width : Math.min(parent.width,
             (baseCellSize * visibleCount) + (launchAppList.spacing * Math.max(visibleCount - 1, 0)))
 
@@ -90,7 +87,7 @@ Item {
 
                 CutieMenu {
                     id: menu
-                    width: layoutWidth * 2 / 3
+                    width: appSwitcher.width * 2 / 3
 
                     CutieMenuItem {
                         text: qsTr("Remove from favorites")
