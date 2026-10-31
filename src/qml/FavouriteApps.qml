@@ -14,12 +14,12 @@ Item {
     z: 1
     
     readonly property real baseCellSize:
-        parentwidth / Math.floor(appSwitcher.width / 51)
+        Screen.width / Math.floor(Screen.width / 51)
 
     readonly property int maxVisibleItems: 5
 
     readonly property int visibleCount:
-        Math.min(launcherApps.rowCount(), maxVisibleItems)
+        launcherApps ? Math.min(launcherApps.rowCount(), maxVisibleItems) : 0
 
     height: (baseCellSize * root.dockScale) + 16
 
