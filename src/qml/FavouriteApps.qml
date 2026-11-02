@@ -7,7 +7,6 @@ import Cutie.Store
 Item {
     id: favourits
 
-    property var wlc: null
     property real menuWidth: 300
 
     anchors.left: parent.left
