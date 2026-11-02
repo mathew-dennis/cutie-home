@@ -93,11 +93,7 @@ Item {
     NotificationScreen { id: notificationScreen }
     ScreenSwipe { id: screenSwipe }
     HomeScreen { id: homeScreen }
-    FooterDock {
-        id: footer
-        wlc: cutieWlc
-        menuWidth: appSwitcher.width * 2 / 3
-    }
+    FooterDock { id: footer }
 
     ListModel { id: notifications }
 }
