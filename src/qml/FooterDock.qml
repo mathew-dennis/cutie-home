@@ -1,7 +1,6 @@
 import QtQuick
 import Cutie
 import Cutie.Store
-import Cutie.Wlc
 import Cutie.Desktopfileparser
 
 Item {
@@ -64,7 +63,6 @@ Item {
 
     FavouriteApps {
         id: favourits
-        wlc: footer.wlc
         menuWidth: footer.menuWidth
     }
 }
