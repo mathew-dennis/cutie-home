@@ -61,5 +61,5 @@ Item {
         storeName: "homeConfigs"
     }
 
-    FavouriteApps {  id: favourits   }
+    AppFavourites {  id: favourits   }
 }
