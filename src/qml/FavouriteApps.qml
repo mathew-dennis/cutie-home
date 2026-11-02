@@ -35,7 +35,7 @@ Item {
     Rectangle {
         color: Atmosphere.secondaryAlphaColor
         radius: 15
-        opacity: 1.0 - wlc.blur
+        opacity: 1.0 -  cutieWlc.blur
         width: footer.panelMode ? parent.width : Math.min(parent.width,
             (baseCellSize * visibleCount) + (launchAppList.spacing * Math.max(visibleCount - 1, 0)))
 
@@ -84,7 +84,7 @@ Item {
 
                     background: null
 
-                    onClicked: wlc.execApp(model.exec)
+                    onClicked: cutieWlc.execApp(model.exec)
                     onPressAndHold: menu.open()
                 }
 
