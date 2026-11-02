@@ -16,5 +16,5 @@ Item {
 		source: "file:/" + Atmosphere.path + "/wallpaper.jpg"
 		fillMode: Image.PreserveAspectCrop
 	}
-	FooterDock {   id: footer   }
+	FooterDock {   id: dock   }
 }

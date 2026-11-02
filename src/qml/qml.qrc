@@ -5,8 +5,8 @@
         <file>NotificationScreen.qml</file>
         <file>ScreenSwipe.qml</file>
         <file>HomeScreen.qml</file>
-        <file>FavouriteApps.qml</file>
+        <file>AppFavourites.qml</file>
         <file>ExternalDesktop.qml</file>
-        <file>FooterDock.qml</file>
+        <file>Dock.qml</file>
     </qresource>
 </RCC>

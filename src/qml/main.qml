@@ -93,7 +93,7 @@ Item {
     NotificationScreen { id: notificationScreen }
     ScreenSwipe { id: screenSwipe }
     HomeScreen { id: homeScreen }
-    FooterDock { id: footer }
+    FooterDock { id: dock }
 
     ListModel { id: notifications }
 }
