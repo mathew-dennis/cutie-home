@@ -61,8 +61,5 @@ Item {
         storeName: "homeConfigs"
     }
 
-    FavouriteApps {
-        id: favourits
-        menuWidth: footer.menuWidth
-    }
+    FavouriteApps {  id: favourits   }
 }
