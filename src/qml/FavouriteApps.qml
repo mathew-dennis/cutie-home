@@ -91,7 +91,8 @@ Item {
 
                 CutieMenu {
                     id: menu
-                    width: favourits.menuWidth
+                    width: Math.min(favourits.width * 2 / 3,
+                                baseCellSize * 6)
 
                     CutieMenuItem {
                         text: qsTr("Remove from favorites")
