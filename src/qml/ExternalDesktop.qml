@@ -1,3 +1,4 @@
+import QtQuick.Window
 import QtQuick
 import Cutie
 
