@@ -4,7 +4,7 @@ import Cutie.Store
 import Cutie.Desktopfileparser
 
 Item {
-    id: footer
+    id: dock
 
     property real menuWidth: width * 2 / 3
     width: parent ? parent.width : Screen.width
