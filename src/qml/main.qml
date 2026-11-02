@@ -21,21 +21,21 @@ Item {
             PropertyChanges { target: appSwitcher; opacity: 1 }
             PropertyChanges { target: homeScreen; opacity: 0 }
             PropertyChanges { target: notificationScreen; opacity: 0 }
-            PropertyChanges { target: footer; opacity: 0 }
+            PropertyChanges { target: dock; opacity: 0 }
         },
         State {
             name: "homeScreen"
             PropertyChanges { target: appSwitcher; opacity: 0 }
             PropertyChanges { target: homeScreen; opacity: 1 }
             PropertyChanges { target: notificationScreen; opacity: 0 }
-            PropertyChanges { target: footer; opacity: 1 }
+            PropertyChanges { target: dock; opacity: 1 }
         },
         State {
             name: "notificationScreen"
             PropertyChanges { target: appSwitcher; opacity: 0 }
             PropertyChanges { target: homeScreen; opacity: 0 }
             PropertyChanges { target: notificationScreen; opacity: 1 }
-            PropertyChanges { target: footer; opacity: 0 }
+            PropertyChanges { target: dock; opacity: 0 }
 
         }
     ]
@@ -46,7 +46,7 @@ Item {
             NumberAnimation { target: notificationScreen; properties: "opacity"; duration: 300; easing.type: Easing.InOutQuad; }
             NumberAnimation { target: homeScreen; properties: "opacity"; duration: 300; easing.type: Easing.InOutQuad; }
             NumberAnimation { target: appSwitcher; properties: "opacity"; duration: 300; easing.type: Easing.InOutQuad; }
-            NumberAnimation { target: footer; properties: "opacity"; duration: 300; easing.type: Easing.InOutQuad; }
+            NumberAnimation { target: dock; properties: "opacity"; duration: 300; easing.type: Easing.InOutQuad; }
 
         }
     ]
