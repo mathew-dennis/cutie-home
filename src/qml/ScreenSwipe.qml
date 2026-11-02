@@ -12,10 +12,10 @@ Item {
             anchors.fill: parent
 
             function getNextState() {
-                if (footer.interfaceMode == footer.merged && root.state=="notificationScreen")
+                if (dock.interfaceMode == dock.merged && root.state=="notificationScreen")
                     return "appSwitcher"
 
-                if (footer.interfaceMode == footer.merged && root.state=="appSwitcher")
+                if (dock.interfaceMode == dock.merged && root.state=="appSwitcher")
                     return "notificationScreen"
                     
                 if (root.state == "homeScreen")
@@ -58,10 +58,10 @@ Item {
             anchors.fill: parent
 
             function getNextState() {
-                if (footer.interfaceMode == footer.merged && root.state=="appSwitcher")
+                if (dock.interfaceMode == dock.merged && root.state=="appSwitcher")
                     return "notificationScreen"
 
-                if (footer.interfaceMode == footer.merged && root.state=="notificationScreen")
+                if (dock.interfaceMode == dock.merged && root.state=="notificationScreen")
                     return "appSwitcher"
 
                 if (root.state == "homeScreen")
