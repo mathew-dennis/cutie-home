@@ -85,7 +85,7 @@ Item {
 
                     background: null
 
-                    onClicked: { if (favourits.wlc) favourits.wlc.execApp(model.exec) }
+                    onClicked: wlc.execApp(model.exec)
                     onPressAndHold: menu.open()
                 }
 
