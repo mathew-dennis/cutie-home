@@ -8,5 +8,6 @@
         <file>AppFavourites.qml</file>
         <file>ExternalDesktop.qml</file>
         <file>Dock.qml</file>
+        <file>MiniLauncher.qml</file>
     </qresource>
 </RCC>

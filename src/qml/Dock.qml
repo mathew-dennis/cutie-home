@@ -37,6 +37,14 @@ Item {
         ? homeConfigStore.data["PanelMode"]  
         : true
 
+    readonly property bool bigScreen: {
+        const screenHeight = parent ? parent.height : Screen.height
+        const landscape = dock.width > screenHeight
+        if (Screen.pixelDensity > 0)
+            return landscape && dock.width / Screen.pixelDensity >= 250
+        return landscape && dock.width >= 1280
+    }
+
     Component.onCompleted: {
         let model = CutieDesktopFileParser.createFilterModel()
         model.favoriteKeys = Object.keys(favoriteStore.data || {})
@@ -61,5 +69,18 @@ Item {
         storeName: "homeConfigs"
     }
 
-    AppFavourites {  id: favourits   }
+    MiniLauncher {
+        id: miniLauncher
+        visible: dock.bigScreen && dock.opacity > 0
+        width: height
+        height: favourits.height
+        anchors.left: parent.left
+        anchors.bottom: parent.bottom
+        anchors.margins: 8
+    }
+
+    AppFavourites {
+        id: favourits
+        anchors.leftMargin: miniLauncher.visible ? miniLauncher.width + 16 : 8
+    }
 }
