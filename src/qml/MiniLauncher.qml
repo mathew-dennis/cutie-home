@@ -96,7 +96,7 @@ Item {
                     background: null
 
                     onClicked: {
-                        cutieWlc.execApp(model.exec)
+                        cutieWlc.execApp(model.exec, "external")
                         miniLauncher.open = false
                     }
                     onPressAndHold: menu.open()
