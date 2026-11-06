@@ -85,7 +85,7 @@ Item {
 
                     background: null
 
-                    onClicked: cutieWlc.execApp(model.exec, "external")
+                    onClicked: cutieWlc.execApp(model.exec,"current")
                     onPressAndHold: menu.open()
                 }
 
