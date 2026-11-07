@@ -111,6 +111,7 @@ Item {
                     anchors.bottomMargin: 25
                     wlc: cutieWlc
                     toplevel: modelData
+					visible: appSwitcher.visible && !tabListView.moving && !tabListView.flicking
                 }
 
                 Item {
