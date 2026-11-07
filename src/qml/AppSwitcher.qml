@@ -108,6 +108,7 @@ Item {
                     anchors.bottomMargin: 25
                     wlc: cutieWlc
                     toplevel: modelData
+					enabled: !tabListView.moving && !tabListView.flicking
                 }
 
                 Item {
