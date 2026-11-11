@@ -5,11 +5,12 @@ import Cutie.Desktopfileparser
 
 Item {
     id: dock
-
+    radius: 15
+    height: 88
     width: parent ? parent.width : Screen.width
     opacity: bigScreen?1.0: 1.0 -  cutieWlc.blur
     color: Atmosphere.secondaryAlphaColor
-    height: 88
+    
     anchors.left: parent.left
     anchors.right: parent.right
     anchors.bottom: parent.bottom
