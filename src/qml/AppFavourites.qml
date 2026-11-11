@@ -35,7 +35,7 @@ Item {
 
     Rectangle {
         radius: 15
-        color: "transparent"
+        color: dock.bigScreen ? "transparent" : Atmosphere.secondaryAlphaColor
         width: dock.panelMode ? parent.width : Math.min(parent.width,
             (baseCellSize * visibleCount) + (launchAppList.spacing * Math.max(visibleCount - 1, 0)))
 
