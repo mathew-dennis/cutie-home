@@ -9,7 +9,6 @@ Rectangle {
     radius: 15
     height: 88
     width: parent ? parent.width : Screen.width
-    opacity:1.0 - cutieWlc.blur
     color: dock.bigScreen ?  Atmosphere.secondaryAlphaColor : "transparent"
     
     anchors.left: parent.left
