@@ -3,12 +3,12 @@ import Cutie
 import Cutie.Store
 import Cutie.Desktopfileparser
 
-Item {
+Rectangle {
     id: dock
     radius: 15
     height: 88
     width: parent ? parent.width : Screen.width
-    opacity: bigScreen?1.0: 1.0 -  cutieWlc.blur
+    opacity: bigScreen ? 1.0 : 1.0 - cutieWlc.blur
     color: Atmosphere.secondaryAlphaColor
     
     anchors.left: parent.left
