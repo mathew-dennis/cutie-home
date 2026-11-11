@@ -9,7 +9,10 @@ Item {
     anchors.fill: parent
     opacity: 0
     enabled: root.state == "appSwitcher"
- 
+	visible: enabled
+    onVisibleChanged: {
+        console.log("appSwitcher visibility changed to:", visible)
+    }
     CutieLabel {
         anchors.centerIn: parent
         text: qsTr("No Running Apps")
