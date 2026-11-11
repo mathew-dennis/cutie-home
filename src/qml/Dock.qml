@@ -1,5 +1,6 @@
 import QtQuick
 import Cutie
+import Cutie.Wlc
 import Cutie.Store
 import Cutie.Desktopfileparser
 
