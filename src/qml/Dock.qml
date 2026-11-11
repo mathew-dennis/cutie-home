@@ -6,8 +6,9 @@ import Cutie.Desktopfileparser
 Item {
     id: dock
 
-    property real menuWidth: width * 2 / 3
     width: parent ? parent.width : Screen.width
+    opacity: bigScreen?1.0: 1.0 -  cutieWlc.blur
+    color: Atmosphere.secondaryAlphaColor
     height: 88
     anchors.left: parent.left
     anchors.right: parent.right
@@ -16,6 +17,7 @@ Item {
     property var launcherApps: null
     readonly property bool split: true
     readonly property bool merged: false
+    property real menuWidth: width * 2 / 3
 
     property bool interfaceMode: 
         homeConfigStore.data && "InterfaceMode" in homeConfigStore.data 
