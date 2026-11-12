@@ -83,16 +83,14 @@ Item {
             boundsBehavior: Flickable.StopAtBounds
 
             delegate: Item {
-                width: miniAppGrid.cellWidth
-                height: miniAppGrid.cellHeight
-
                 CutieButton {
                     id: appIconButton
-                    anchors.fill: parent
+                    width: miniAppGrid.cellWidth
+                    height: width
                     icon.name: model.icon
                     icon.source: "file://" + model.icon
-                    icon.width: width / 2
-                    icon.height: height / 2
+                    icon.height: width / 2
+                    icon.width: height / 2
                     background: null
 
                     onClicked: {
