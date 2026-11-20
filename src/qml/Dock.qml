@@ -7,13 +7,15 @@ import Cutie.Desktopfileparser
 Rectangle {
     id: dock
     radius: 15
-    height: 88
-    width: parent ? parent.width : Screen.width
-    color: dock.bigScreen ?  Atmosphere.secondaryAlphaColor : "transparent"
-    
-    anchors.left: parent.left
-    anchors.right: parent.right
+    height: favourits.height
+    width: dock.bigScreen
+        ? miniLauncher.width + (favourits.visibleCount > 0 ? favourits.iconsWidth + 24 : 16)
+        : (parent ? parent.width : Screen.width)
+    color: dock.bigScreen ? Atmosphere.secondaryAlphaColor : "transparent"
+
+    anchors.horizontalCenter: parent.horizontalCenter
     anchors.bottom: parent.bottom
+    anchors.bottomMargin: dock.bigScreen ? 8 : 0
 
     property var launcherApps: null
     readonly property bool split: true
@@ -41,11 +43,12 @@ Rectangle {
         : true
 
     readonly property bool bigScreen: {
+        const screenWidth = parent ? parent.width : Screen.width
         const screenHeight = parent ? parent.height : Screen.height
-        const landscape = dock.width > screenHeight
+        const landscape = screenWidth > screenHeight
         if (Screen.pixelDensity > 0)
-            return landscape && dock.width / Screen.pixelDensity >= 250
-        return landscape && dock.width >= 1280
+            return landscape && screenWidth / Screen.pixelDensity >= 250
+        return landscape && screenWidth >= 1280
     }
 
     Component.onCompleted: {
@@ -76,10 +79,10 @@ Rectangle {
         id: miniLauncher
         visible: dock.bigScreen && dock.opacity > 0
         width: height
-        height: favourits.height
+        height: favourits.height - 16
         anchors.left: parent.left
-        anchors.bottom: parent.bottom
-        anchors.margins: 8
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.leftMargin: 8
     }
 
     AppFavourites {

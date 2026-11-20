@@ -14,6 +14,7 @@ Item {
     anchors.right: parent.right
     anchors.bottom: parent.bottom
     anchors.margins: 8
+    anchors.bottomMargin: dock.bigScreen ? 0 : 8
     z: 1
     
     readonly property real baseCellSize:
@@ -23,6 +24,10 @@ Item {
 
     readonly property int visibleCount:
         launcherApps ? Math.min(launcherApps.rowCount(), maxVisibleItems) : 0
+
+    readonly property real iconsWidth:
+        (baseCellSize * dock.dockScale * visibleCount) +
+        (launchAppList.spacing * Math.max(visibleCount - 1, 0))
 
     height: (baseCellSize * dock.dockScale) + 16
 
@@ -37,8 +42,8 @@ Item {
         radius: 15
         opacity: dock.bigScreen ? 1.0 : 1.0 - cutieWlc.blur
         color: dock.bigScreen ? "transparent" : Atmosphere.secondaryAlphaColor
-        width: dock.panelMode ? parent.width : Math.min(parent.width,
-            (baseCellSize * visibleCount) + (launchAppList.spacing * Math.max(visibleCount - 1, 0)))
+        width: (dock.panelMode && !dock.bigScreen) ? parent.width : Math.min(parent.width,
+            favourits.iconsWidth)
 
 
         anchors.horizontalCenter: parent.horizontalCenter
