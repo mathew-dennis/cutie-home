@@ -10,7 +10,7 @@ Item {
 
     readonly property int columns: 6
     readonly property int rows: 5
-    property real cellSize: 96
+    property real cellSize: 96 * dock.dockScale
     property real padding: 12
     property bool open: false
 
@@ -31,7 +31,7 @@ Item {
             anchors.fill: parent
             color: miniLauncher.open ? Atmosphere.accentColor : Atmosphere.secondaryAlphaColor
             radius: 15
-            opacity: 1.0 - cutieWlc.blur
+            opacity: dock.bigScreen ? 1.0 : 1.0 - cutieWlc.blur
         }
 
         Grid {
@@ -63,13 +63,13 @@ Item {
         height: miniLauncher.rows * miniLauncher.cellSize + 2 * miniLauncher.padding
         anchors.left: parent.left
         anchors.bottom: parent.top
-        anchors.bottomMargin: 8
+        anchors.bottomMargin: 16
 
         Rectangle {
             anchors.fill: parent
             color: Atmosphere.secondaryAlphaColor
             radius: 15
-            opacity: 1.0 - cutieWlc.blur
+            opacity: dock.bigScreen ? 1.0 : 1.0 - cutieWlc.blur
         }
 
         GridView {

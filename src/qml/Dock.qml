@@ -75,7 +75,7 @@ Rectangle {
         storeName: "homeConfigs"
     }
 
-    MiniLauncher {
+    AppMiniLauncher {
         id: miniLauncher
         visible: dock.bigScreen && dock.opacity > 0
         width: height
