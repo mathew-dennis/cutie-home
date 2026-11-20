@@ -8,14 +8,14 @@ Rectangle {
     id: dock
     radius: 15
     height: favourits.height
-    width: dock.bigScreen
+    width: (dock.bigScreen && !dock.panelMode)
         ? miniLauncher.width + (favourits.visibleCount > 0 ? favourits.iconsWidth + 24 : 16)
         : (parent ? parent.width : Screen.width)
     color: dock.bigScreen ? Atmosphere.secondaryAlphaColor : "transparent"
 
     anchors.horizontalCenter: parent.horizontalCenter
     anchors.bottom: parent.bottom
-    anchors.bottomMargin: dock.bigScreen ? 8 : 0
+    anchors.bottomMargin: (dock.bigScreen && !dock.panelMode) ? 8 : 0
 
     property var launcherApps: null
     readonly property bool split: true

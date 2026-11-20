@@ -42,7 +42,7 @@ Item {
         radius: 15
         opacity: dock.bigScreen ? 1.0 : 1.0 - cutieWlc.blur
         color: dock.bigScreen ? "transparent" : Atmosphere.secondaryAlphaColor
-        width: (dock.panelMode && !dock.bigScreen) ? parent.width : Math.min(parent.width,
+        width: dock.panelMode ? parent.width : Math.min(parent.width,
             favourits.iconsWidth)
 
 
