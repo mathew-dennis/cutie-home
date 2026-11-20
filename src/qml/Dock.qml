@@ -27,15 +27,16 @@ Rectangle {
         ? homeConfigStore.data["InterfaceMode"] 
         : merged
 
-    readonly property real dockScale: {
-        if (!homeConfigStore.data)
-            return 1.0
+readonly property real dockScale: {
+    const scaleFactor = dock.bigScreen ? 0.7 : 1.0
+    if (!homeConfigStore.data)
+        return scaleFactor
 
-        const v = homeConfigStore.data.dockScale
-        const raw = (v !== undefined && v > 0) ? v : 1.0
+    const v = homeConfigStore.data.dockScale
+    const raw = (v !== undefined && v > 0) ? v : 1.0
 
-        return Math.round(raw * 10) / 10
-    }
+    return Math.round(raw * scaleFactor * 10) / 10
+}
     
     property bool panelMode: 
         homeConfigStore.data && "PanelMode" in homeConfigStore.data  
