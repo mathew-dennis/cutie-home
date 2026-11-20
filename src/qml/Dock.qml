@@ -27,16 +27,16 @@ Rectangle {
         ? homeConfigStore.data["InterfaceMode"] 
         : merged
 
-readonly property real dockScale: {
-    const scaleFactor = dock.bigScreen ? 0.7 : 1.0
-    if (!homeConfigStore.data)
+    readonly property real dockScale: {
+        const scaleFactor = dock.bigScreen ? 0.7 : 1.0
+        if (!homeConfigStore.data)
         return scaleFactor
 
-    const v = homeConfigStore.data.dockScale
-    const raw = (v !== undefined && v > 0) ? v : 1.0
+        const v = homeConfigStore.data.dockScale
+        const raw = (v !== undefined && v > 0) ? v : 1.0
 
-    return Math.round(raw * scaleFactor * 10) / 10
-}
+        return Math.round(raw * scaleFactor * 10) / 10
+    }
     
     property bool panelMode: 
         homeConfigStore.data && "PanelMode" in homeConfigStore.data  
@@ -89,5 +89,37 @@ readonly property real dockScale: {
     AppFavourites {
         id: favourits
         anchors.leftMargin: miniLauncher.visible ? miniLauncher.width + 16 : 8
+        anchors.rightMargin: dockClock.visible ? dockClock.width + 24 : 8
+    }
+
+    Column {
+        id: dockClock
+        visible: dock.bigScreen && dock.panelMode
+        anchors.right: parent.right
+        anchors.rightMargin: 16
+        anchors.verticalCenter: parent.verticalCenter
+        spacing: 2
+
+        property date currentDate: new Date()
+
+        Timer {
+            interval: 1000
+            running: dockClock.visible
+            repeat: true
+            triggeredOnStart: true
+            onTriggered: dockClock.currentDate = new Date()
+        }
+
+        CutieLabel {
+            anchors.horizontalCenter: parent.horizontalCenter
+            text: Qt.formatDateTime(dockClock.currentDate, "h:mm AP")
+            font.pixelSize: Math.max(10, Math.round(13 * dock.dockScale))
+        }
+
+        CutieLabel {
+            anchors.horizontalCenter: parent.horizontalCenter
+            text: Qt.formatDateTime(dockClock.currentDate, "MM/dd/yyyy")
+            font.pixelSize: Math.max(10, Math.round(13 * dock.dockScale))
+        }
     }
 }
