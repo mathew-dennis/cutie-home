@@ -98,29 +98,43 @@ Item {
             contentWidth: width * homeScreen.pageCount
             contentHeight: height
             interactive: !homeScreen.iconDragging
+            flickableDirection: Flickable.HorizontalFlick
             boundsBehavior: Flickable.StopAtBounds
-            flickDeceleration: 10000
             clip: true
 
-        onWidthChanged: contentX = homeScreen.currentPage * width
-        onMovementStarted: snapAnim.stop()
-        onMovementEnded: {
-            let delta = contentX - homeScreen.currentPage * width
-            if (delta > width * 0.2 && homeScreen.currentPage < homeScreen.pageCount - 1)
-                homeScreen.snapToPage(homeScreen.currentPage + 1)
-            else if (delta < -width * 0.2 && homeScreen.currentPage > 0)
-                homeScreen.snapToPage(homeScreen.currentPage - 1)
-            else
-                homeScreen.snapToPage(Math.round(contentX / width))
-        }
+            function finishSwipe(vel) {
+                let delta = contentX - homeScreen.currentPage * width
+                if ((delta > width * 0.15 || vel > 250) && homeScreen.currentPage < homeScreen.pageCount - 1)
+                    homeScreen.snapToPage(homeScreen.currentPage + 1)
+                else if ((delta < -width * 0.15 || vel < -250) && homeScreen.currentPage > 0)
+                    homeScreen.snapToPage(homeScreen.currentPage - 1)
+                else
+                    homeScreen.snapToPage(Math.round(contentX / width))
+            }
 
-        NumberAnimation {
-            id: snapAnim
-            target: gridFlick
-            property: "contentX"
-            duration: 220
-            easing.type: Easing.OutCubic
-        }
+            onWidthChanged: contentX = homeScreen.currentPage * width
+            onDraggingChanged: {
+                if (dragging) {
+                    snapAnim.stop()
+                } else {
+                    let vel = horizontalVelocity
+                    cancelFlick()
+                    finishSwipe(vel)
+                }
+            }
+            onFlickStarted: {
+                let vel = horizontalVelocity
+                cancelFlick()
+                finishSwipe(vel)
+            }
+
+            NumberAnimation {
+                id: snapAnim
+                target: gridFlick
+                property: "contentX"
+                duration: 250
+                easing.type: Easing.OutCubic
+            }
 
         Repeater {
             model: homeScreen.homeApps
