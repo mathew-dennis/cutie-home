@@ -100,6 +100,11 @@ Item {
                                 baseCellSize * 6)
 
                     CutieMenuItem {
+                        text: qsTr("Add to home screen")
+                        onTriggered: homeScreen.addApp(model.name)
+                    }
+
+                    CutieMenuItem {
                         text: qsTr("Remove from favorites")
                         onTriggered: {
                             let data = favoriteStore.data
