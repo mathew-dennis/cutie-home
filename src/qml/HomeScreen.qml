@@ -10,7 +10,8 @@ Item {
     id: homeScreen
     anchors.fill: parent
     opacity: 0
-    enabled: root.state == "homeScreen"
+    enabled: root.state == "homeScreen" && cutieWlc.blur === 0
+    visible: opacity > 0 && cutieWlc.blur < 1.0
 
     property bool editMode: false
     property var homeApps: null
@@ -83,19 +84,23 @@ Item {
         homeStore.data = data
     }
 
-    Flickable {
-        id: gridFlick
+    Item {
         anchors.fill: parent
-        anchors.topMargin: 84
-        anchors.bottomMargin: dock.height + 32
-        anchors.leftMargin: 25
-        anchors.rightMargin: 25
-        contentWidth: width * homeScreen.pageCount
-        contentHeight: height
-        interactive: !homeScreen.iconDragging
-        boundsBehavior: Flickable.StopAtBounds
-        flickDeceleration: 10000
-        clip: true
+        opacity: 1.0 - cutieWlc.blur
+
+        Flickable {
+            id: gridFlick
+            anchors.fill: parent
+            anchors.topMargin: 84
+            anchors.bottomMargin: dock.height + 32
+            anchors.leftMargin: 25
+            anchors.rightMargin: 25
+            contentWidth: width * homeScreen.pageCount
+            contentHeight: height
+            interactive: !homeScreen.iconDragging
+            boundsBehavior: Flickable.StopAtBounds
+            flickDeceleration: 10000
+            clip: true
 
         onWidthChanged: contentX = homeScreen.currentPage * width
         onMovementStarted: snapAnim.stop()
@@ -271,42 +276,43 @@ Item {
         }
     }
 
-    Row {
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: dock.height + 10
-        anchors.horizontalCenter: parent.horizontalCenter
-        spacing: 8
+        Row {
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: dock.height + 10
+            anchors.horizontalCenter: parent.horizontalCenter
+            spacing: 8
 
-        Repeater {
-            model: homeScreen.pageCount
+            Repeater {
+                model: homeScreen.pageCount
 
-            Rectangle {
-                width: 8
-                height: 8
-                radius: 4
-                color: Atmosphere.textColor
-                opacity: index === homeScreen.currentPage ? 0.9 : 0.35
+                Rectangle {
+                    width: 8
+                    height: 8
+                    radius: 4
+                    color: Atmosphere.textColor
+                    opacity: index === homeScreen.currentPage ? 0.9 : 0.35
 
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: homeScreen.snapToPage(index)
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: homeScreen.snapToPage(index)
+                    }
                 }
             }
         }
-    }
 
-    CutieButton {
-        id: closeEditBtn
-        visible: homeScreen.editMode
-        text: qsTr("Close")
-        font.pixelSize: 18
-        font.bold: true
-        width: 160
-        height: 48
-        anchors.top: parent.top
-        anchors.topMargin: 36
-        anchors.horizontalCenter: parent.horizontalCenter
-        z: 20
-        onClicked: homeScreen.editMode = false
+        CutieButton {
+            id: closeEditBtn
+            visible: homeScreen.editMode
+            text: qsTr("Close")
+            font.pixelSize: 18
+            font.bold: true
+            width: 160
+            height: 48
+            anchors.top: parent.top
+            anchors.topMargin: 36
+            anchors.horizontalCenter: parent.horizontalCenter
+            z: 20
+            onClicked: homeScreen.editMode = false
+        }
     }
 }
