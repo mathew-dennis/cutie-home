@@ -73,7 +73,10 @@ int main(int argc, char *argv[])
 		const QList<QQuickView *> windows = externalViews.take(screen);
 		for (auto it = windows.crbegin(); it != windows.crend(); ++it) {
 			(*it)->hide();
-			(*it)->deleteLater();
+			// Intentionally do not delete the QQuickView when its Wayland
+			// QScreen is removed: in Qt 6 with QSG_RENDER_LOOP=threaded and
+			// LayerShellQt, tearing down a QQuickView after its wl_output is
+			// gone segfaults inside QtWaylandClient / QSGThreadedRenderLoop.
 		}
 	};
 	auto addExternalScreen = [&view, &externalViews,
