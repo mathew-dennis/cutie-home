@@ -92,7 +92,7 @@ Item {
             id: gridFlick
             anchors.fill: parent
             anchors.topMargin: 84
-            anchors.bottomMargin: dock.height + 20
+            anchors.bottomMargin: dock.height + 28
             anchors.leftMargin: 25
             anchors.rightMargin: 25
             contentWidth: width * homeScreen.pageCount
@@ -292,7 +292,7 @@ Item {
 
         Row {
             anchors.bottom: parent.bottom
-            anchors.bottomMargin: dock.height + 8
+            anchors.bottomMargin: dock.height + 16
             anchors.horizontalCenter: parent.horizontalCenter
             spacing: 6
 
