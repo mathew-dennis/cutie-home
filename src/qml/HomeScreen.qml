@@ -14,14 +14,25 @@ Item {
 
     property bool editMode: false
     property var homeApps: null
+    property bool iconDragging: false
+    readonly property int pageCount: 3
+    property int currentPage: 0
 
-    readonly property real cellSize: 88 * dock.dockScale
-    readonly property int columns: Math.max(1, Math.floor(gridArea.width / cellSize))
-    readonly property int rows: Math.max(1, Math.floor(gridArea.height / cellSize))
-    readonly property real cellW: gridArea.width / columns
-    readonly property real cellH: gridArea.height / rows
+    readonly property real iconSize:
+        (Screen.width / Math.floor(Screen.width / 51)) * dock.dockScale
+    readonly property real cellSize: iconSize + 28
+    readonly property int columns: Math.max(1, Math.floor(gridFlick.width / cellSize))
+    readonly property int rows: Math.max(1, Math.floor(gridFlick.height / cellSize))
+    readonly property real cellW: gridFlick.width / columns
+    readonly property real cellH: gridFlick.height / rows
 
     onEnabledChanged: if (!enabled) editMode = false
+
+    function snapToPage(page) {
+        currentPage = Math.max(0, Math.min(pageCount - 1, page))
+        snapAnim.to = currentPage * gridFlick.width
+        snapAnim.restart()
+    }
 
     Component.onCompleted: {
         let model = CutieDesktopFileParser.createFilterModel()
@@ -45,7 +56,7 @@ Item {
 
     function parsePos(posStr) {
         let parts = (posStr || "1x1").split("x")
-        let col = Math.min(columns, Math.max(1, parseInt(parts[0]) || 1))
+        let col = Math.min(columns * pageCount, Math.max(1, parseInt(parts[0]) || 1))
         let row = Math.min(rows, Math.max(1, parseInt(parts[1]) || 1))
         return { col: col, row: row }
     }
@@ -57,12 +68,14 @@ Item {
         let occupied = Object.values(data)
         let pos = "1x1"
         outer:
-        for (let r = 1; r <= rows; r++) {
-            for (let c = 1; c <= columns; c++) {
-                let candidate = c + "x" + r
-                if (occupied.indexOf(candidate) === -1) {
-                    pos = candidate
-                    break outer
+        for (let p = 0; p < pageCount; p++) {
+            for (let r = 1; r <= rows; r++) {
+                for (let c = 1; c <= columns; c++) {
+                    let candidate = (p * columns + c) + "x" + r
+                    if (occupied.indexOf(candidate) === -1) {
+                        pos = candidate
+                        break outer
+                    }
                 }
             }
         }
@@ -70,13 +83,39 @@ Item {
         homeStore.data = data
     }
 
-    Item {
-        id: gridArea
+    Flickable {
+        id: gridFlick
         anchors.fill: parent
         anchors.topMargin: 84
-        anchors.bottomMargin: dock.height + 16
-        anchors.leftMargin: 16
-        anchors.rightMargin: 16
+        anchors.bottomMargin: dock.height + 32
+        anchors.leftMargin: 25
+        anchors.rightMargin: 25
+        contentWidth: width * homeScreen.pageCount
+        contentHeight: height
+        interactive: !homeScreen.iconDragging
+        boundsBehavior: Flickable.StopAtBounds
+        flickDeceleration: 10000
+        clip: true
+
+        onWidthChanged: contentX = homeScreen.currentPage * width
+        onMovementStarted: snapAnim.stop()
+        onMovementEnded: {
+            let delta = contentX - homeScreen.currentPage * width
+            if (delta > width * 0.2 && homeScreen.currentPage < homeScreen.pageCount - 1)
+                homeScreen.snapToPage(homeScreen.currentPage + 1)
+            else if (delta < -width * 0.2 && homeScreen.currentPage > 0)
+                homeScreen.snapToPage(homeScreen.currentPage - 1)
+            else
+                homeScreen.snapToPage(Math.round(contentX / width))
+        }
+
+        NumberAnimation {
+            id: snapAnim
+            target: gridFlick
+            property: "contentX"
+            duration: 220
+            easing.type: Easing.OutCubic
+        }
 
         Repeater {
             model: homeScreen.homeApps
@@ -115,7 +154,7 @@ Item {
 
                 CutieButton {
                     id: appIcon
-                    width: Math.min(parent.width, parent.height) - 20
+                    width: homeScreen.iconSize
                     height: width
                     anchors.top: parent.top
                     anchors.topMargin: 4
@@ -139,6 +178,23 @@ Item {
                     horizontalAlignment: Text.AlignHCenter
                 }
 
+                Timer {
+                    id: pageEdgeTimer
+                    interval: 450
+                    repeat: true
+                    running: dragArea.dragging
+                    onTriggered: {
+                        let relX = appItem.x + appItem.width / 2 - gridFlick.contentX
+                        if (relX > gridFlick.width - 36 && homeScreen.currentPage < homeScreen.pageCount - 1) {
+                            homeScreen.snapToPage(homeScreen.currentPage + 1)
+                            appItem.x += gridFlick.width
+                        } else if (relX < 36 && homeScreen.currentPage > 0) {
+                            homeScreen.snapToPage(homeScreen.currentPage - 1)
+                            appItem.x -= gridFlick.width
+                        }
+                    }
+                }
+
                 MouseArea {
                     id: dragArea
                     anchors.fill: parent
@@ -152,16 +208,20 @@ Item {
                     }
 
                     onPressAndHold: {
-                        if (homeScreen.editMode)
+                        if (homeScreen.editMode) {
                             dragging = true
-                        else
+                            homeScreen.iconDragging = true
+                        } else {
                             itemMenu.open()
+                        }
                     }
 
                     onReleased: {
                         if (dragging) {
                             dragging = false
-                            let col = Math.min(homeScreen.columns, Math.max(1,
+                            homeScreen.iconDragging = false
+                            let maxCol = homeScreen.columns * homeScreen.pageCount
+                            let col = Math.min(maxCol, Math.max(1,
                                 Math.floor((appItem.x + appItem.width / 2) / homeScreen.cellW) + 1))
                             let row = Math.min(homeScreen.rows, Math.max(1,
                                 Math.floor((appItem.y + appItem.height / 2) / homeScreen.cellH) + 1))
@@ -182,6 +242,7 @@ Item {
                     onCanceled: {
                         if (dragging) {
                             dragging = false
+                            homeScreen.iconDragging = false
                             appItem.x = Qt.binding(function() { return appItem.targetX })
                             appItem.y = Qt.binding(function() { return appItem.targetY })
                         }
@@ -205,6 +266,30 @@ Item {
                             homeStore.data = data
                         }
                     }
+                }
+            }
+        }
+    }
+
+    Row {
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: dock.height + 10
+        anchors.horizontalCenter: parent.horizontalCenter
+        spacing: 8
+
+        Repeater {
+            model: homeScreen.pageCount
+
+            Rectangle {
+                width: 8
+                height: 8
+                radius: 4
+                color: Atmosphere.textColor
+                opacity: index === homeScreen.currentPage ? 0.9 : 0.35
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: homeScreen.snapToPage(index)
                 }
             }
         }
