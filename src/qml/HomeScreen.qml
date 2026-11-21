@@ -92,7 +92,7 @@ Item {
             id: gridFlick
             anchors.fill: parent
             anchors.topMargin: 84
-            anchors.bottomMargin: dock.height + 32
+            anchors.bottomMargin: dock.height + 20
             anchors.leftMargin: 25
             anchors.rightMargin: 25
             contentWidth: width * homeScreen.pageCount
@@ -102,30 +102,30 @@ Item {
             boundsBehavior: Flickable.StopAtBounds
             clip: true
 
-            function finishSwipe(vel) {
-                let delta = contentX - homeScreen.currentPage * width
-                if ((delta > width * 0.15 || vel > 250) && homeScreen.currentPage < homeScreen.pageCount - 1)
-                    homeScreen.snapToPage(homeScreen.currentPage + 1)
-                else if ((delta < -width * 0.15 || vel < -250) && homeScreen.currentPage > 0)
-                    homeScreen.snapToPage(homeScreen.currentPage - 1)
-                else
-                    homeScreen.snapToPage(Math.round(contentX / width))
-            }
+            property real dragStartX: 0
+            property int startPage: 0
 
             onWidthChanged: contentX = homeScreen.currentPage * width
             onDraggingChanged: {
                 if (dragging) {
                     snapAnim.stop()
+                    dragStartX = contentX
+                    startPage = Math.round(contentX / width)
                 } else {
+                    let delta = contentX - dragStartX
                     let vel = horizontalVelocity
                     cancelFlick()
-                    finishSwipe(vel)
+                    if ((delta > width * 0.15 || vel > 250) && startPage < homeScreen.pageCount - 1)
+                        homeScreen.snapToPage(startPage + 1)
+                    else if ((delta < -width * 0.15 || vel < -250) && startPage > 0)
+                        homeScreen.snapToPage(startPage - 1)
+                    else
+                        homeScreen.snapToPage(Math.round(contentX / width))
                 }
             }
             onFlickStarted: {
-                let vel = horizontalVelocity
                 cancelFlick()
-                finishSwipe(vel)
+                snapAnim.restart()
             }
 
             NumberAnimation {
@@ -292,22 +292,23 @@ Item {
 
         Row {
             anchors.bottom: parent.bottom
-            anchors.bottomMargin: dock.height + 10
+            anchors.bottomMargin: dock.height + 8
             anchors.horizontalCenter: parent.horizontalCenter
-            spacing: 8
+            spacing: 6
 
             Repeater {
                 model: homeScreen.pageCount
 
                 Rectangle {
-                    width: 8
-                    height: 8
-                    radius: 4
+                    width: 4
+                    height: 4
+                    radius: 2
                     color: Atmosphere.textColor
                     opacity: index === homeScreen.currentPage ? 0.9 : 0.35
 
                     MouseArea {
                         anchors.fill: parent
+                        anchors.margins: -4
                         onClicked: homeScreen.snapToPage(index)
                     }
                 }
