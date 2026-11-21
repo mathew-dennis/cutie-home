@@ -73,7 +73,7 @@ int main(int argc, char *argv[])
 		const QList<QQuickView *> windows = externalViews.take(screen);
 		for (auto it = windows.crbegin(); it != windows.crend(); ++it) {
 			(*it)->hide();
-			delete *it;
+			(*it)->deleteLater();
 		}
 	};
 	auto addExternalScreen = [&view, &externalViews,
