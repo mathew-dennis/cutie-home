@@ -53,9 +53,10 @@ Item {
                     ColorAnimation { properties: "color"; duration: 500; easing.type: Easing.InOutQuad }
                 }
             }
-
+            // This timer function id to update time so let's run it slower and only when notification screen is active.
             Timer {
-                interval: 100; running: true; repeat: true;
+                interval: 60000; repeat: true; triggeredOnStart: true
+                running: root.state == "notificationScreen"
                 onTriggered: timeChanged()
             }
 
