@@ -100,7 +100,7 @@ Item {
             interactive: !homeScreen.iconDragging
             flickableDirection: Flickable.HorizontalFlick
             boundsBehavior: Flickable.StopAtBounds
-            clip: true
+            clip: false
 
             property real dragStartX: 0
             property int startPage: 0
